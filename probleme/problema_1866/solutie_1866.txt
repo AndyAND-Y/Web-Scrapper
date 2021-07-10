@@ -1,0 +1,19 @@
+#include <fstream>
+#include <cstring>
+using namespace std;
+ifstream f("prosir.in");
+ofstream g("prosir.out");
+
+
+int main()
+{
+char s[201];
+int i;
+f.getline(s,201);
+for(i=0; i<strlen(s)-1;i++)
+    if(islower(s[i]) && (s[i+1]==' ' || s[i+1]=='.'))
+       s[i]='5';
+g<<s;
+
+return 0;
+}

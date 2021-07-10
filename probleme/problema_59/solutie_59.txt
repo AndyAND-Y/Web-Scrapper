@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    // pentru a calcula CMMMC, folosim formula matematica:
+    //      [a,b] = a*b/(a,b)   , unde
+    // [a,b] = cmmmc al lui a si b
+    // (a,b) = cmmdc al lui a si b
+    
+    int a  ,b;
+    cin >> a >> b;
+    
+    //vom calcula cmmdc pentru a, b, folosind algoritmul lui Euclid.
+    //ATENTIE: valorile lui a si b se modifica, deci le facem copii in p, q
+    int p = a, q = b;
+    
+    //stim ca numerele sunt nenule
+    
+    while(a%b)
+    {
+        int r = a % b;
+        a = b;
+        b =r;
+    }
+    //rezultatul este ultimul impartitor, adica b.
+    
+    //aplicam formula de mai sus
+    cout << p*q/b << endl;
+    
+    return 0;
+}

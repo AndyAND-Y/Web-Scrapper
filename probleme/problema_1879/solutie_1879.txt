@@ -1,0 +1,27 @@
+#include <fstream>
+using namespace std;
+int main()
+{
+    ifstream f("platou2.in");
+    ofstream g("platou2.out");
+    int kmax=0,k=1,x,y,n,i;
+    f>>n>>x;
+    for(i=2; i<=n; i++)
+    {
+        f>>y;
+        if(x<y)
+        {
+            x=y;
+            k++;
+        }
+        else
+        {
+            kmax=max(kmax,k);
+            x=y;
+            k=1;
+        }
+    }
+    kmax=max(k,kmax);
+    g<<kmax;
+    return 0;
+}

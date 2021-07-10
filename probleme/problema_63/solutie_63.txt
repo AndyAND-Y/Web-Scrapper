@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n;
+    cin >> n;
+    int d=2,p,maxp=-1,maxd=0;
+    while(n>1){
+        p = 0;
+        while(n%d == 0)
+            p++, n /= d;
+        if(p>maxp)
+            maxp = p, maxd = d;
+        else
+            if(p == maxp)
+                maxd = d;
+        d ++;
+        if(d*d>n && n>1){
+            if(1>maxp)
+                maxp = p, maxd = n;
+            else
+                if(1 == maxp)
+                    maxd = n;
+            n = 1;
+        }
+    }
+    cout << maxd;
+    return 0;
+}

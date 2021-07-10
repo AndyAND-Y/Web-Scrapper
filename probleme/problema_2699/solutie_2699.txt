@@ -1,0 +1,15 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    long long n,p;
+    cin>>n>>p;
+    long long x=1;
+    while(x<=p)
+    {
+        cout<<x<<" ";
+        x=x*n;
+    }
+    return 0;
+}

@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+
+int n, m , v[1005];
+
+int main()
+{
+    cin >> m >> n;
+    int MAX = -1, CNT;
+    for(int  k = 1 ; k <= m ; ++k)
+    {
+        for(int i = 0 ; i < n ; i ++)
+            cin >> v[i];
+        int MaxCurent = v[0];
+        for(int i  = 0 ; i < n ; i ++)
+            if(v[i] > MaxCurent)
+                MaxCurent = v[i];
+        if(MaxCurent > MAX)
+            MAX = MaxCurent, CNT = 1;
+        else
+            if(MaxCurent == MAX)
+                CNT ++;
+    }
+    cout << MAX << " " << CNT;
+    return 0;
+}

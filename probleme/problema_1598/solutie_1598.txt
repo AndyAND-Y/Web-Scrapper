@@ -1,0 +1,42 @@
+//Dragan Andrei Gabriel
+//University of Bucharest
+
+#include <cstdio>
+#include <cstring>
+#include <algorithm>
+
+using namespace std;
+
+int v[1001], coada[50001], dim, m, x, indx;
+char s[10];
+
+int main()
+{
+    freopen("coada1.in", "r", stdin);
+    freopen("coada1.out", "w", stdout);
+
+    scanf("%d", &m);
+
+    indx = 0, dim = 0;
+
+    while (m--)
+    {
+        scanf("%s %d", s, &x);
+        if (strcmp(s, "push") == 0)
+        {
+            if (v[x] > indx)
+                indx = v[x], coada[++dim] = x, v[x] = dim;
+                else
+                    if (v[x] <= indx)
+                        coada[++dim] = x, v[x] = dim;
+        }else
+        {
+            if (v[x] > indx)
+                printf("%d\n", v[x] - indx);
+                else
+                    printf("-1\n");
+        }
+    }
+
+    return 0;
+}

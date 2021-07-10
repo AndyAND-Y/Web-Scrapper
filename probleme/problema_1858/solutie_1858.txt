@@ -1,0 +1,15 @@
+#include <fstream>
+
+using namespace std;
+ifstream f("restmare.in");
+ofstream g("restmare.out");
+long long n , k ;
+
+int main()
+{
+    f >> n ;
+    k = n / 2 ;
+    if ( n % 2 == 1 ) g << k * k ;
+             else g << k * (k-1) ;
+    return 0;
+}

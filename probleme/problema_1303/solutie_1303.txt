@@ -1,0 +1,17 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+    int a,b;
+    char c;
+    cin>>a>>b;///citim numerele
+    cin>>c;///citim operatia
+    switch(c)///Verificam operatia
+    {
+     case '/':{cout<<max(a,b)/min(a,b);break;}
+     case '*':{cout<<a*b;break;}
+     case '+':{cout<<a+b;break;}
+     case '-':{cout<<max(a,b)-min(a,b);break;}
+    }
+    return 0;
+}

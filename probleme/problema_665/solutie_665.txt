@@ -1,0 +1,24 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int a, b , cnt = 0, n;
+    cin >> a >> b;
+    for(int i = a ; i <= b ; ++i)
+    {
+        n = i;
+        int ok = 1;
+        while(n && ok)
+        {
+            if(n % 10 != 0)
+                if(i % (n % 10) != 0)
+                    ok = 0;
+            n /= 10;
+        }
+        if(ok)
+            cnt ++;
+    }
+    cout << cnt;
+    return 0;
+}

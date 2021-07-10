@@ -1,0 +1,19 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n, s = 0, cnt = 0, x, nrc = 0;
+    cin >> n;
+    x = n;
+    while(x)
+        nrc ++, x /= 10;
+    int tt = (nrc%2==0)?0:1;
+    while(n){
+        cnt ++;
+        if(cnt%2==tt)
+            s += n%10;
+        n /= 10;
+    }
+    cout << s;
+    return 0;
+}

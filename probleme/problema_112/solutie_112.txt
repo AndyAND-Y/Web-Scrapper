@@ -1,0 +1,27 @@
+#include <iostream>
+#include <cassert>
+
+using namespace std;
+
+int main(){
+    int n, a, max, min;
+    cin >> n;
+    assert(cin >> a);
+    max = min = a;
+    for(int i=1;i<n;++i){
+        assert(cin >> a);
+        if(a < min)
+            min = a;
+        if(a > max)
+            max= a;
+    }
+    int x = max,y=min;
+    int r = x % y;
+    while(r){
+        x = y;
+        y = r;
+        r = x % y;
+    }
+    cout << min/y << "/" << max/y << endl;
+    return 0;
+}

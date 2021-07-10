@@ -1,0 +1,38 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int x , y;
+    cin >> x >> y;
+    int a  = 0, b = 0, c , p , n;
+    
+    n = x, c = x % 10, p =1;
+    while(n)
+    {
+        if(n % 2 == c % 2)
+            a = a + n % 10 * p, p *= 10;
+        n /= 10;
+    }
+    n = y, c = y % 10, p =1;
+    while(n)
+    {
+        if(n % 2 == c % 2)
+            b = b + n % 10 * p, p *= 10;
+        n /= 10;
+    }
+    
+    if(a > b)
+        cout << x;
+    else
+        if(a < b)
+            cout << y;
+        else
+            if(x > y)
+                cout << x;
+            else
+                cout << y;
+    
+    return 0;
+}

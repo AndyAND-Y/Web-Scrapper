@@ -1,0 +1,26 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+ifstream fin("sumainsecv.in");
+ofstream fout("sumainsecv.out");
+
+int n, S, a[105];
+
+int main(){
+    fin >> n >> S;
+    int ii=0, jj=0;
+    for(int i=1;i<=n;++i)
+        fin >> a[i];
+    for(int i=1 ; i<=n && ii==0 ; ++i)
+        for(int j=i ; j<=n && ii==0 ; ++j)
+        {
+            int sum = 0;
+            for(int k=i;k<=j;++k)
+                sum += a[k];
+            if(sum == S)
+                ii = i, jj = j;
+        }
+    fout << ii << " " << jj;
+    return 0;
+}

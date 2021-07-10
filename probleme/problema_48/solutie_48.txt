@@ -1,0 +1,21 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n;
+    //citim n
+    cin >> n;
+    
+    //initializam s cu 0
+    int s = 0 ;
+    
+    //determinam suma, observand ca fiecare termen este de forma i*i
+    // il marim pe i cat timp i*i<=n
+    for (int i = 1 ; i*i <= n ; i++)
+        s += i * i;
+    
+    //afisam rezultatul
+    cout << "Rezultatul este " << s << endl;
+    
+    return 0;
+}

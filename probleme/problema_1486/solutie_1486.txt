@@ -1,0 +1,41 @@
+#include <fstream>
+#include <cmath>
+
+using namespace std;
+int dx[]={-1,-1, 0, 1,1,1,0,-1};
+int dy[]={ 0,-1,-1,-1,0,1,1, 1};
+char t[8][3]={"N","NV","V","SV","S","SE","E","NE"};
+int n,m,x,y;
+float a[1002][1002];
+
+ifstream f("gropi.in");
+ofstream g("gropi.out");
+
+int main()
+{
+    int i,j,k,dir,nr, maxim=0;
+    f>>n>>m>>x>>y;
+    for (i=1;i<=n;i++)
+        for (j=1;j<=m;j++)
+            {
+                f>>a[i][j];
+            }
+    for (k = 0 ; k < 8 ; k++)
+    {
+        i=x+dx[k];j=y+dy[k];
+        nr=0;
+        while (i>0 && j>0 && i<=n &&j<=m)
+        {
+            if ( a[i][j] == 0 )nr++;
+            i=i+dx[k];
+            j=j+dy[k];
+        }
+        if (nr>maxim) {
+            maxim=nr; dir=k;
+        }
+    }
+    g <<t[dir]<<" "<<maxim<<"\n";
+    f.close();
+    g.close();
+    return 0;
+}

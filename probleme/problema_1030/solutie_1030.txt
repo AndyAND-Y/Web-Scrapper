@@ -1,0 +1,23 @@
+#include <iostream>
+
+using namespace std;
+long long i , n , s , t , x ;
+
+int main()
+{
+    cin >> n ;
+    s = 0 ; t = 0 ;
+    for( i = 1 ; i <= n / 2 ; i++)
+    {
+        cin >> x ;
+        s = s + x ;
+    }
+    for( i = 1 ; i <= n / 2 ; i++)
+    {
+        cin >> x ;
+        t = t + x ;
+    }
+    s = s * t ;
+    cout << s ;
+    return 0;
+}

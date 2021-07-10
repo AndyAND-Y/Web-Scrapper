@@ -1,0 +1,17 @@
+int echilibrat(int n)
+{
+    int sp = 0, si = 0, i = 0;
+    while(n)
+    {
+        if(i % 2 == 0)
+            sp += n % 10;
+        else
+            si += n % 10;
+        
+        i++, n/= 10;
+    }
+    if(sp % 2 == 0 && si % 2 == 1)
+        return 1;
+    else
+        return 0;
+}

@@ -1,0 +1,32 @@
+#include <fstream>
+
+using namespace std;
+ifstream f("relativ.in");
+ofstream g("relativ.out");
+long long n , x , minim , maxim , sumpart , suma , i , nrrel ;
+
+int main()
+{
+    f >> n ;
+    f >> x ;
+    minim = x ;
+    maxim = 0 ;
+    sumpart = x ;
+    suma = x ;
+    nrrel = 1 ;
+    for ( i=1 ; i<=n-1 ; i++ )
+    {
+        f >> x ;
+        sumpart += x ;
+        if ( x <= minim )
+          {
+              nrrel++ ;
+              if ( sumpart-suma+minim > maxim ) maxim = sumpart-suma+minim ;
+              minim = x ;
+              suma = sumpart ;
+          }
+    }
+    g << nrrel << "\n" << maxim ;
+
+    return 0;
+}

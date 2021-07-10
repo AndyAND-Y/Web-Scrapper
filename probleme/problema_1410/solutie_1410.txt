@@ -1,0 +1,36 @@
+#include <iostream>
+#include <cassert>
+using namespace std;
+
+int main()
+{
+    int cnt = 0;
+    long long a , b;
+    cin >> a >> b;
+    while(a != 0 && b != 0)
+    {
+        long long x = a, y = b;
+        long long pa  = 1, pb = 1;
+        while(x) 
+            pa *= 10, x /= 10;
+        while(y) 
+            pb *= 10, y /= 10;
+        long long p, q , ogl;
+        p = q = a * pb + b, ogl = 0;
+        while(p != 0)
+            ogl = 10 * ogl + p % 10, p /= 10;
+        if(ogl == q)
+            cnt  ++;
+        else
+        {
+            p = q = b * pa + a, ogl = 0;
+            while(p != 0)
+                ogl = 10 * ogl + p % 10, p /= 10;
+            if(ogl == q)
+                cnt  ++;
+        }
+        cin >> a >> b;
+    }
+    cout << cnt << endl;
+    return 0;
+}

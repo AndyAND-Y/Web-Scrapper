@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+
+void factorizare(int n){
+    
+}
+
+int main(){
+    int n , x;
+    cin >> n;
+    long long int s = 0;
+    for(int i = 1 ; i <= n ;++i)
+    {
+        cin >> x;
+        int d = 3, f = -1;
+        
+        if(x%2 == 0)
+            f = 2;
+        while(f == -1)
+            if(x % d == 0)
+                f = d;
+            else
+            {
+                d += 2;
+                if(d * d > x)
+                    f = x;
+            }
+        s += f;
+    }
+    cout << s;
+    return 0;
+}

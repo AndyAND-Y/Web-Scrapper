@@ -1,0 +1,23 @@
+#include <iostream>
+
+using namespace std;
+int n , r , maxim , m;
+long long p;
+int main()
+{
+    cin>>n;
+    r=n;
+    p=1;
+    maxim=-1;
+    while(r!=0)
+    {
+        m = (n / (10 * p)) * p + n % p;
+        if(m != 0)
+            if(n % m > maxim)
+                maxim = n % m;
+        r = n / (10 * p);
+        p = p * 10;
+    }
+    cout << maxim;
+    return 0;
+}

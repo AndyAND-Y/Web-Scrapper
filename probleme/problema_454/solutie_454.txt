@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int z , l , a;
+    cin >> z >> l >> a;
+    bool corect = true;
+    if(z<1 || l<1)
+        corect = false;
+    if(corect)
+        if(l == 1 || l == 3 || l == 5 || l == 7 || l == 8 || l == 10 || l == 12)
+            if(z>31)
+                corect = false;
+    if(corect)
+        if(l == 4 || l == 6 || l == 9 || l == 11)
+            if(z>30)
+                corect = false;
+    if(corect)
+        if(l == 2)
+        {
+            if( (a % 4 == 0 && a % 100 != 0) || a % 400 == 0)
+            {
+                if(z>29)
+                    corect = false;
+            }
+            else
+                if(z > 28)
+                    corect = false;
+        }
+    if(corect)
+        cout << "DA";
+    else
+        cout << "NU";
+    return 0;
+}

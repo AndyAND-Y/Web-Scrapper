@@ -1,0 +1,123 @@
+#include <iostream>
+using namespace std;
+
+int A,B,C,v[1000001], q[1000001], op[1000001];
+
+void operatii(int poz , int cnt)
+{
+    if ( poz == 0 )
+        cout << cnt << endl;
+    else
+    {
+        operatii(v[poz] , cnt + 1);
+        switch(op[poz])
+        {
+            case 1:
+                cout << "A C\n"; break;
+            case 2:
+                cout << "B C\n"; break;
+            case 3:
+                cout << "R A\n"; break;
+            case 4:
+                cout << "R B\n"; break;
+            case 5:
+                cout << "A B\n"; break;
+            case 6:
+                cout << "B A\n"; break;
+        }
+    }
+}
+
+int main(){
+    cin >> A >> B >> C;
+    for(int i =1 ; i <= 1000000 ; i ++)
+        v[i] = -1;
+    int st = 1, dr = 1;
+    q[dr] = 0;
+    v[0] = 0;
+    int pdr = -1;
+    while(st <= dr && pdr == -1)
+    {
+        int k = q[st];
+        int x = k / 1000, y = k % 1000;
+        int xx , yy , kk;
+        
+        xx = 0 , yy = y ;
+        kk = xx * 1000 + yy;
+        if(v[kk] == -1)
+        {
+            q[++dr] = kk;
+            v[kk] = k;
+            op[kk] = 1; // golirea lui A
+            if(xx == C || yy == C)
+                pdr = dr;
+        }
+        xx = x , yy = 0 ;
+        kk = xx * 1000 + yy;
+        if(v[kk] == -1)
+        {
+            q[++dr] = kk;
+            v[kk] = k;
+            op[kk] = 2; // golirea lui B
+            if(xx == C || yy == C)
+                pdr = dr;
+        }
+        xx = A , yy = y ;
+        kk = xx * 1000 + yy;
+        if(v[kk] == -1)
+        {
+            q[++dr] = kk;
+            v[kk] = k;
+            op[kk] = 3; // umplerea lui A
+            if(xx == C || yy == C)
+                pdr = dr;
+        }
+        xx = x , yy = B ;
+        kk = xx * 1000 + yy;
+        if(v[kk] == -1)
+        {
+            q[++dr] = kk;
+            v[kk] = k;
+            op[kk] = 4; // umplerea lui B
+            if(xx == C || yy == C)
+                pdr = dr;
+        }
+        // A -> B
+        if(y + x <= B)
+            yy = y + x, xx = 0;
+        else
+            yy = B, xx = y + x - B;
+        kk = xx * 1000 + yy;
+        if(v[kk] == -1)
+        {
+            q[++dr] = kk;
+            v[kk] = k;
+            op[kk] = 5; // A -> B
+            if(xx == C || yy == C)
+                pdr = dr;
+        }
+        // B -> A
+        if(x + y <= A)
+            xx = x + y , yy = 0;
+        else
+            xx = A , yy = x + y - A;
+        kk = xx * 1000 + yy;
+        if(v[kk] == -1)
+        {
+            q[++dr] = kk;
+            v[kk] = k;
+            op[kk] = 6; // B -> A
+            if(xx == C || yy == C)
+                pdr = dr;
+        }
+        st ++;
+    }
+    
+    if(pdr == -1)
+        cerr << "Nu se poate";
+    else
+    {
+        operatii(q[pdr] , 0);
+    }
+    return 0;
+}

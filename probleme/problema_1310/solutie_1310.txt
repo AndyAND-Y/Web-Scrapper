@@ -1,0 +1,24 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int n , m , c , cnt = 0;
+    cin >> n >> m;
+    c = n % 10;
+    if(c != 0)
+        if(m % c == 0)
+            cnt ++;
+    n /= 10;
+    c = n % 10;
+    if(c != 0)
+        if(m % c == 0)
+            cnt ++;
+    n /= 10;
+    c = n % 10;
+    if(c != 0)
+        if(m % c == 0)
+            cnt ++;
+    cout << cnt;
+    return 0;
+}

@@ -1,0 +1,11 @@
+/// solutie - Moca Andrei - 100p
+#include <iostream>
+int main()
+{
+    int a, b;
+    std::cin >> a >> b;
+    if ((a - (b * (b - 1) / 2)) % b == 0)
+        std::cout << "DA";
+    else std::cout << "NU";
+    return 0;
+}

@@ -1,0 +1,30 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int a  ,b;
+    cin >> a >> b;
+    
+    //aplicam Algoritmul lui EUCLID
+    //cat timp b este nenul
+    //  determinam restul impartirii lui a la b
+    //  a devine b
+    //  b devine restul determinat
+    
+    //aici, prentru comodititate folosim do .. while
+    int r;
+    if( b!= 0)
+        do
+        {
+            r = a % b;
+            a = b;
+            b = r;
+        }
+        while( r );
+    else
+        if(a == 0) // pentru a prinde cazul particular in care ambele valori sunt 0
+            a = -1;
+    //rezultatul este ultimul impartitor. Atentie, el s-a mutat in a !!
+    cout << a << endl;
+    return 0;
+}

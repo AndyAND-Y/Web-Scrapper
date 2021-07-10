@@ -1,0 +1,29 @@
+#include <fstream>
+using namespace std;
+
+ifstream fin("nrapprime.in");
+ofstream fout("nrapprime.out");
+
+int prim(int n){
+    if(n<2)
+        return 0;
+    if(n%2 == 0 && n > 2)
+        return 0;
+    for(int d=3 ; d*d<=n ; d+=2)
+        if(n%d == 0)
+            return 0;
+    return 1;
+}
+
+int main(){
+    int n,x[100];
+    fin >> n ;
+    for(int i=0; i<n ;++i)
+        fin >> x[i];
+    int cnt = 0;
+    for(int i=0; i<n; ++i)
+        if(prim(x[i]))
+            cnt ++;
+    fout << cnt << endl;
+    return 0;
+}

@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int n , x , b;
+    cin >> n;
+    b = -1;
+    for(int i = 1 ; i <= n ; ++i)
+    {
+        cin >> x;
+        do
+        {
+            if(x % 10 > b)
+                b = x % 10;
+            x /= 10;
+        }
+        while(x != 0);
+    }
+    cout << b + 1;
+    return 0;
+}

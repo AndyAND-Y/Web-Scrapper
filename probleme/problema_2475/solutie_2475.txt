@@ -1,0 +1,58 @@
+#include <iostream>
+#include <fstream>
+#define MOD 1000000007
+using namespace std;
+
+ifstream fin("mosquito.in");
+ofstream fout("mosquito.out");
+
+void precalculare(long long n, long long k, unsigned long long &sum)
+{
+    for(long long i=1; i<=n/2; i++)
+        sum+=(n-i+1)*i;
+
+    sum*=2;
+
+    if(n%2!=0)
+        sum+=(n/2+1)*(n/2+1);
+
+    sum*=k;
+}
+
+unsigned long long pow(long long a, unsigned long long putere)
+{
+    long long R=1, X=a;
+
+    while(putere)
+    {
+        if(putere%2!=0)
+        {
+            R=((R%MOD)*(X%MOD))%MOD;
+            putere--;
+        }
+
+        X=((X%MOD)*(X%MOD))%MOD;
+        putere/=2;
+    }
+
+    return R;
+}
+
+int main()
+{
+    int t;
+    fin >> t;
+
+    for(int i=1; i<=t; i++)
+    {
+        long long a, n, k;
+        unsigned long long sum=0;
+
+        fin >> a >> n >> k;
+        precalculare(n,k,sum);
+
+        fout << pow(a,sum) << "\n";
+    }
+
+    return 0;
+}

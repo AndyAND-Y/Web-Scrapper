@@ -1,0 +1,50 @@
+#include <iostream>
+#include <fstream>
+#include <math.h>
+
+
+
+using namespace std;
+
+int main()
+{
+    int m, i, d, s, p, x;
+    bool prim;
+    ifstream f("pitic.in");
+    ofstream g("pitic.out");
+    f>>m;
+    for(i=1;i<=m;i++)
+    {
+       prim=true;
+       d=2;
+       if(i == 1)
+            prim = false;
+       while(d<=sqrt(i)&&prim)
+       {
+          if(i%d==0)
+            prim=false;
+          d++;
+        }
+       if(prim)
+            g<<i<<" ";
+       else
+       {
+           s=0;
+           x=i;d=2;
+           while(x!=1)
+           {
+               p=0;
+               while(x%d==0)
+               {
+                   p++;x=x/d;
+               }
+               if(p!=0)
+                s=s+d;
+               d++;
+           }
+           g<<s<<" ";
+       }
+    }
+
+    return 0;
+}

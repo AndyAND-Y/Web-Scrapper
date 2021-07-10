@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n,x,s,c;
+    cin >> n;
+    s = c = 0;
+    for( ; n ; --n){
+        cin >> x;
+        int pp =1;
+        if(x<2)
+            pp = 0;
+        if(x%2==0 && x>2)
+            pp = 0;
+        for(int d=3;d*d<=x;d +=2)
+            if(x%d == 0)
+                pp = 0;
+        if( pp)
+            s+=x, c++;
+    }
+    double M = (double)s / c;
+    M *=100;
+    M = (int)(M);
+    cout << M / 100;
+    return 0;
+}

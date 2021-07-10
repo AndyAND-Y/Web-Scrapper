@@ -1,0 +1,28 @@
+#include <iostream>
+#include <fstream>
+
+#define NN 1000000
+
+using namespace std;
+
+ifstream fin("eratostene.in");
+ofstream fout("eratostene.out");
+
+int n, v[NN];
+
+int main(){
+    v[0] = v[1] = 1;
+    for(int i=2;i*i<NN; ++i)
+        if(v[i]==0)
+            for(int j=2;i*j<NN;++j)
+                v[i*j] = 1;
+    fin >> n;
+    int x,C = 0;
+    for(int i=1;i<=n;++i){
+        fin >> x;
+        if(v[x]==0)
+            C ++;
+    }
+    fout << C;
+    return 0;
+}

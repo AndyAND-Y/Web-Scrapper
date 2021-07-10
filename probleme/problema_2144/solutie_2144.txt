@@ -1,0 +1,38 @@
+int diofantic(int n, int s[], long long a, long long b, long long c)
+{
+    /// solutie pur didactica, usor de inteles 
+    int i, j, nr = 0;
+    
+    /// perechea (a,b)
+    i = 1; j = n;
+    while (i < j){
+
+        long long x = a * s[i]* s[i] + b * s[j] * s[j];
+
+        if ( x < c) ++i;
+        else
+            if (x > c) --j;
+            else {
+                ++nr;
+                ++i; --j;
+            }
+    }
+    
+    /// perechea (b, a)
+    i = 1; j = n;
+    while (i < j){
+
+        long long x = b * s[i]* s[i] + a * s[j] * s[j];
+
+        if ( x < c) ++i;
+        else
+            if (x > c) --j;
+            else {
+                ++nr;
+                ++i; --j;
+            }
+    }
+    
+    return nr;
+
+}

@@ -1,0 +1,65 @@
+#include <fstream>
+using namespace std;
+ifstream fin ("muzical.in");
+ofstream fout ("muzical.out");
+int n,i;
+long long int sum;
+char a,b,c;
+int main()
+{
+    fin>>n;
+    for(i=1; i<=n; i++)
+    {
+        fin>>a>>b;
+        if(a=='d' && b=='o')
+        {
+            fin>>c;
+            if(c=='1')
+                sum+=0;
+            else if(c=='2')
+                sum+=7;
+        }
+        if(a=='r' && b=='e')
+        {
+            sum+=1;
+        }
+        if(a=='m' && b=='i')
+        {
+            sum+=2;
+        }
+        if(a=='f' && b=='a')
+        {
+            sum+=3;
+        }
+        if(a=='s' && b=='o')
+        {fin>>c;
+            sum+=4;
+        }
+        if(a=='l' && b=='a')
+        {
+            sum+=5;
+        }
+        if(a=='s' && b=='i')
+        {
+            sum+=6;
+        }
+    }
+    sum%=8;
+    if(sum==0)
+        fout<<"do1";
+    if(sum==1)
+        fout<<"re";
+    if(sum==2)
+        fout<<"mi";
+    if(sum==3)
+        fout<<"fa";
+    if(sum==4)
+        fout<<"sol";
+    if(sum==5)
+        fout<<"la";
+    if(sum==6)
+        fout<<"si";
+    if(sum==7)
+        fout<<"do2";
+    return 0;
+}

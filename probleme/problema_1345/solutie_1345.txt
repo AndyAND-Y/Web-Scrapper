@@ -1,0 +1,31 @@
+#include <iostream>
+#include <fstream>
+#include <cassert>
+using namespace std;
+
+ofstream fout("kprim.out");
+ifstream fin("kprim.in");
+
+int main()
+{
+    int k;
+    fin >> k;
+    k ++ ;
+    int n = 1;
+    if(k == 3)
+        n = 7, k = 0;
+    while( k > 0 )
+    {
+        n ++;
+        int prim = 1;
+        if(n % 2 == 0 && n > 2)
+            prim = 0;
+        for(int d = 3 ; d * d <= n && prim ; d += 2)
+            if(n % d == 0)
+                prim = 0;
+                
+        if(prim)
+            k --;
+    }
+    fout << (long long) n * n << endl;
+}

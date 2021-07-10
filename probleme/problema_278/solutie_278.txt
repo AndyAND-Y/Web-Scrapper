@@ -1,0 +1,24 @@
+#include <iostream>
+#include <cassert>
+using namespace std;
+
+int n,m,a[105],b[105];
+
+int main(){
+    cin >> n;
+    for(int i=1;i<=n;++i)
+        cin >>a[i];
+    cin >> m;
+    for(int i=1;i<=m;++i)
+        cin >> b[i];
+    int Max = b[1];
+    for(int i=2 ; i<=m ; ++i)
+        if(b[i]>Max)
+            Max = b[i];
+    int C = 0;
+    for(int i=1;i<=n;++i)
+        if(a[i]>Max)
+            C ++;
+    cout << C;
+    return 0;
+}

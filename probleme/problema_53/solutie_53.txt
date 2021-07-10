@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    //declaram doua variabile: 
+    //      x   - in care vom citi numerele
+    //      nrp - un contor, in care vom numara cate numere citite sunt impare
+    int x , nrp;
+    
+    //initializam contorul cu zero
+    nrp = 0;
+    
+    //citim un numar
+    cin >> x;
+    //cat timp numarul citit este diferit de zero
+    while(x != 0){
+        //il prelucram  - daca este impar il numaram
+        if(x % 2 == 1)
+            nrp ++;
+        //citim alt numar
+        cin >> x;
+        
+        //se verifica din nou conditi x != 0 si se reiau instructiunile, etc, pan cand numarul citi mai sus este zero
+    }
+    
+    //afisam rezultatul
+    cout << nrp << endl;
+    return 0;
+}

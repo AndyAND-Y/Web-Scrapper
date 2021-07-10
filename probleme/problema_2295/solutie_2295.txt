@@ -1,0 +1,87 @@
+#include <fstream>
+#include <cstring>
+
+using namespace std;
+
+ifstream fin("baza.in");
+ofstream fout("baza.out");
+
+int pw[150], ans[150];
+char word[55];
+
+void read();
+void solve();
+void write();
+void addTo(int To[], int value);
+void multiplyByConstant(int vec[], int value);
+
+int main() {
+    read();
+    solve();
+    write();
+
+    return 0;
+}
+
+void read() {
+    fin >> word;
+
+    fin.close();
+}
+
+void solve() {
+    int lg = strlen(word);
+
+    pw[0] = pw[1] = 1;
+
+    for(int i = lg - 1; i >= 0; --i) {
+        addTo(ans, (int)(word[i] - 'a'));
+        multiplyByConstant(pw, 26);
+    }
+}
+
+void write() {
+    for(int i = ans[0]; i > 0; --i) {
+        fout << ans[i];
+    }
+
+    fout << '\n';
+
+    fout.close();
+}
+
+void addTo(int To[], int value) {
+    int toAdd[150];
+
+    for(int i = 0; i < 150; ++i) {
+        toAdd[i] = pw[i];
+    }
+
+    multiplyByConstant(toAdd, value);
+
+    while(toAdd[0] > 1 && toAdd[toAdd[0]] == 0) --toAdd[0];
+
+    int i = 1, t = 0;
+
+    while(i <= To[0] || i <= toAdd[0] || t != 0) {
+        To[i] = To[i] + toAdd[i] + t;
+        t = To[i] / 10;
+        To[i] %= 10;
+
+        To[0] = max(To[0], i);
+        ++i;
+    }
+}
+
+
+void multiplyByConstant(int vec[], int value) {
+    int t = 0;
+
+    for(int i = 1; i <= vec[0] || t != 0; ++i) {
+        vec[i] = vec[i] * value + t;
+        t = vec[i] / 10;
+        vec[i] %= 10;
+
+        vec[0] = max(vec[0], i);
+    }
+}

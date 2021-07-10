@@ -1,0 +1,22 @@
+#include <iostream>
+
+using namespace std;
+
+long long n, i, p, m, nc;
+int main () {
+    cin>>n;
+    m = n;
+    nc = 0;
+    while (m!=0) {
+        nc++;
+        m /= 10;
+    }
+
+    p = 1;
+    for (i=1;i<=nc/2;i++)
+        p *= 10;
+
+    cout<<n/(p*10) * p + n%p;
+
+    return 0;
+}

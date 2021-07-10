@@ -1,0 +1,55 @@
+#include <fstream>
+
+using namespace std;
+
+ifstream fin("af.in");
+ofstream fout("af.out");
+
+long long nr1, nr2, nr3;
+char sign, eq;
+short n;
+
+inline void TrueOrFalse();
+
+int main()
+{
+    fin >> n;
+    while(n--)
+    {
+        fin >> nr1 >> sign >> nr2;
+        fin >> eq >> nr3;
+        TrueOrFalse();
+        fout << '\n';
+    }
+    return 0;
+}
+
+inline void TrueOrFalse()
+{
+    if(sign == '+')
+            if(nr1 + nr2 == nr3)
+                fout << "Adevarat";
+            else
+                fout << "Fals";
+
+       if(sign == '-')
+            if(nr1 - nr2 == nr3)
+                fout << "Adevarat";
+            else
+                fout << "Fals";
+
+       if(sign == 'x')
+            if(nr1 * nr2 == nr3)
+                fout << "Adevarat";
+            else
+                fout << "Fals";
+
+        if(sign == ':')
+            if(nr2 == 0)
+                fout << "Fals";
+            else
+                if(nr1 / nr2 == nr3)
+                    fout << "Adevarat";
+                else
+                    fout << "Fals";
+}

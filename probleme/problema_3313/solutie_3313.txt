@@ -1,0 +1,32 @@
+#include <fstream>
+using namespace std;
+ifstream f("eratostene2.in");
+ofstream g("eratostene2.out");
+int i,j,x,n,k;
+int p[1000001],a[1000001];
+
+
+int main()
+{
+    p[1] = 1;
+    a[1] = 0;
+    for(i = 2; i <= 1000000; i++)
+        if(p[i]==0)
+    {
+        a[i] = 1;
+        j = i + i;
+        while(j <= 1000000)
+        {
+            p[j] = 1;
+            a[j]++;
+            j = j + i;
+        }
+    }
+    f >> n;
+    for(i = 1; i <= n; i++)
+    {
+        f >> x;
+        g << a[x] << " ";
+    }
+    return 0;
+}

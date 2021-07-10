@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n, max = -1, m;
+    cin >> n;
+    m = n;
+    int cnt = 0;
+    while(n)
+    {
+        cnt++;
+        int r = 0, p = 1, x = m;
+        int i = 1;
+        while(x!=0){
+            if(i!=cnt)
+                r += p*(x%10), p *= 10;
+            i++;
+            x /= 10;
+        }
+        if(r>max)
+            max = r;
+
+        n /= 10;
+    }
+    cout << max;
+    return 0;
+}

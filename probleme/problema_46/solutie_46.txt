@@ -1,0 +1,20 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n;
+    //citim n
+    cin >> n;
+    
+    //initializam s cu 0
+    int s = 0 ;
+    
+    //determinam suma, observand ca fiecare termen este de forma 2*i
+    for (int i = 1 ; i <= n ; i++)
+        s += 2 * i;
+    
+    //afisam rezultatul
+    cout << "Suma este " << s << endl;
+    
+    return 0;
+}

@@ -1,0 +1,47 @@
+#include <fstream>
+#include <iostream>
+#include <cassert>
+using namespace std;
+#define NN 500
+
+
+ifstream fin("BFS.in");
+ofstream fout("BFS.out");
+
+int n, X, a[NN][NN];
+char v[NN];
+int c[NN];
+
+void citire(){
+    int m, q, p ;
+    fin >> n >> m >> X;
+    assert(X>=1 && X<=n);
+    for( ; m ; --m){
+        fin >> p >> q;
+        assert(p<=n && q<=n);
+        a[p][q]= a[q][p] = 1;
+    }
+}
+
+void BFS(int start){
+
+    int st=1,dr=0;
+    v[start]=1;
+    c[++dr] = start;
+    while(st<=dr){
+        int k = c[st];
+        for(int i=1;i<=n;++i)
+            if(a[k][i]==1 && v[i]==0){
+                v[i] = 1;
+                c[++dr]=i;
+            }
+        fout << k << " ";
+        st++;
+    }
+}
+
+int main(){
+    citire();
+    BFS(X);
+    return 0;
+}

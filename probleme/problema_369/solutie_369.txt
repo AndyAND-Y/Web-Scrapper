@@ -1,0 +1,13 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int a,  S = 0, ogl = 0;
+    cin >> a;
+    while(a)
+        S += a % 10, a /= 10;
+    while(S)
+        ogl = 10 * ogl + S % 10, S /= 10;
+    cout << ogl;
+    return 0;
+}

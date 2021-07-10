@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+///Fara functii
+int main()
+{
+   int lenght;
+   char border='*',filler=' ';
+   cin>>lenght;
+   int start=2,base=4,i;
+   for(i=start;i<=lenght;i++) {
+     for(int sp=0;sp<=lenght-i;sp++)
+     {
+       cout<<filler;
+     }
+    if(i>start){
+       cout<<border<<" ";
+       for(int b=base;b<=i;b++)
+       {
+         cout<<filler<<" ";
+       }
+     }
+     cout<<border<<" ";
+     cout<<"\n";
+   }
+   for(int j=base;j<lenght+base;j++)
+   {
+     cout<<border<<" ";
+   }
+   cout<<"\n";
+    return 0;
+}

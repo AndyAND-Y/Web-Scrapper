@@ -1,0 +1,27 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+int a,sa,b,sb,d;
+
+cin>>a;
+cin>>b;
+sa=1;
+for(d=2;d<=a/2;d++)
+if(a%d==0)
+sa=sa+d;
+
+if(sa==b)
+{
+sb=1;
+for(d=2;d<=b/2;d++)
+if(b%d==0)
+sb=sb+d;
+
+if(sb==a)
+cout<<"PRIETENE";
+}
+else
+cout<<"NU SUNT PRIETENE";
+}

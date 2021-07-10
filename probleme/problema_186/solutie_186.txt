@@ -1,0 +1,33 @@
+#include <iostream>
+using namespace std;
+
+int v[10];
+
+int cm(int n){
+    int MM = 10;
+    while(n){
+        if(n%10<MM)
+            MM = n % 10;
+            n /= 10;
+    }
+    return MM;
+}
+
+int main(){
+    int n;
+    cin >> n;
+    for( ; n ; --n ){
+        int x;
+        cin >> x;
+        v[cm(x)]++;
+    }
+    int p = 1;
+    while(v[p]==0)
+        p++;
+    cout << p;
+    v[p]--;
+    for(int i=0;i<10;++i)
+        for(int j=1;j<=v[i] ; ++j)
+            cout<< i;
+    return 0;
+}

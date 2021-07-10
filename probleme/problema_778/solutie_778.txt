@@ -1,0 +1,35 @@
+#include <iostream>
+using namespace std;
+
+int n,m,a[101][101] , v[500] , k;
+
+int main()
+{
+    cin >> n >> m;
+    for(int i = 1 ; i <= n ; ++i)
+        for(int j = 1 ; j <= m ; ++j)
+            cin >> a[i][j];
+    
+    k = 0;
+    
+    for(int i = 1 ; i <= n ; i ++ )
+        for(int j =1 ; j <=m ; j ++)
+            if(i == 1 || i == n || j == 1 || j == m)
+            {
+                bool gasit = false;
+                for(int p = 1 ; p <= k && ! gasit ; p ++)
+                    if(a[i][j] == v[p])
+                        gasit = true;
+                if(! gasit)
+                {
+                    int p = k + 1;
+                    for(p = k + 1 ; p > 1 && v[p-1] > a[i][j] ; p --)
+                        v[p] = v[p-1];
+                    v[p] = a[i][j];
+                    k ++;
+                }
+            }
+    for(int i = 1; i <= k ; i ++)
+        cout << v[i] << " ";
+    return 0;
+}

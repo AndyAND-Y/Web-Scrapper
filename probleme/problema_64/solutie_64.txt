@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n;
+    cin >> n;
+    // vom calcula suma divizorilor.
+    // Folosim faptul ca divizorii sunt in pereche:
+    //      daca d este divizor, si n/d este divizor
+    int s = 0 , d;
+    for(d=1 ; d * d < n ; ++ d)
+        if(n % d == 0)
+            s += d + n / d;
+    if(d * d == n)
+        s += d;
+    // verificam daca s este egal cu dublul lui n
+    if(2 * n == s)
+        cout << n <<  " este perfect" << endl;
+    else
+        cout << n <<  " nu este perfect" << endl;
+    return 0;
+}

@@ -1,0 +1,29 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int r, g, b, minc, maxc;
+    cin >> r >> g >> b;
+    
+    minc = r;
+    if(minc > g) minc = g;
+    if(minc > b) minc = b;
+    
+    maxc = r;
+    if(maxc < g) maxc = g;
+    if(maxc < b) maxc = b;
+    
+    if(minc >= 0 && maxc <= 255)
+    {
+        if(maxc - minc <= 10)
+            cout << "GRI";
+        else
+            cout << "CULOARE";
+    }
+    else
+        cout << "NU E CULOARE";
+    
+    return 0;
+}

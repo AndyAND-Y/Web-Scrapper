@@ -1,0 +1,26 @@
+#include<fstream>
+using namespace std;
+ifstream fin("vistiernic.in");
+ofstream fout("vistiernic.out");
+int n, x, i, p2, p5, nz;
+int main()
+{
+    fin >> n;
+    for (i = 1; i <= n; i++) {
+        fin >> x;
+        while (x % 2 == 0) {
+            p2++;
+            x = x/2;
+        }
+        while (x % 5 == 0) {
+           p5++;
+           x = x/5;
+        }
+    }
+    if (p2 <= p5)
+        nz = p2;
+    else
+        nz = p5;
+    fout << nz << '\n';
+    return 0;
+}

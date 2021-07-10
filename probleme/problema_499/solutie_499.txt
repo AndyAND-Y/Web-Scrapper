@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n, x[205];
+    cin  >> n;  
+    for(int i = 0 ; i < n ; ++ i)
+        cin >> x[i];
+    int cnt = 0;
+    for(int  i = 0; i < n - 1 ; ++i)
+    {   
+        int sca = 0, a = x[i];
+        while(a)
+            sca += a % 10, a /= 10;
+        for(int  j = i + 1 ; j < n ; ++ j)
+        {
+            int scb = 0, b = x[j];
+            while(b)
+                scb += b % 10, b /= 10;
+            if(sca == scb)
+                cnt ++;
+            
+        }
+    }
+    cout << cnt;
+    return 0;
+}

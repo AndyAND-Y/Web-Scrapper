@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int a , b , c , max , min;
+    //citim cele trei numere
+    cin >> a >> b >> c;
+    
+    //determinam maximul
+    max = a;
+    if(max < b) 
+        max = b;
+    if(max < c)
+        max = c;
+    
+    //determinam minimul
+    min = a;
+    if(min > b)
+        min = b;
+    if(min > c)
+        min = c;
+    
+    //determinam rezultatul cerut
+    cout << max-min << endl;
+    
+    return 0;
+}

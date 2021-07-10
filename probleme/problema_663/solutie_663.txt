@@ -1,0 +1,27 @@
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+
+using namespace std;
+
+ifstream fin("lungime1.in");
+ofstream fout("lungime1.out");
+
+int v[100005],n;
+
+int main(){
+    fin >> n;
+    int lgmax = 0;
+    for(int i=1;i<=n;++i)
+    {
+        int x;
+        fin >> x;
+        if(v[x] == 0)
+            v[x] = i;
+        else
+            if(i-v[x] + 1 > lgmax)
+                lgmax = i - v[x] + 1;
+    }
+    fout << lgmax ;
+    return 0;
+}

@@ -1,0 +1,11 @@
+void dublare1(int &n)
+{
+    int p=1;
+    int cop=n;
+    while(cop>9)
+    {
+        p=p*10;
+        cop=cop/10;
+    }
+    n=n/p*11*p+n%p;
+}

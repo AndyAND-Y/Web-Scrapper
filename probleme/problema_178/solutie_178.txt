@@ -1,0 +1,14 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main(){
+    int n;
+    cin >> n;
+    int p = (int) sqrt((double) n);
+    if(n == p*p)
+        cout << "da";
+    else
+        cout << "nu";
+    return 0;
+}

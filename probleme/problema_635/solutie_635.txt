@@ -1,0 +1,46 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+ifstream fin("vecini1.in");
+ofstream fout("vecini1.out");
+
+const int di[] = {0 , 0, 1 , -1} , dj[] = {1 , -1 , 0 , 0};
+
+int n,m,A[105][105];
+
+int  main()
+{
+    fin >> n >> m;
+    for(int i =1 ; i <= n ; ++i)
+        for(int j = 1 ; j <= m ; ++j)
+            fin >> A[i][j];
+            
+    //pentru a ignora cazurile speciale (prima linie, prima coloana, etc),
+    //bordam matricea cu valori diferite, incepand de la valoare maxim + 1
+    int  p  = A[1][1] ;
+    for(int i =1 ; i <= n ; ++i)
+        for(int j = 1 ; j <+ m ; ++j)
+            if(A[i][j] > p)
+                p = A[i][j];
+    p ++;
+    for(int i = 0 ; i <= n  + 1 ; i ++)
+        A[i][0] = p ++, A[i][m + 1] = p ++;
+    for(int j = 1 ; j <= m ; ++j)
+        A[0][j] = p ++, A[n + 1][j] = p ++;
+    int cnt = 0;
+    // parcurgem matricea si verificam pentru fiecare element daca are toti vecinii diferiti
+    for(int i = 1 ; i <= n ; ++i)
+        for(int j = 1 ; j <= m ; ++j)
+        {
+            bool OK = true;
+            for(int s = 0 ; s < 3 ; s ++)
+                for(int t = s + 1 ; t < 4 ; t ++)
+                    if(A[i + di[s]][j + dj[s]] == A[i + di[t]][j + dj[t]])
+                        OK = false;
+            if(OK)
+                cnt ++;
+        }
+    fout << cnt << endl;
+    return 0;
+}

@@ -1,0 +1,48 @@
+# include <fstream>
+# include <cstdio>
+# define DIM 1003
+using namespace std;
+int n, p, k, a[DIM][DIM], pmax, nsol;
+
+void read ()
+{
+    FILE *fin=fopen("gradina.in","rt");
+    fscanf(fin,"%d%d%d",&n,&p,&k);
+    for(int i=1;i<=p;++i)
+    {
+        int x, y;
+        fscanf(fin,"%d%d",&x,&y);
+        a[x][y]=1;
+    }
+    fclose(fin);
+}
+
+void solve ()
+{
+    for(int i=1;i<=n;++i)
+        for(int j=1;j<=n;++j)
+            a[i][j]+=a[i][j-1]+a[i-1][j]-a[i-1][j-1];
+    for(int i=k;i<=n;++i)
+        for(int j=k;j<=n;++j)
+        {
+            int np = a[i][j]-a[i-k][j]-a[i][j-k]+a[i-k][j-k];
+            if (np>pmax)
+            {
+                pmax=np;
+                nsol=1;
+            }
+            else if (np==pmax)
+                ++nsol;
+        }
+}
+
+int main ()
+{
+    read ();
+    solve ();
+
+    FILE *fout = fopen("gradina.out","wt");
+    fprintf(fout,"%d\n%d\n",pmax,nsol);
+    fclose(fout);
+    return 0;
+}

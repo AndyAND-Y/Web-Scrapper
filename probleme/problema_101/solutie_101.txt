@@ -1,0 +1,31 @@
+#include <fstream>
+#include <cstring>
+using namespace std;
+
+ifstream fin("sortcuv.in");
+ofstream fout("sortcuv.out");
+
+int main(){
+    char p[251],   v[200][21] , *c;
+    int n;
+    fin.getline(p,251);
+    c = strtok(p," ");
+    n = 0;
+    while(c){
+        strcpy(v[n++] , c);
+        c = strtok(NULL," ");
+    }
+
+    for(int i=0; i < n ;++i)
+        for(int j=i+1 ; j < n ;++j)
+            if(strcmp(v[i],v[j])>0){
+                char a[21];
+                strcpy(a,v[i]);
+                strcpy(v[i],v[j]);
+                strcpy(v[j],a);
+            }
+
+    for(int i=0;i<n;++i)
+        fout << v[i] << endl;
+    return 0;
+}

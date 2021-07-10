@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+
+
+int main(){
+    int x,      // in x vom citi pe rand fiecare numar
+        max,    // in max vom calcula numarul maxim
+        gasit;  //gasit ne va spune daca primul numar a fost sau nu zero
+    gasit = 0; // gasit primeste zero. Daca vom citi cel putin un numar nenul, gasit va deveni 1
+    
+    //citim primul numar
+    cin >> x;
+    //primul numar este in acest moment si maximul
+    max = x;
+    // cat timp numarul citit este nenul
+    while(x){
+        // il comparam cu maximul, si, daca este cazul, actualizam maximul
+        if(x > max)
+            max = x;
+        // x este neul, deci gasit devine 1
+        gasit ++;
+        
+        //citim alt numar, pe care urmeaza sa-l prelucram
+        cin >> x;
+    }
+    // in functe de valoarea variabilei gasit, afisam rezultatul
+    if(gasit)
+        cout << max << endl;
+    else
+        cout << "NU EXISTA\n";
+    return 0;
+}

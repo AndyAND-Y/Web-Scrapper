@@ -1,0 +1,10 @@
+#include <iostream>
+using namespace std;
+int a , b , d;
+int main() 
+{
+    cin >> a >> b;//citim numerele
+    d = a - b;//facem diferenta lor
+    cout << d;//afisam diferenta
+    return 0; 
+}

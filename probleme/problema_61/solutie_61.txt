@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    // prima idee este cautam toti divizorii lui a, si daca sunt divizori 
+    // si pentru b, sa-i afisam
+    // observam ca divizori comuni ai lui a si b vor divide si cmmdc al lor
+    // calculam cmmdc si afisam divizorii acestuia
+    
+    int a  ,b;
+    cin >> a >> b;
+    
+    //vom calcula cmmdc pentru a, b, folosind algoritmul lui Euclid.
+    
+    //stim ca numerele sunt nenule
+    
+    while(a%b)
+    {
+        int r = a % b;
+        a = b;
+        b =r;
+    }
+    //rezultatul este ultimul impartitor, adica b.
+    
+    // afisam divizorii lui b (cmmdc-ul calculat)
+    for(int d=1 ; d<=b; ++d)
+        if(b % d == 0)
+            cout << d << " ";
+    
+    return 0;
+}

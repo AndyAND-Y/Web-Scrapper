@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n;
+    //citim numarul
+    cin >> n;
+        
+    //verificam daca i este prim
+    
+    //presupunem ca este prim
+    int prim = 1;
+    //0 si 1 nu sunt prime
+    if(n<2)
+        prim = 0;
+    //numerele pare mai mari decat 2 nu sunt prime
+    if(n % 2 == 0 && n > 2)
+        prim = 0;
+    //cautam un divizor impar 
+    for(int d = 3; d * d <= n && prim == 1 ; d ++)
+        if(n % d == 0)  // daca il gasim
+            prim = 0;   //numarul n nu este prim
+    
+    //afisam rezultatul
+    
+    cout << (prim ? "DA" : "NU") << endl;
+    return 0;
+}

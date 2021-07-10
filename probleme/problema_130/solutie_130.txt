@@ -1,0 +1,30 @@
+#include <fstream>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+ifstream fin("sortcif.in");
+ofstream fout("sortcif.out");
+
+int n, a[105];
+
+int sumcif(int n){
+    int s=0;
+    while(n)
+        s+=n%10, n/=10;
+    return s;
+}
+
+bool maimic(int a,int b){
+    return sumcif(a)<sumcif(b);
+}
+
+int main(){
+    fin >> n;
+    for(int i=0;i<n;++i)
+        fin >> a[i];
+    sort(a,a+n,maimic);
+    for(int i=0 ; i<n ; ++i)
+        fout << a[i] << " ";
+    return 0;
+}

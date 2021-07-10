@@ -1,0 +1,409 @@
+#include <iostream>
+#include <stdio.h>
+#include <vector>
+using namespace std;
+
+int n,q;
+vector<int> Graph[300111];
+
+int sz[300111];
+int parent[300111];
+int inId[300111];
+int inEnd[300111];
+int inCounter = 0;
+
+void DFS(int ver)
+{
+    int i;
+
+    inCounter++;
+    inId[ver] = inCounter;
+
+    sz[ver] = 1;
+
+    for (i=0;i<Graph[ver].size();i++)
+    {
+        DFS(Graph[ver][i]);
+        sz[ver] += sz[ Graph[ver][i] ];
+    }
+
+    inEnd[ver] = inCounter;
+}
+
+int hCounter = 1;
+int heavyChild[300111];
+vector<int> heavyPaths[300111];
+int myPath[300111];
+int hpInd[300111];
+vector<int> HIT[300111];
+int HLEAFOFFSET[300111];
+
+void buildHL(int ver, int hid)
+{
+    int i;
+
+    heavyPaths[hid].push_back(ver);
+    myPath[ver] = hid;
+    hpInd[ver] = heavyPaths[hid].size();
+
+    for (i=0;i<Graph[ver].size();i++)
+    {
+        if (sz[ Graph[ver][i] ] > sz[ver] / 2)
+        {
+            heavyChild[ver] = Graph[ver][i];
+            buildHL(Graph[ver][i], hid);
+        }
+        else
+        {
+            hCounter++;
+            buildHL(Graph[ver][i], hCounter);
+        }
+    }
+}
+
+struct status
+{
+    int infChildren;
+    int infVer;
+
+    status(): infChildren(0), infVer(0) {}
+    status(int a, int b): infChildren(a), infVer(b) {}
+
+    status operator+(const status &other) const
+    {
+        return status(infChildren + other.infChildren, infVer + other.infVer);
+    }
+};
+
+int explodeTimestamp[300111];
+int clearTimestamp[300111];
+status IT[1200111];
+int LEAFOFFSET;
+
+void hpSet(int ver,int val)
+{
+    int hp = myPath[ver];
+    int ind = hpInd[ver];
+
+    ind += HLEAFOFFSET[hp];
+    HIT[hp][ind] = val;
+    ind /= 2;
+
+    while(ind > 0)
+    {
+        HIT[hp][ind] = HIT[hp][2*ind] + HIT[hp][2*ind+1];
+        ind /= 2;
+    }
+}
+
+int hpVal(int ver)
+{
+    int hp = myPath[ver];
+    int ind = hpInd[ver];
+
+    return HIT[hp][ind+HLEAFOFFSET[hp]];
+}
+
+int recNext(int hp, int ver, int L, int R, int ind)
+{
+    if (L > ind || HIT[hp][ver] == 0)
+        return 0;
+
+    if (L == R)
+        return L;
+
+    int ret = recNext(hp, 2*ver+1, (L+R)/2+1, R, ind);
+
+    if (ret != 0)
+        return ret;
+    else
+        return recNext(hp, 2*ver, L, (L+R)/2, ind);
+}
+
+int getNext(int ver)
+{
+    int hp = myPath[ver];
+    if (HIT[hp][1] == 0)
+        return 0;
+
+    int ind = hpInd[ver];
+
+    int nextInd = recNext(hp, 1, 1, HLEAFOFFSET[hp] + 1, ind - 1);
+
+    if (nextInd == 0)
+        return 0;
+
+    return heavyPaths[hp][nextInd-1];
+}
+
+void sumSetInfest(int ver,int infVal)
+{
+    int ind = inId[ver];
+
+    ind += LEAFOFFSET;
+    IT[ind].infVer = infVal;
+    ind /= 2;
+
+    while(ind > 0)
+    {
+        IT[ind] = IT[2*ind] + IT[2*ind+1];
+        ind /= 2;
+    }
+}
+
+bool pathRootIsInfested(int ver)
+{
+    int ind = inId[ver];
+    return clearTimestamp[ind] < explodeTimestamp[ inId[parent[ver]] ];
+}
+
+bool isHeavyRoot(int ver)
+{
+    return (heavyPaths[ myPath[ver] ][0] == ver && ver != 1);
+}
+
+bool isInfested(int ver)
+{
+    if (isHeavyRoot(ver))
+        return pathRootIsInfested(ver);
+    else
+        return IT[inId[ver] + LEAFOFFSET].infVer == 1;
+}
+
+void hpRootChangeInfest(int ver, int val)
+{
+    int ind = inId[parent[ver]];
+
+    ind += LEAFOFFSET;
+    IT[ind].infChildren += val;
+    ind /= 2;
+
+    while(ind > 0)
+    {
+        IT[ind] = IT[2*ind] + IT[2*ind+1];
+        ind /= 2;
+    }
+
+    return;
+}
+
+void hpRootClearChildren(int ver)
+{
+    int ind = inId[ver];
+    ind += LEAFOFFSET;
+    IT[ind].infChildren = 0;
+    ind /= 2;
+
+    while(ind > 0)
+    {
+        IT[ind] = IT[2*ind] + IT[2*ind+1];
+        ind /= 2;
+    }
+}
+
+status sumRec(int ver,int L,int R,int l,int r)
+{
+    if (L > r || R < l)
+        return status(0, 0);
+    else if (L >= l && R <= r)
+        return IT[ver];
+    else
+        return sumRec(2*ver, L, (L+R)/2, l, r) + sumRec(2*ver+1, (L+R)/2+1, R, l, r);
+}
+
+void explode(int ver, int immune, int ts)
+{
+    int cnt;
+
+    explodeTimestamp[inId[ver]] = ts;
+    clearTimestamp[inId[immune]] = ts + 1;
+
+    cnt = Graph[ver].size();
+    if (immune != 0)
+        cnt--;
+    if (heavyChild[ver] != 0 && heavyChild[ver] != immune)
+    {
+        cnt--;
+        hpSet(heavyChild[ver], 1);
+        sumSetInfest(heavyChild[ver], 1);
+    }
+
+    if (isHeavyRoot(ver) && isInfested(ver))
+    {
+        hpRootChangeInfest(ver, -1);
+    }
+    clearTimestamp[inId[ver]] = ts;
+
+    int ind = inId[ver];
+
+    ind += LEAFOFFSET;
+    IT[ind] = status(cnt, 0);
+    ind /= 2;
+
+    while(ind > 0)
+    {
+        IT[ind] = IT[2*ind] + IT[2*ind+1];
+        ind /= 2;
+    }
+
+    ///cout<<"Finished exploding "<<ver<<endl;
+    ///cout<<isInfested(2)<<endl;
+    ///cout<<explodeTimestamp[inId[ver]]<<" this explodes"<<endl;
+    ///cout<<clearTimestamp[inId[2]]<<" two is cleared"<<endl;
+}
+
+void infest(int x)
+{
+    hpSet(x, 1);
+    ///cout<<x<<" infested"<<endl;
+    if (isHeavyRoot(x))
+    {
+        if (!pathRootIsInfested(x))
+        {
+            ///cout<<"new heavy root inf"<<endl;
+            hpRootChangeInfest(x, 1);
+            ///cout<<IT[inId[x]+LEAFOFFSET].infChildren<<";"<<IT[inId[x]+LEAFOFFSET].infVer<<endl;
+            clearTimestamp[inId[x]] = explodeTimestamp[ inId[parent[x]] ] - 1;
+        }
+    }
+    else
+    {
+        sumSetInfest(x, 1);
+    }
+}
+
+void killPath(int x, int ts)
+{
+    ///cout<<"QUERY 2 with "<<x<<endl;
+
+    int comefrom = 0;
+
+    int pathSize = 0, suspicious = 0;
+    int pathSwitch = 0;
+    int ctr = 0;
+
+    while(x > 0)
+    {
+        pathSize++;
+        ///cout<<"Considering "<<x<<endl;
+
+        if (hpVal(x) == 1 || isHeavyRoot(x))
+        {
+            suspicious++;
+            ///cout<<"Potentially infested"<<endl;
+
+            if (hpVal(x) == 1)
+                hpSet(x, 0);
+
+            if (isInfested(x))
+            {
+                ///cout<<"Actually infested"<<endl;
+                explode(x, comefrom, ts);
+            }
+        }
+
+        int hpRoot = heavyPaths[ myPath[x] ][0];
+
+        if (hpRoot == x)
+        {
+            comefrom = x;
+            x = parent[x];
+        }
+        else
+        {
+            int suspect = getNext(x);
+
+            if (suspect == 0 || hpInd[suspect] > hpInd[x])
+                suspect = hpRoot;
+
+            comefrom = heavyChild[suspect];
+            x = suspect;
+        }
+    }
+}
+
+void clearSubtree(int x, int ts)
+{
+    if (isHeavyRoot(x) && isInfested(x))
+    {
+        hpRootChangeInfest(x, -1);
+    }
+    else
+    {
+        sumSetInfest(x, 0);
+    }
+    hpSet(x, 0);
+    clearTimestamp[ inId[x] ] = ts;
+
+    if (heavyChild[x] != 0)
+    {
+        hpSet(heavyChild[x], 0);
+        sumSetInfest(heavyChild[x], 0);
+    }
+
+    hpRootClearChildren(x);
+    explodeTimestamp[inId[x]] = -ts;
+}
+
+int sumSubtree(int x)
+{
+    status sum = sumRec(1, 1, LEAFOFFSET+1, inId[x], inEnd[x]);
+    int ans = sum.infChildren + sum.infVer;
+
+    if (isHeavyRoot(x) && isInfested(x))
+    {
+        ans++;
+    }
+
+    return ans;
+}
+
+int main()
+{
+    int i,j;
+
+    scanf("%d",&n);
+
+    LEAFOFFSET = 1;
+    while(LEAFOFFSET < n)
+        LEAFOFFSET *= 2;
+    LEAFOFFSET--;
+
+    for (i=2;i<=n;i++)
+    {
+        scanf("%d",&parent[i]);
+
+        Graph[parent[i]].push_back(i);
+    }
+
+    DFS(1);
+    buildHL(1, 1);
+
+    for (i=1;i<=hCounter;i++)
+    {
+        HLEAFOFFSET[i] = 1;
+        while(HLEAFOFFSET[i] < heavyPaths[i].size())
+            HLEAFOFFSET[i] *= 2;
+        HLEAFOFFSET[i]--;
+
+        HIT[i].resize(2*HLEAFOFFSET[i] + 2, 0);
+    }
+
+    scanf("%d",&q);
+
+    for (i=1;i<=q;i++)
+    {
+        int cm, x;
+
+        scanf("%d %d",&cm,&x);
+
+        if (cm == 1)
+            infest(x);
+        else if (cm == 2)
+            killPath(x, 2*i);
+        else if (cm == 3)
+            clearSubtree(x, 2*i);
+        else
+            printf("%d\n",sumSubtree(x));
+    }
+}

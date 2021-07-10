@@ -1,0 +1,22 @@
+//Ciurul Lui Eratosthenes
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    bool prim[n+1];
+    memset(prim,1,sizeof(prim));
+
+    for(int p=2;p*p<=n;p++)
+    {
+        if (prim[p]==1)
+        {
+            for(int i=p*2;i<=n;i+=p)
+                prim[i]=0;
+        }
+    }
+    for(int p=2;p<=n;p++)
+        if(prim[p])
+            cout<<p<<" ";
+}

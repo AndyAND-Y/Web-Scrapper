@@ -1,0 +1,9 @@
+double nreal(int x,int y){
+    int cy = y, nrc = 0, p=1;
+    while(cy)
+        nrc++, cy /= 10, p *= 10;
+    while(nrc)
+        x *= 10, nrc --;
+    x += y;
+    return (double)x/p;
+}

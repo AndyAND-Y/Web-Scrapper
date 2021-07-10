@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n;
+    //citim numarul
+    cin >> n;
+    int s = 0, d;
+    // determina suma divizorilor
+    for( d = 1 ; d * d <= n ; d++ )
+        if (n % d == 0)
+        {
+            s += d;
+            if(d * d < n)
+                s += n / d;
+        }
+    if(d * d == n)
+        s += d;
+    // verificam daca suma se divide cu n
+    if(s % n == 0)
+        cout << "DA";
+    else
+        cout << "NU";
+    
+    return 0;
+}

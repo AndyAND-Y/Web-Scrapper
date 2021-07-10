@@ -1,0 +1,29 @@
+#include <iostream>
+
+using namespace std;
+int n , s , c , r , i ;
+
+int main()
+{
+    cin >> n ;
+    s = 0 ;
+    while ( n != 0 )
+    {
+        s = s + n % 10 ;
+        n = n / 10 ;
+    }
+    if ( s < 10 )
+    {
+        cout << s ;
+        for ( i=1 ; i<s ; i++ ) cout << 0 ;
+    }
+    else
+    {
+        c = s / 9 ;
+        r = s % 9 ;
+        for ( i=1 ; i<=c ; i++ ) cout << 9 ;
+        cout << r ;
+        for ( i=1 ; i<=s-c-1 ; i++ ) cout << 0 ;
+    }
+    return 0;
+}

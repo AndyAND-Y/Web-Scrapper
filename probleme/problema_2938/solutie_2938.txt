@@ -1,0 +1,12 @@
+#include <iostream>
+
+using namespace std;
+
+int main(){
+    int n;
+    long long c;
+    cin >> n;
+    c = 1LL + 3LL*n*(n-1);
+    cout << c;
+    return 0;
+}

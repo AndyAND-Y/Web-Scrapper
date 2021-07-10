@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+
+int n, v[200005], u[200005];
+
+int main() {
+    int m , s, d , X;
+    cin >> n >> m;
+    while(m != 0)
+    {
+        cin >> s >> d >> X;
+        u[s] += X;
+        u[d+1] -= X;
+        m --;
+    }
+    v[0] = 0;
+    for(int i = 1 ; i <= n ; i ++)
+        v[i] = v[i-1] + u[i];
+    for(int i = 1 ; i <= n ; i ++)
+        cout << v[i] << " ";
+    return 0;
+    
+}

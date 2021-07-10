@@ -1,0 +1,60 @@
+#include <vector>
+#include <fstream>
+using namespace std;
+const int   MAX_VAL     = 5000;
+const int   LOG_MAX_VAL = 13;
+
+vector<int> solveWithPrefix(vector<int> &cnt, int s, int prefix) {
+    vector<int> a(s + 1, -1); a[0] = 0;
+    vector<int> link(s + 1);
+    for (int x = 0; x < cnt.size(); x++) {
+        if ((x | prefix) > prefix)  continue;
+        if (!cnt[x])                continue;
+        for (int i = 0; i <= s; i++) {
+            if (a[i] >= 0) {
+                a[i] = cnt[x];
+            } else if (i >= x && a[i - x] > 0) {
+                a[i] = a[i - x] - 1; link[i] = i - x;
+            } else {
+                a[i] = -1;
+            }
+        }
+    }
+
+    vector<int> sol;
+    for (int i = s; i && a[i] >= 0; i = link[i]) {
+        sol.push_back(i - link[i]);
+    }
+
+    return sol;
+}
+
+int main() {
+    ifstream        f("sormin.in");
+    ofstream        g("sormin.out");
+    int             n, s; f >> n >> s;
+    vector<int>     cnt(MAX_VAL + 1);
+
+    for (int i = 0; i < n; i++) {
+        int x; f >> x; cnt[x]++;
+    }
+
+    int prefix = (1 << (LOG_MAX_VAL + 1)) - 1;
+    for (int bit = 1 << LOG_MAX_VAL; bit; bit >>= 1) {
+        if (solveWithPrefix(cnt, s, prefix ^ bit).size()) {
+            prefix ^= bit;
+        }
+    }
+
+    auto ans = solveWithPrefix(cnt, s, prefix);
+    if (ans.size()) {
+        g << prefix << " " << ans.size() << "\n";
+int y[10002],ny=0;
+        for (auto x : ans) {ny++;y[ny]=x;}///g << x << " ";
+for(int i=ny;i>=1;i--)g<<y[i]<<" ";
+    } else {
+        g << -1;
+    }
+
+    return 0;
+}

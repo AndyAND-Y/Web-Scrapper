@@ -1,0 +1,15 @@
+#include <iostream>
+using namespace std;
+long long x,k=0;
+int main()
+{
+    while(true)
+    {
+     cin>>x;
+     if(x==0) break;
+     if(x%2==0) k++;
+    }
+    if(k==0) cout<<"NU EXISTA";
+        else cout<<k;
+    return 0;
+}

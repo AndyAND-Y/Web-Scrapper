@@ -1,0 +1,28 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int n , m , A[21][21];
+    cin >> m >> n;
+    
+    int k = 2;
+    for(int i = 1 ; i <= m ; i ++)
+        for(int j = 1 ; j <= n ; j ++)
+        {
+            A[i][j] = k;
+            k += 2;
+            if(k % 5 == 0)
+                k +=2;
+        }
+    
+    for(int i = 1 ; i <= m ; i ++)
+    {
+        for(int j = 1 ; j <= n ; j ++)
+            cout << A[i][j] << " ";
+        cout << endl;
+    }
+    
+    return 0;
+}

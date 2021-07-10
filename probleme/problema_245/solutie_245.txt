@@ -1,0 +1,25 @@
+#include <iostream>
+
+using namespace std;
+
+int main(){
+    int n;
+    cin >> n;
+    int Max =1, NrMax = 1;
+    for(int i=2 ; i<=n ; ++i){
+        int nr = 1, d = 2, x = i;
+        while(x>1){
+            int p = 0;
+            while(x%d==0)
+                ++p , x /= d;
+            nr *= p+1;
+            ++d;
+            if( d*d > x && x > 1 )
+                nr *= 2, x = 1;
+        }
+        if(nr > NrMax)
+            NrMax = nr, Max = i;
+    }
+    cout << Max;
+    return 0;
+}

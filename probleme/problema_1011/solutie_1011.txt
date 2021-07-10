@@ -1,0 +1,29 @@
+#include <iostream>
+
+using namespace std;
+long long a,b,c,p,exp,expa,expb,expc,put;
+int main()
+{
+    cin>>a>>b>>c>>p;
+    put=p;
+    while(a/put!=0)
+    {
+        expa=expa+a/put;
+        put=put*p;
+    }
+    put=p;
+    while(b/put!=0)
+    {
+        expb=expb+b/put;
+        put=put*p;
+    }
+    put=p;
+    while(c/put!=0)
+    {
+        expc=expc+c/put;
+        put=put*p;
+    }
+    exp=expa-expb-expc;
+    cout<<exp;
+    return 0;
+}

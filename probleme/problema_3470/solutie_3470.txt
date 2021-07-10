@@ -1,0 +1,130 @@
+/**
+  *  Worg
+  */
+#include <deque>
+#include <vector>
+#include <fstream>
+#include <algorithm>
+
+std::ifstream fin("rau.in"); std::ofstream fout("rau.out");
+
+const int MAX_VAL = 4e5;
+const int INF = 1e9;
+
+std::deque<int> h_deque[MAX_VAL + 1];
+int stree[MAX_VAL * 3];
+std::vector<int> h, dp;
+
+void insert_deque(int h_value, int dp_id) {
+    while (!h_deque[h_value].empty() && dp[h_deque[h_value].back()] >= dp[dp_id]) {
+        h_deque[h_value].pop_back();
+    }
+    h_deque[h_value].push_back(dp_id);
+}
+
+void build_stree(int node, int left, int right) {
+    stree[node] = INF;
+    if (left == right) {
+        return;
+    }
+
+    int mid = (left + right) / 2, left_son = node * 2, right_son = node * 2 + 1;
+    build_stree(left_son, left, mid);
+    build_stree(right_son, mid + 1, right);
+}
+
+void update_stree(int node, int left, int right, int h_value) {
+    if (left == right) {
+        if (h_deque[h_value].empty()) {
+            stree[node] = INF;
+        } else {
+            stree[node] = dp[h_deque[h_value].front()];
+        }
+        return;
+    }
+
+    int mid = (left + right) / 2, left_son = node * 2, right_son = node * 2 + 1;
+
+    if (h_value <= mid) {
+        update_stree(left_son, left, mid, h_value);
+    } else {
+        update_stree(right_son, mid + 1, right, h_value);
+    }
+
+    stree[node] = std::min(stree[left_son], stree[right_son]);
+}
+
+int query_stree(int node, int left, int right, int first, int last) {
+    if (first > last) return INF;
+
+    if (first <= left && right <= last) {
+        return stree[node];
+    }
+
+    int mid = (left + right) / 2, left_son = node * 2, right_son = node * 2 + 1;
+    int answer = INF;
+
+    if (first <= mid) {
+        answer = std::min(answer, query_stree(left_son, left, mid, first, last));
+    }
+    if (mid < last) {
+        answer = std::min(answer, query_stree(right_son, mid + 1, right, first, last));
+    }
+    return answer;
+}
+
+int solve_task(int n, int k, int c) {
+    dp = std::vector<int>(n);
+    dp[0] = 0;
+    insert_deque(h[0], 0);
+
+    build_stree(1, 1, MAX_VAL);
+    update_stree(1, 1, MAX_VAL, h[0]);
+    for (int i = 1; i < n; i++) {
+        //  Verificam daca trebuie updatata o valoare in arborele de intervale.
+        if (i - k - 1>= 0) {
+            if (!h_deque[h[i - k - 1]].empty() && h_deque[h[i - k - 1]].front() == i - k - 1) {
+                h_deque[h[i - k - 1]].pop_front();
+                update_stree(1, 1, MAX_VAL, h[i - k - 1]);
+            }
+        }
+
+        //  Calculam dp[i]
+        dp[i] = INF;
+        for (int cube_root = 0; cube_root <= 100; cube_root++) {
+            int offset = (cube_root + 1) * (cube_root + 1) * (cube_root + 1) - 1;
+            int left = std::max(0, h[i] - offset);
+            int right = std::min(MAX_VAL, h[i] + offset);
+            int candidate = query_stree(1, 1, MAX_VAL, left, right) + cube_root + c;
+
+            dp[i] = std::min(dp[i], candidate);
+        }
+
+        //  Updatam h_deque-ul corespunzator lui h[i]
+        insert_deque(h[i], i);
+        if (h_deque[h[i]].size() == 1) {
+            update_stree(1, 1, MAX_VAL, h[i]);
+        }
+    }
+/*
+    fout << "dp[] = [";
+    for (int i = 0; i < n - 1; i++) {
+        fout << dp[i] << ", ";
+    }
+    fout << dp.back() << "]\n";
+*/
+    return dp.back();
+}
+
+int main() {
+    int n, k, c;
+    fin >> n >> k >> c;
+
+    h = std::vector<int>(n);
+    for (int i = 0; i < n; i++) {
+        fin >> h[i];
+    }
+
+    fout << solve_task(n, k, c) << "\n";
+    return 0;
+} 

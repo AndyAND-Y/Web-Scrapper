@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+#define MOD 777013
+using namespace std;
+
+char s[5005];
+int dp[5005], n;
+
+int main()
+{
+    int i, st, dr;
+    cin >> (s + 1);
+    n = strlen(s + 1);
+    s[0] = '+';
+    s[n + 1] = '-';
+    dp[0] = 1;
+    for (i = 1; i <= n; i++)
+    {
+        st = dr = i;
+        while (s[st] == s[dr])
+        {
+            dp[dr] = (dp[dr] + dp[st - 1]) % MOD;
+            st--; dr++;
+        }
+        st = i;
+        dr = i + 1;
+        while (s[st] == s[dr])
+        {
+            dp[dr] = (dp[dr] + dp[st - 1]) % MOD;
+            st--; dr++;
+        }
+    }
+    cout << dp[n] << "\n";
+    return 0;
+}

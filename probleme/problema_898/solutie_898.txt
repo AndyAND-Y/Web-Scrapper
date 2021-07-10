@@ -1,0 +1,15 @@
+int sumfactcif(int n)
+{
+    if(n == 0)
+        return 1;
+    int s = 0;
+    while(n)
+    {
+        int c = n % 10, p = 1;
+        for(int i = 1 ; i <= c ; i++)
+            p *= i;
+        s += p;
+        n /= 10;
+    }
+    return s;
+}

@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n;
+    //citim n
+    cin >> n;
+    
+    // initializam produsul cu 1 si suma cu 0. IMPORTANT!!!
+    // de asemenea este important ca variabilele sa fie de tip long long, 
+    // 15! este un numar mare
+    long long int p = 1, s = 0;
+    
+    //determinam pe rand produsele, inmultind la p toate numerele i de la 1 la n
+    for (int i = 1 ; i <= n ; i++){
+        p *= i;
+        // fiecare produs calculat va fi adunat la s
+        s += p;
+    }
+    
+    //afisam rezultatul
+    cout << "Rezultatul este " << s << endl;
+    
+    return 0;
+}

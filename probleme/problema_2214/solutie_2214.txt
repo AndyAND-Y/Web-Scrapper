@@ -1,0 +1,32 @@
+#include <iostream>
+
+using namespace std;
+int a,b,d,m,n ;
+
+int main()
+{
+    cin >> m >> n ;
+    a = 0 ;
+    b = 0 ;
+    d = 0 ;
+    while (( m!=0 ) or ( n!=0 ))
+    {
+        if (( m!=0) and ( n!=0 ))
+        {
+            a++ ;
+            b++ ;
+            if ( m%10==n%10 ) d++ ;
+            m = m / 10 ;
+            n = n / 10 ;
+        }
+        else
+        {
+         if ( m!=0 ) { a++ ; m = m / 10 ; }
+         if ( n!=0 ) { b++ ; n = n / 10 ; }
+        }
+
+    }
+    if ( a==b ) cout << "DA" << "\n" << d ;
+    else cout << "NU" ;
+    return 0;
+}

@@ -1,0 +1,27 @@
+#include <fstream>
+using namespace std;
+ifstream fin("numere18.in");
+ofstream fout("numere18.out");
+
+int main()
+{
+    int p,n,m;
+    fin>>p;
+    if(p==1)
+    {
+        fin>>n;
+        int s=0,a=n*(n-1)/2, b=n*(n+1)/2;
+        for(int i=a+1;i<=b;i++)
+            s=s+i;
+        fout<<s;
+    }
+    else
+    {
+        fin>>m;
+        int k=1;
+        while(k*(k+1)/2<m) k++;
+        k--;
+        fout<<k+1<<" "<<m-k*(k+1)/2;
+    }
+    return 0;
+}

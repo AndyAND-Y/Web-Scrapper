@@ -1,0 +1,23 @@
+#include <fstream>
+using namespace std;
+ifstream fin("conversie_b_10.in");
+ofstream fout("conversie_b_10.out");
+
+int main()
+{
+    long long x10=0,b,pb=1,xb,c;
+
+    fin>>xb>>b;
+    while(xb)
+    {
+        c  = xb % 10;
+        x10 = x10 + c * pb;
+        pb  = pb * b;
+        xb  = xb / 10;
+    }
+    fout<<x10;
+
+    fin.close();
+    fout.close();
+    return 0;
+}

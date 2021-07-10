@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int h,l,i,j,k,se=2,si=1; //se- spatii exterioare, si- spatii interioare
+    cin>>h>>l;
+    for(i=1;i<=h;i++)
+    {
+        for(j=1;j<=l;j++)
+        {
+            for(k=1;k<=se;k++)
+            cout<<"_";
+            cout<<"0";
+            for(k=1;k<=si;k++)
+            cout<<"_";
+            cout<<"0";
+            for(k=1;k<=se;k++)
+            cout<<"_";
+            cout<<"_";
+        }
+        se=(i+1!=h); //structura care incarca se cu 1 daca i+1 nu e egal cu h altfel il face 0
+        si=(i+1!=h)?3:5; //structura de tip "daca a atunci b altfel c"
+        cout<<endl;
+    }
+}

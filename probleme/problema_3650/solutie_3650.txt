@@ -1,0 +1,31 @@
+#include <fstream>
+using namespace std;
+
+const int A = 65535;
+int fr[A + 1];
+long long answer;
+ifstream fin("perechi.in");
+ofstream fout("perechi.out");
+
+int main()
+{
+    char s[35];
+    int i, j, x;
+    while (fin >> s)
+    {
+        x = 0;
+        for (i = 0; s[i]; i++)
+        {
+            if (s[i] <= '9') j = s[i] - '0';
+            else j = 10 + s[i] - 'A';
+
+            x = x | (1 << j);
+        }
+        answer += fr[A ^ x];
+        fr[x]++;
+    }
+    fout << answer << "\n";
+    fout.close();
+    fin.close();
+    return 0;
+}

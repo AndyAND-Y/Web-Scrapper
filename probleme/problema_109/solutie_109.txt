@@ -1,0 +1,12 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n;
+    cin >> n;
+    if(n%2)
+        cout << n << " este impar";
+    else
+        cout << n << " este par";
+    return 0;
+}

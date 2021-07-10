@@ -1,0 +1,19 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+ifstream fin ("numere8.in");
+ofstream fout("numere8.out");
+
+int v[10000];
+
+int main(){
+    int x;
+    while(fin >>x)
+        if(x < 10000)
+            v[x] = 1;
+    for(int i = 9999 ; i > 0 ; i --)
+        if(v[i] == 0)
+            fout << i << " ";
+    return 0;
+}

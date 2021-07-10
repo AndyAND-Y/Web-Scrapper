@@ -1,0 +1,29 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int n, A[35][35], i, j;
+
+    cin >> n;
+
+    for(i = 1; i <= n; i++) {
+        for(j = 1; j <= n; j++) {
+            if(i + j <= n + 1){ // A[i][j] se afla deasupra diagonalei secundare sau pe aceasta
+                A[i][j] = i + j - 1;
+            }
+            else{ // A[i][j] se afla sub diagonala secundara
+                A[i][j] = 2*n - i - j + 1;
+            }
+        }
+    }
+
+    for(i = 1; i <= n; i++) {
+        for(j = 1; j <= n; j++)
+            cout << A[i][j] << ' ';
+        cout << '\n';
+    }
+
+    return 0;
+}

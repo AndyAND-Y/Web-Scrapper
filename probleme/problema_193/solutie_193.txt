@@ -1,0 +1,38 @@
+#include <iostream>
+#include <fstream>
+#include <cassert>
+
+using namespace std;
+
+ifstream fin("interschimbarelinii.in");
+ofstream fout("interschimbarelinii.out");
+
+int n,m,a[110][110];
+
+int main(){
+    fin >> n >> m;
+    for(int i=1;i<=n;++i)
+        for(int j=1; j<=m;++j)
+            fin >> a[i][j];
+    int imax=1,jmax=1;
+    for(int i=1;i<=n;++i)
+        for(int j=1;j<=m;++j)
+            if(a[i][j]>a[imax][jmax])
+                imax = i, jmax=j;
+    int imin=1,jmin=1;
+    for(int i=1;i<=n;++i)
+        for(int j=1;j<=m;++j)
+            if(a[i][j]<a[imin][jmin])
+                imin = i, jmin=j;
+    for(int j=1;j<=m;++j){
+        int aux = a[imin][j];
+        a[imin][j] = a[imax][j];
+        a[imax][j] = aux;
+    }
+    for(int i=1;i<=n;++i){
+        for(int j=1;j<=m;++j)
+            fout << a[i][j] << " ";
+        fout << endl;
+    }
+    return 0;
+}

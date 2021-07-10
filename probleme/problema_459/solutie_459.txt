@@ -1,0 +1,19 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int a, b , s;
+    cin >> a;
+    s = a;
+    cin >> b;
+    while(a != b)
+    {
+        s += b;
+        a = b;
+        cin >> b;
+    }
+    s += b;
+    cout << s; 
+    return 0;
+}

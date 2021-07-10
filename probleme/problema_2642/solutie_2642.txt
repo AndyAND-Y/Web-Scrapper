@@ -1,0 +1,14 @@
+int Phi(int n)
+{
+    int d, nr = n;
+    for (d = 2; n > 1 && d * d <= n; d++)
+        if (n % d == 0)
+        {
+            nr = nr / d * (d - 1);
+            while (n % d == 0)
+                n /= d;
+        }
+    if (n > 1)
+        nr = nr / n * (n - 1);
+    return nr;
+}

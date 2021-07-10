@@ -1,0 +1,4 @@
+int multipli(int a,int b,int c){
+    int n=b/c, m=(a-1)/c;
+    return n-m;
+}

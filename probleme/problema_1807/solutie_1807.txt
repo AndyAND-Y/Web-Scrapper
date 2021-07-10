@@ -1,0 +1,13 @@
+#include <iostream>
+///Limita ar fi de 1000000000000
+using namespace std;
+typedef unsigned long long ull;
+ull dagonale(ull n){return n*(n-3)/2;}
+ull suma(ull n){return 180*(n-2);}
+ull n;
+int main(){
+ cin>>n;
+ cout<<dagonale(n)<<"\n";///Diagonale
+ cout<<suma(n);///Suma unghiurilor
+ return 0;
+}

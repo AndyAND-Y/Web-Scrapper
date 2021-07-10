@@ -1,0 +1,58 @@
+#include <fstream>
+
+using namespace std;
+
+ifstream cin("parcare.in");
+ofstream cout("parcare.out");
+
+int hs, ms, hp, mp;
+int zis, lus, zip, lup;
+int t, cerinta;
+char c1, c2;
+
+int main()
+{
+    int x1, x2, x3, z1, z2, ore, minute;
+
+    cin >> zis >> lus >> hs >> ms;
+    cin >> zip >> lup >> hp >> mp;
+    cin >> t;                       //tarif
+    cin >> cerinta;                 //cerinta
+
+    //punctul 1
+    if (zis == zip)                 //aceiasi zi
+        minute = hp * 60 + mp - (hs * 60 + ms);
+    else
+        {
+            x1 = 24 * 60 - (hs * 60 + ms);//minute ziua sosire
+            if (lus == lup)               //aceiasi luna
+                x2 = (zip - 1 - (zis + 1) + 1) * 24 * 60; //zile intregi
+            else                         //luna diferita
+            {
+                if (lus == 2)             //caz februarie -> martie
+                    z1 = 28 - zis;
+                else
+                    if (lus == 4 || lus == 6 || lus == 9 || lus == 11)
+                        z1 = 30 - zis;      //caz 30 zile
+                    else
+                        z1 = 31 - zis;      //caz 31 zile
+                z2 = zip - 1;
+                x2 = (z1 + z2) * 60 * 24;      //zile intregi
+            }
+            x3 = hp * 60 + mp;           //minute ziua plecare
+            minute = x1 + x2 + x3;
+        }
+    if (cerinta == 1)                  //cerinta1
+        cout << minute << '\n';
+    else                               //cerinta2
+      if (minute <= 15)
+         cout << "0\n";               //nu se percepe taxa
+      else
+         {
+            ore = minute / 60;        //ore intregi
+            if (minute % 60 > 0)      //minute in plus
+               ore++;                     //inca o ora
+            cout << ore * t << '\n';
+         }
+    return 0;
+}

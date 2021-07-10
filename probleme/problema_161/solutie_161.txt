@@ -1,0 +1,23 @@
+#include <cmath>
+#include <iostream>
+using namespace std;
+
+int n,a[205];
+
+int main(){
+    cin >> n;
+    for(int i=1; i<=n; ++i)
+        cin >> a[i];
+
+    int s=0, c=0;
+    for(int i=1;i<=n;++i)
+        if(a[i])
+            s+=a[i], c++;
+    s /= c;
+    for(int i=1;i<=n;++i)
+        if(!a[i])
+            a[i] = s;
+    for(int i=1;i<=n;++i)
+        cout << a[i] << " ";
+    return 0;
+}

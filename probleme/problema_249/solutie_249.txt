@@ -1,0 +1,29 @@
+#include <iomanip>
+#include <fstream>
+#include <iostream>
+#include <cassert>
+using namespace std;
+
+ifstream fin("pozitiex.in");
+ofstream fout("pozitiex.out");
+
+int a[10];
+
+int main(){
+    int n, x, a, p, ok = 0;
+    fin >> x >> n;
+    p = 1;
+    for(int i=1 ; i<=n ; ++i){
+        fin >> a;
+        if(a<x)
+            p++;
+        else
+            if(a==x)
+                ok = 1;
+    }
+    if(ok)
+        fout << p << endl;
+    else
+        fout << "NU EXISTA\n";
+    return 0;
+}

@@ -1,0 +1,20 @@
+#include <fstream>
+using namespace std;
+
+ifstream fin("maxim4.in");
+ofstream fout("maxim4.out");
+
+int main(){
+    int n,a,max=-1,nrap=0;
+    fin >> n ;
+    for( ; n ; --n){
+        fin >> a;
+        if(a>max)
+            max = a, nrap = 1;
+        else
+            if(a == max)
+                nrap++;
+    }
+    fout << max << " " << nrap;
+    return 0;
+}

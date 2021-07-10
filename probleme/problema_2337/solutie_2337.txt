@@ -1,0 +1,20 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+ifstream f("coada2.in");
+ofstream g("coada2.out");
+
+long long x,y,z;
+
+int main()
+{
+    f>>x>>y>>z;
+
+    if (x>=y || x>=z)
+        g<<-1;
+    else
+    {
+        g<<y+z-x;
+    }
+    return 0;
+}

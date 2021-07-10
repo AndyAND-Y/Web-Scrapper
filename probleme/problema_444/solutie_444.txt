@@ -1,0 +1,20 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n , x;
+    cin >> n;
+    for(int  i = 0; i <= 9 ; ++i)
+    {
+        bool apare = false;
+        x = n;
+        while(x && ! apare){
+            if(x % 10 == i)
+                apare = true;
+            x /= 10;
+        }
+        if(apare)
+            cout << i << " ";
+    }
+    return 0;
+}

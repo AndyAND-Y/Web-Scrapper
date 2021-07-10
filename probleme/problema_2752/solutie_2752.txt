@@ -1,0 +1,11 @@
+#include <iostream>
+
+using namespace std;
+int k, C;
+int main()
+{
+    cin >> k;
+    if (k % 2 == 1) cout << k / 20 + 1;
+    else cout << (k % 20 / 2 + 9) % 10;
+    return 0;
+}

@@ -1,0 +1,36 @@
+#include <fstream>
+#define mod 6669666
+#define Maxx 1001
+using namespace std;
+ifstream fin("test.in");
+ofstream fout("test.out");
+unsigned long long A[Maxx],B[Maxx],i,ans,rez,n;
+int main()
+{
+    fin>>n;
+    for (i=1;i<=n;i++)
+        fin>>A[i],A[i]%=mod;
+    for (i=1;i<=n;i++)
+        fin>>B[i];
+    for (i=1;i<=n;i++)
+    {
+        ans=1;
+        while (B[i]!=0)
+        {
+            if (B[i]%2==0)
+            {
+                A[i]=A[i]*A[i]%mod;
+                B[i]/=2;
+            }
+            else
+            {
+                ans=(ans*A[i])%mod;
+                A[i]=A[i]*A[i]%mod;
+                B[i]/=2;
+            }
+        }
+        rez+=ans;
+    }
+    fout<<rez;
+    return 0;
+}

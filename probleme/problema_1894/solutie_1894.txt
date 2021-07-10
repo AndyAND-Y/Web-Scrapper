@@ -1,0 +1,28 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int a[20][20],n;
+    cin>>n;
+    n=n*2+1;
+    int P=n/2, k=1, x=0;
+    for(; P > 0 ; P--)
+    {
+     for(int i=k ; i<=n-x ; i++)
+      for(int j=k ; j<=n-x ; j++)
+        a[i][j]=P;
+        k++;
+        x++;
+    }
+        a[n/2+1][n/2+1]=0;
+
+    for(int i=1 ; i<=n ; i++)
+    {
+      for(int j=1 ; j<=n ; j++)
+        cout<<a[i][j]<<" ";
+        cout<<endl;
+    }
+
+}

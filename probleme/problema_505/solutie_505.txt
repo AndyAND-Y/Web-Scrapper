@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n, x[1005], y[1005];
+    cin  >> n;  
+    for(int i = 0 ; i < n ; ++ i)
+        cin >> x[i];
+    for(int i = 0 ; i < n ; ++ i)
+        cin >> y[i];
+    bool ok = true;
+    for(int i = 0 ; i < n && ok ; i++ )
+    {
+        int  p = -1;
+        for(int  j = 0 ; j < n && p == -1 ; ++j)
+            if(y[j] == x[i])
+                p = j;
+        if(p > -1)
+            y[p] = -1;
+        else
+            ok = false;
+    }
+    if(ok)
+        cout << "DA";
+    else
+        cout << "NU";
+    return 0;
+}

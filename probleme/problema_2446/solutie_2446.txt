@@ -1,0 +1,35 @@
+#include <fstream>
+using namespace std;
+ifstream fin("numere24.in");
+ofstream fout("numere24.out");
+long long p,x,k,n,i,ogl,aux,nr;
+int main()
+{
+    fin>>p;
+    if(p==1){fin>>n; fout<<(n-1)*10<<'\n';return 0;}
+    if(p==2)
+    {
+        fin>>x;
+        for(i=1;i<=3;i++)
+        {
+            x=x/10;ogl=0;aux=x;
+            while(aux)ogl=ogl*10+aux%10,aux/=10;
+            if(ogl==x)nr=1;else if(x%10==0)nr=0;
+            else nr=2;
+            fout<<nr<<' ';
+        }
+        return 0;
+     }
+     ///p=3  numere mari
+      fin>>k;
+     if(k==1){fout<<9<<'\n';return 0;}
+     if(k==2){fout<<153<<'\n';return 0;}
+     if(k==3){fout<<1530<<'\n';return 0;}
+     if(k==4){fout<<16110<<'\n';return 0;}
+     x=(k-1)/2;
+     fout<<161;
+     for(i=1;i<=k-x-3;i++)fout<<9;
+     fout<<1;
+     for(i=1;i<=x;i++)fout<<0;
+    return 0;
+}

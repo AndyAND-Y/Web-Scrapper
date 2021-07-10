@@ -1,0 +1,45 @@
+//MaxD solutie alternativa, cea oficiala fiind de negasit :)
+//Popa Bogdan Ioan
+//Clasa a IX-a A, Colegiul National Aurel Vlaicu Orastie
+
+#include <iostream>
+#include <fstream>
+#include <cmath>
+
+using namespace std;
+
+ifstream fin("maxd.in");
+ofstream fout("maxd.out");
+
+int a,b,i,nr,pr,k,pt,mx,nrsol,sol;
+int main()
+{
+    fin>>a>>b;
+    for(i=a;i<=b;i++)
+    {
+        nr=i;
+        pt=0;
+        k=2;
+        while(nr%2==0)nr/=2,pt++;
+        pr=pt+1;;
+        k++;
+        while(nr!=1)
+        {
+            pt=0;
+            while(nr%k==0)nr/=k,pt++;
+            pr=pr*(pt+1);
+            k+=2;
+            if(k>sqrt(nr))
+                k=nr;
+        }
+        if(mx<pr)
+        {
+            mx=pr;
+            nrsol=i;
+            sol=0;
+        }
+        if(mx==pr)sol++;
+    }
+    fout<<nrsol<<" "<<mx<<" "<<sol;
+    return 0;
+}

@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+int n , a[26][26];
+
+int main()
+{
+    cin >> n;
+    for(int i =1 ; i <= n ; i++)
+        for(int j =1 ; j <= n ; j ++)
+            cin >> a[i][j];
+    
+    for(int i = 1 ; i <= n ; i ++)
+        if(i % 2 == 0) // in jos
+            for(int j = i , k = 1 ; j > 0 ; j --, k ++)
+                cout << a[j][k] << " ";
+        else // in sus
+            for(int j = i , k = 1 ; j > 0 ; j --, k ++)
+                cout << a[k][j] << " ";
+    for(int j = 2 ; j <= n ; j ++)
+        if(j % 2 != n % 2) // in jos
+            for(int i = j, k = n ; i <= n ; i ++, k --)
+                cout << a[k][i] << " ";
+        else // in sus
+            for(int i = j, k = n ; i <= n ; i ++, k --)
+                cout << a[i][k] << " ";
+    return 0;
+}

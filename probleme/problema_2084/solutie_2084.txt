@@ -1,0 +1,29 @@
+# include <bits/stdc++.h>
+# define NM 100001
+using namespace std;
+
+int H[NM], max_left[NM], max_right[NM];
+int n;
+long long water = 0;
+
+int main()
+{
+    cin >> n;
+    for(int i = 0; i < n; i++)
+        cin >> H[i];
+
+    max_left[0] = H[0];
+    for (int i = 1; i < n; i++)
+       max_left[i] = max(max_left[i-1], H[i]);
+
+    max_right[n-1] = H[n-1];
+    for (int i = n-2; i >= 0; i--)
+       max_right[i] = max(max_right[i+1], H[i]);
+
+    for (int i = 0; i < n; i++)
+       water += min(max_left[i], max_right[i]) - H[i];
+
+    cout << water << '\n';
+
+    return 0;
+}

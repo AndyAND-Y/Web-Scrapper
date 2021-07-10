@@ -1,0 +1,26 @@
+#include <iostream>
+
+using namespace std;
+int a,x,y,z,n,i,viz[1000001],maxim,nr;
+
+int main()
+{
+
+    a=1;
+    viz[1]=1;
+    for(i=2;i<=20;i++)
+    {
+        a=a*2;
+        viz[a-1]=1;
+    }
+    cin>>n;
+    maxim=-1;nr=0;
+    for(i=1;i<=n;i++)
+    {
+        cin>>x;
+        if(viz[x]==1)nr++;
+          else {if(nr>maxim)maxim=nr;nr=0;}
+    }
+    cout<<maxim;
+    return 0;
+}

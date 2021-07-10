@@ -1,0 +1,15 @@
+int cifraControl(int numar)
+{
+    return (numar % 9 == 0) ? 9 : (numar % 9);
+}
+
+int sum_cifra_control(int a, int b)
+{
+    int sum = 0;
+    for(int i = a; i <= b; i++) {
+        if(cifraControl(i) == a) {
+            sum++;
+        }
+    }
+    return sum;
+}

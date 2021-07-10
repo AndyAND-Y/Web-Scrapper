@@ -1,0 +1,20 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n;
+    cin >> n;
+    int cmax= -1;
+    while(n){
+        if(n % 2 == 1)
+            if(n%10>cmax)
+                cmax = n%10;
+        n /= 10;
+    }
+    if(cmax == -1)
+        cout << "nu exista";
+    else
+        cout << cmax << endl;
+    
+    return 0;
+}

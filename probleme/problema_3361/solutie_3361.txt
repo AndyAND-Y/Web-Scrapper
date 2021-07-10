@@ -1,0 +1,52 @@
+/// Solutie - Moca Andrei - 100p
+#include <bits/stdc++.h>
+using namespace std;
+struct PSI {
+    string str;
+    int ind;
+    bool operator < (const PSI& p) const
+    {
+        if (str.size() != p.str.size())
+            return str.size() > p.str.size();
+        return str > p.str;
+    }
+};
+int n;
+vector<PSI> v;
+vector<int> a, aib;
+inline void Update(int poz)
+{
+    for (int i = poz; i <= n; i += i & -i)
+        ++aib[i];
+}
+inline int Query(int poz)
+{
+    int sum = 0;
+    for (int i = poz; i > 0; i -= i & -i)
+        sum += aib[i];
+    return sum;
+}
+int main()
+{
+    ifstream fin("stringaib.in");
+    fin >> n;
+    v = vector<PSI>(n + 1);
+    for (int i = 1; i <= n; ++i)
+    {
+        fin >> v[i].str;
+        v[i].ind = i;
+    }
+    fin.close();
+    sort(v.begin() + 1, v.end());
+    aib = a = vector<int>(n + 1);
+    for (int i = 1; i <= n; ++i)
+        a[v[i].ind] = i;
+    ofstream fout("stringaib.out");
+    for (int i = 1; i <= n; ++i)
+    {
+        fout << Query(a[i] - 1) << ' ';
+        Update(a[i]);
+    }
+    fout.close();
+    return 0;
+}

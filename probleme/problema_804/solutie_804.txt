@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+
+int n,m,a[51][51];
+
+int main()
+{
+    cin >> m >> n;
+    for(int i = 1 ; i <= m ; ++i)
+        for(int j = 1 ; j <= n ; ++j)
+            cin >> a[i][j];
+    
+    int cnt = 0;
+    for(int j = 1 ; j <= n ; j ++)
+    {
+        bool ok = true;
+        for(int i = 1 ; i <= m ; ++i)
+            if(a[i][j] != a[1][j])
+                ok = false;
+        if(ok)
+            cout << a[1][j] << " ", cnt ++;
+    }
+    if(cnt == 0)
+        cout << "nu exista";
+    
+    return 0;
+}

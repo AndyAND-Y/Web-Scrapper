@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int x , s;
+    
+    //initializam suma cu zero
+    s = 0;
+    
+    //citim un numar
+    cin >> x;
+    //cat timp numarul citit este diferit de zero
+    while(x != 0){
+        //il prelucram  - daca este par il adunam la suma
+        if(x % 2 == 0)
+            s += x;
+        //citim alt numar
+        cin >> x;
+        
+        //se verifica din nou conditi x != 0 si se reiau instructiunile, etc, pan cand numarul citi mai sus este zero
+    }
+    
+    //afisam rezultatul
+    cout << s << endl;
+    return 0;
+}

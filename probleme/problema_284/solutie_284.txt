@@ -1,0 +1,67 @@
+#include <iomanip>
+#include <fstream>
+#include <iostream>
+#include <cassert>
+using namespace std;
+
+ifstream fin("interclasare3.in");
+ofstream fout("interclasare3.out");
+
+int n,m,a[100005], b[100005];
+
+int main(){
+    fin >> n >> m;
+    for(int i=1 ; i<=n ; i++)
+        assert(fin >> a[i]);
+    for(int i=1 ; i<=m ; i++)
+        assert(fin >> b[i]);
+    int i=1, j=m, c =0;
+    for( ; i<=n && j>=1; )
+        if(a[i]%2==1)
+            i++;
+        else
+            if(b[j]%2==1)
+                j--;
+            else
+                if(a[i]<b[j]){
+                    fout << a[i++];
+                    c ++;
+                    if(c%20 == 0)
+                        fout << "\n";
+                    else
+                        fout << " ";
+                }
+                else{
+                    fout << b[j--];
+                    c ++;
+                    if(c%20 == 0)
+                        fout << "\n";
+                    else
+                        fout << " ";
+                }
+    if(i<=n)
+        while(i<=n){
+            if(a[i]%2==0){
+                fout << a[i];
+                c ++;
+                if(c%20 == 0)
+                    fout << "\n";
+                else
+                    fout << " ";
+            }
+            i++;
+        }
+    else
+        while(j>0){
+            if(b[j]%2==0){
+                fout << b[j];
+                c ++;
+                if(c%20 == 0)
+                    fout << "\n";
+                else
+                    fout << " ";
+            }
+            j--;
+        }
+    return 0;
+}

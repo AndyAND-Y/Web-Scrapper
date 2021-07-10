@@ -1,0 +1,40 @@
+#include <iostream>
+#include <cstring>
+#include <cassert>
+#include <cstdlib>
+using namespace std;
+
+char operatie[25];
+int n , Q[1005] , st = 1 , dr = 0, X ;
+
+int main()
+{
+    cin >> n;
+    for(int i =1 ; i <= n ; i ++)
+    {
+        assert(cin >> operatie);
+        if(strcmp(operatie,"push") == 0)
+        {
+            assert(cin >> X);
+            if(dr <= 1000)
+                Q[++dr] = X;
+            else
+            {
+                //mutam toate elementele spre stanga
+                for(int i = st ; i <= dr ; i ++)
+                    Q[i - st + 1] = Q[i];
+                dr = dr - st + 1;
+                st = 1;
+                Q[++dr] = X;
+            }
+        }
+        if(strcmp(operatie,"pop") == 0)
+            if(st<= dr)
+                st ++;
+        if(strcmp(operatie,"front") == 0)
+            if(st<= dr)
+                cout << Q[st] << "\n";
+        
+    }
+    return 0;
+}

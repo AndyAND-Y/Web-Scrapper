@@ -1,0 +1,18 @@
+#include <iostream>
+using namespace std;
+
+int n,a[100][100];
+
+int main(){
+    cin >> n;
+    for(int i=1;i<=n;++i)
+        for(int j=1;j<=n;++j)
+            cin >> a[i][j];
+    int rez = 0;
+    for(int i=1;i<=n;++i)
+        for(int j=1;j<=n;++j)
+            if(a[i][j]>a[i-1][j] && a[i][j]>a[i+1][j] && a[i][j]>a[i][j+1] && a[i][j]>a[i][j-1])
+                rez ++;
+    cout << rez ;
+    return 0;
+}

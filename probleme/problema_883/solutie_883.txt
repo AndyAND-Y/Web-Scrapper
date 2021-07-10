@@ -1,0 +1,56 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+ifstream fin("traversare.in");
+ofstream fout("traversare.out");
+
+int n , m, nrI, nrP;
+int  a[1002][1002];
+short x[1000005], y[1000005];
+
+const int dx[]={0 , 0 , 1 , -1}, dy[]={1 , -1 , 0 , 0};
+
+int main(){
+    fin >> n >> m;
+    for(int i = 1 ; i <= n ; i ++)
+        for(int j = 1 ; j <= m ; j ++)
+            fin >> a[i][j];
+    //facem obstacolele -1
+    for(int i = 1 ; i <= n ; i ++)
+        for(int j = 1 ; j <= m ; j ++)
+            a[i][j] = - a[i][j];
+    int st = 1 , dr = 0;
+    for(int j =1 ; j <= m ; j ++)
+        if(a[1][j] == 0)
+        {
+            dr ++;
+            x[dr] = 1 , y[dr] = j;
+            a[1][j] = 1;
+        }
+    while(st <= dr)
+    {
+        int i = x[st] , j = y[st];
+        for(int k = 0 ; k < 4 ; k ++)
+        {
+            int ii = i + dx[k] , jj = j + dy[k];
+            if(ii > 0 && ii <= n && jj > 0 && jj <= m && a[ii][jj] == 0)
+            {
+                dr ++;
+                x[dr] = ii, y[dr] = jj;
+                a[ii][jj] = a[i][j]  + 1;
+            }
+        }
+        st ++;
+    }
+    
+    int mmin = 1000005;
+    for(int j = 1 ; j <= m ; j ++)
+        if(a[n][j] > 0)
+            if(a[n][j] < mmin)
+                mmin = a[n][j];
+    
+    fout << mmin << "\n";
+    
+    return 0;
+}

@@ -1,0 +1,18 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n, count = 1;
+    bool prim;
+    cin >> n;
+    cout << "2 ";
+    for(int i = 3 ; count < n ; i+=2){
+        prim = true;
+        for(int d = 3; d*d <= i; d += 2)
+            if(i % d == 0)
+                prim = false;
+        if(prim)
+            cout << i << " ", count ++;
+    }
+    return 0;
+}

@@ -1,0 +1,52 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+    int n , V , P;
+    cin >> n;
+    int cpv = 9 + 2 * 90 + 3 * 201 ;// 792
+    bool ok = true;
+    if(n % cpv == 0)
+    {
+        V = n / cpv;
+        P = 300;
+    }
+    else
+    {
+        V = n / cpv + 1;
+        n %= cpv;
+        P = 0;
+        if(n < 10)
+            P += n , n = 0;
+        else
+        {
+            n -= 9;
+            P += 9;
+        }
+        
+        if(n <= 2 * 90)
+        {
+            if(n % 2 == 0)
+                P += n / 2, n = 0;
+            else
+                ok = false;
+        }
+        else
+        {
+            P += 90;
+            n -= 2 * 90;
+        }
+        
+        if(n % 3 != 0)
+            ok = false;
+        else
+            P += n / 3;
+    }
+    if(ok)
+        cout << V << " " << P;
+    else
+        cout << "IMPOSIBIL";
+    return 0;
+}

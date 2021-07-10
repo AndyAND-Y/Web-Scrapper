@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+#define nmax 50003
+using namespace std;
+
+ifstream fin("nondecreasing.in");
+ofstream fout("nondecreasing.out");
+char s[nmax];
+int t[nmax];
+int n, a[27][nmax];
+
+/*
+Notam cu t[i] = s[i]-'a'+1, i=1..n
+    Cost(i,j) = 0, daca i=j
+                i+j, daca i != j
+
+a[i][j] = costul minim necesar pentru a construi
+    din s[1..j] un sir crescator, ultimul caracter fiind i
+
+Initial:
+a[i][1] = Cost(i,t[1])
+
+Recurente:
+a[i][j] = min{a[k][j-1] + cost(i, t[j]), k=1..i}, j=2..n
+
+Solutia: min{a[i][n], i=1..26}
+*/
+
+inline int Cost(int i, int j)
+{
+    if (i == j) return 0;
+    return i + j;
+}
+
+int main()
+{
+    int i, j, k, mn;
+    fin >> (s + 1);
+    for (n = 1; s[n]; n++)
+        t[n] = s[n] - 'a' + 1;
+    n--;
+
+    /// initial:
+    for (i = 1; i <= 26; i++)
+        a[i][1] = Cost(i, t[1]);
+
+    /// recurente:
+    for (j = 2; j <= n; j++)
+        for (i = 1; i <= 26; i++)
+        {
+            mn = 2e9;
+            for (k = 1; k <= i; k++)
+                mn = min(mn, a[k][j - 1] + Cost(i, t[j]));
+            a[i][j] = mn;
+        }
+
+    /// solutia:
+    mn = 2e9;
+    for (i = 1; i <= 26; i++)
+        mn = min(mn, a[i][n]);
+
+    fout << mn << "\n";
+    fin.close();
+    fout.close();
+    return 0;
+}

@@ -1,0 +1,28 @@
+#include <iostream>
+#include <cassert>
+using namespace std;
+
+int main(){
+    int n, v[1005];
+    cin  >> n;
+    
+    for(int i = 0 ; i < n ; ++ i)
+        cin >> v[i];
+    int pmin = 0, pmax  = 0;
+    for(int i = 0 ; i < n ; ++ i)
+    {
+        if(v[i]>v[pmax])
+            pmax = i;
+        if(v[i]<v[pmin])
+            pmin = i;
+    }
+    if(pmin > pmax)
+    {
+        int aux = pmin;
+        pmin = pmax;
+        pmax = aux;
+    }
+    for(int i = pmin ; i <= pmax ; ++ i)
+        cout << v[i] << " ";
+    return 0;
+}

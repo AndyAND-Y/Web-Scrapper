@@ -1,0 +1,36 @@
+#include <fstream>
+using namespace std;
+
+ifstream fin("datapal.in");
+ofstream fout("datapal.out");
+int n,i,j,ok,st,dr,maxs,nr,sec;
+char d[9],f[100];
+int main()
+{
+    fin>>n;
+    for(i=1; i<=n; i++)
+    {
+        for(j=0; j<8; j++)fin>>d[j];
+        ok=1;
+        st=0;
+        dr=7;
+        while(st<dr&&ok==1)
+            if(d[st]!=d[dr])ok=0;
+            else
+            {
+                st++;
+                dr--;
+            }
+        if(ok==1)
+        {
+            nr++;
+            sec=(d[4]-'0')*10+d[5]-'0';
+            f[sec]++;
+            if(f[sec]>maxs)maxs=f[sec];
+        }
+    }
+        fout<<nr<<'\n';
+        
+        for(i=0; i<=99; i++)if(f[i]==maxs) fout<<i+1<<' ';
+        return 0;
+    }

@@ -1,0 +1,11 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int G,O,P,C;
+    cin >> G >> O;
+    C = G+O;
+    P = 4 * O + 2 * G;
+    cout << C << " " << P ;
+    return 0;
+}

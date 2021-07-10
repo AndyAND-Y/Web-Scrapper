@@ -1,0 +1,38 @@
+/*
+    Implementare: Catalin Puricoi
+*/
+#include <fstream>
+#define inf 1000000000
+using namespace std;
+ifstream f("magic3.in");
+ofstream g("magic3.out");
+int x,i,j,nr,n,min1,ok;
+int main()
+{
+        f>>n;
+        min1=inf;
+        for(i=1;i<=n;i++)
+        {
+            ok=0;
+            f>>x;
+            if(x==1) // cazul in care avem numarul 1 in sir(numarul divizori mereu va fi minim pt acest numar adica 1 div)
+                ok=1;
+            else
+            {
+            for(j=1;j*j<x;j++) //verific numarul de div. pana la radical pt 100 puncte, pana la jumatate pentru 80, pana la n pt 70
+                if(x%j==0)
+                    ok=ok+2;
+            if(j*j==x) // cazul in care numarul este patrat perfect
+                ok++;
+            }
+            if(ok<min1) // daca gasesc un nou minim il retin
+                {
+                    min1=ok;
+                    nr=0;
+                }
+            if(min1==ok) // daca numarul de div este egal cu minim il numar
+                nr++;
+        }
+        g<<nr;
+    return 0;
+}

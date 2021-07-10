@@ -1,0 +1,18 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    long long n,r,x;
+    cin>>n;
+    for(int i=1;i<=n;i++)
+    {
+        cin>>x;
+        r=sqrt(x);
+        if(r*r==x)
+            cout<<"DA"<<'\n';
+        else
+            cout<<"NU"<<'\n';
+    }
+    return 0;
+}

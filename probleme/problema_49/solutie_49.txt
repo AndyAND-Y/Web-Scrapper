@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n;
+    //citim n
+    cin >> n;
+    
+    // initializam produsul cu 1. IMPORTANT!!!
+    // de asemenea este important ca variabila sa fie de tip long long, 
+    // 15! este un numar mare
+    long long int p = 1;
+    
+    //determinam produsul, inmultindu-l cu toate numerele i de la 1 la n
+    for (int i = 1 ; i <= n ; i++)
+        p *= i;
+    
+    //afisam rezultatul
+    cout << p << endl;
+    
+    return 0;
+}

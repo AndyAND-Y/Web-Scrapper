@@ -1,0 +1,21 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int x, y, n, val, rez;
+    cin >> n >> x >> y >> val;
+
+    /// determin valoarea de la pozitia (x, y)
+    rez = (x - 1) * n + y;
+    cout << rez << " ";
+
+    /// determin pozitia (x, y) a valorii val
+    x = val / n;
+    y = val % n;
+    if (y == 0) y = n;
+    else x++;
+    cout << x << " "  << y;
+
+    return 0;
+}

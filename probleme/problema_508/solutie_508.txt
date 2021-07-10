@@ -1,0 +1,38 @@
+#include <iostream>
+#include <cassert>
+using namespace std;
+
+int n,m,x[25005];
+
+int main()
+{
+    cin >> n;
+    for(int i = 0; i < n ; i++)
+        assert(cin >> x[i]);
+    cin >> m;
+    for( ; m ; --m)
+    {
+        int y, p = -1, st = 0, dr = n-1;
+        assert(cin >> y);
+        while(st <= dr)
+        {
+            int mijloc = (st + dr) / 2;
+            if(x[mijloc] == y)
+            {
+                p = mijloc;
+                break;
+            }
+            else
+                if(x[mijloc] > y)
+                    dr = mijloc - 1;
+                else
+                    st = mijloc + 1;
+        }
+        if(p == -1)
+            cout << "0 ";
+        else
+            cout << "1 ";
+    }
+    cout << endl;
+    return 0;
+}

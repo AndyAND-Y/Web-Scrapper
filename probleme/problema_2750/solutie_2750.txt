@@ -1,0 +1,27 @@
+#include <iostream>
+
+using namespace std;
+long long x, y, a, b, mini, maxi, yy;
+int main()
+{
+    cin >> x >> y;
+    maxi = 0;
+    mini = 100;
+    while (x)
+    {
+        yy = y;
+        a = x % 10;
+        while (yy)
+        {
+            b = yy % 10;
+            if (a * 10 + b > 9 && a * 10 + b > maxi) maxi = a * 10 + b;
+            if (b * 10 + a > 9 && b * 10 + a > maxi) maxi = b * 10 + a;
+            if (a * 10 + b > 9 && a * 10 + b < mini) mini = a * 10 + b;
+            if (b * 10 + a > 9 && b * 10 + a < mini) mini = b * 10 + a;
+            yy /= 10;
+        }
+        x /= 10;
+    }
+    cout << mini << ' ' << maxi;
+    return 0;
+}

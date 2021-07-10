@@ -1,0 +1,23 @@
+#include <fstream>
+using namespace std;
+int main()
+{
+    ifstream f("calcul3.in");
+    ofstream g("calcul3.out");
+    int e,x;
+    char c;
+    f>>e;
+    g<<e;
+    while(f>>c)
+    {
+        if(c!='=')
+        {
+            f>>x;
+            g<<c<<x;
+            if(c=='+')e=e+x;
+            else e=e-x;
+        }
+    }
+    g<<"="<<e;
+    return 0;
+}

@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n , x , y ,ogl , r, rez = 0;
+    
+    cin >> n;
+    for(int i = 1 ; i <= n ; ++i)
+    {
+        cin >> x;
+        y = x, ogl = 0;
+        while(y)
+            ogl = 10 * ogl + y %10 , y /= 10;
+        while(x % ogl){
+            r = x % ogl;
+            x = ogl;
+            ogl = r;
+        }
+        if(ogl == 1)
+            rez ++;
+    }
+    cout << rez;
+    
+    return 0;
+}

@@ -1,0 +1,19 @@
+#include <fstream>
+using namespace std;
+ifstream f("rapunzel.in");
+ofstream g("rapunzel.out");
+int main()
+{
+    long long N,M1,M2,t;
+    f>>N>>M1>>M2;
+    t = M1 + M2;
+    if(t>N)
+        g<<1;
+    else if(N % t == 0)
+        g<<N / t;
+    else
+        g<<N / t + 1;
+    g<<'\n';
+    return 0;
+}
+

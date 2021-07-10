@@ -1,0 +1,25 @@
+#include<fstream>
+using namespace std;
+
+//deschidem fisierele de intrare si de iesire
+ofstream out("nrdiv.out");
+ifstream in("nrdiv.in");
+
+int main()
+{
+    int a, rez;
+    // initializam rezultatul cu zero
+    rez = 0;
+    
+    //citim numarul dat
+    in >> a;    
+    //parcugem intervalul in care putem gasii divizori
+    for(int d = 1 ; d <= a ; d++)
+        if(a % d ==0)       // daca d divide pe a
+            ++ rez;         //incrementam contorul
+    
+    //afisam rezultatul
+    out<<rez<<'\n';
+    
+    return 0;
+}

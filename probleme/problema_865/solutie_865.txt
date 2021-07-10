@@ -1,0 +1,62 @@
+#include <iostream>
+#include <fstream>
+#include <cassert>
+using namespace std;
+
+ifstream fin("palat.in");
+ofstream fout("palat.out");
+
+int n , m;
+int a[1001][1001];
+short x[1000001], y[1000001];
+char P[1001][1001];
+
+const int dx[]={0 , 0 , 1 , -1}, dy[]={1 , -1 , 0 , 0};
+
+int main(){
+    fin >> n >> m;
+    for(int i = 1 ; i <= n ; i ++)
+        for(int j = 1 ; j <= m ; j ++)
+        {
+            fin >> P[i][j];
+            if(P[i][j] == 'I')
+                x[1] = i, y[1] = j , cerr << i << " " << j;
+        }
+    
+    fin.close();
+    
+    int st , dr;
+    st = dr = 1;
+    a[x[1]][y[1]] = 1;
+    while(st <= dr)
+    {
+        int i = x[st], j = y[st];
+        for(int k = 0 ; k < 4 ; k ++)
+        {
+            int ii = i + dx[k], jj = j + dy[k];
+            if( ii > 0 && ii <= n && jj > 0 && jj <= m && P[ii][jj] !='Z' && a[ii][jj] == 0)
+            {
+                a[ii][jj] = a[i][j] + 1;
+                dr ++;
+                x[dr] = ii, y[dr] = jj;
+            }
+        }
+        st ++;
+    }
+    /*
+    for(int i = 1 ; i <= n ; i ++)
+    {
+        for(int j = 1 ; j <= m ; j ++)
+            cerr << a[i][j] << " ";
+        cerr << endl;
+    }
+    */
+    int Min = 1000000000 , imin ,jmin;
+    for(int i = 1 ; i <= n ; i ++)
+        for(int j = 1 ; j <= m ; j ++)
+            if( P[i][j] == 'F' && a[i][j] <= Min && a[i][j] > 0)
+                Min = a[i][j] , imin = i , jmin = j;
+    fout << imin << " " << jmin;
+    fout.close();
+    return 0;
+}

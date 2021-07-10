@@ -1,0 +1,25 @@
+#include <iostream>
+
+using namespace std;
+int i,n,k,bun,nr,x,c;
+int main()
+{
+    cin>>n>>k;
+    nr=0;
+    if(k==2)cout<<n;
+    else{
+    for(i=1;i<=n;i++)
+    {
+        cin>>x;
+        bun=1;
+        while((x!=0)&&(bun))
+        {
+            c=x%k;
+            if(c>1)bun=0;
+            x=x/k;
+        }
+        if(bun)nr++;
+    }
+    cout<<nr;}
+    return 0;
+}

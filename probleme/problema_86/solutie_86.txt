@@ -1,0 +1,32 @@
+#include <fstream>
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+ifstream fin("halfsort.in");
+ofstream fout("halfsort.out");
+
+int main(){
+    int n, a[105];
+    fin >> n;
+    for(int i=1 ; i<=n ; ++i)
+        fin >> a[i];
+    for(int i=1;i<n/2;++i)
+        for(int j=i+1 ; j <=n/2 ; ++j)
+            if(a[i]>a[j]){
+                int aux = a[i];
+                a[i]=a[j];
+                a[j]=aux;
+            }
+    for(int i=n/2+1;i<n;++i)
+        for(int j=i+1 ; j <=n ; ++j)
+            if(a[i]<a[j]){
+                int aux = a[i];
+                a[i]=a[j];
+                a[j]=aux;
+            }
+    for(int i=1 ; i<=n ; ++i)
+        fout << a[i] << " ";
+    fout << endl;
+    return 0;
+}

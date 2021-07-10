@@ -1,0 +1,31 @@
+#include <stdio.h>
+#define DIM 1000002
+#define MOD 2011
+
+int P[DIM];
+int M[DIM];
+int N, K, T, i, aux;
+
+int main() {
+    FILE *f = fopen("minusk.in","r");
+    fscanf(f,"%d %d",&N, &K);
+    fclose(f);
+    P[0] = 1;
+    P[1] = 1;
+    M[1] = 1;
+    for (i=2;i<=N;i++) {
+        P[i] = (P[i-1] + M[i-1]) % MOD;
+        if (i>=K)
+            aux = P[i-K];
+        else
+            aux = 0;
+        M[i] = (P[i-1] + M[i-1]) % MOD;
+        M[i] -= aux;
+        if (M[i]<0)
+            M[i]+=MOD;
+    }
+    FILE *g = fopen("minusk.out","w");
+    fprintf(g,"%d",(P[N] + M[N])%MOD);
+    fclose(g);
+
+}

@@ -1,0 +1,37 @@
+#include <iostream>
+#include <cstdio>
+#include <fstream>
+
+using namespace std;
+
+ifstream fin("sume2.in");
+ofstream fout("sume2.out");
+
+long long S[100004];
+
+int main() {
+    int N;
+    fin >> N;
+
+    int x;
+    for(int i = 1; i <= N; ++i) {
+        fin >> x;
+
+        S[i] = S[i - 1] + (long long) x;
+    }
+
+    int M;
+    fin >> M;
+
+    int y;
+    for(int i = 1; i <= M; ++i) {
+        fin >> x >> y;
+
+        fout << S[y] - S[x - 1] << '\n';
+    }
+
+    fin.close();
+    fout.close();
+
+    return 0;
+}

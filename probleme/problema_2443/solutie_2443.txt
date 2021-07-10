@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+#define nmax 100005
+using namespace std;
+
+int a[nmax], M[nmax], n;
+
+int CautBin(int x, int s)
+{
+    int st, dr, p, mid;
+    if (x < M[1]) return 0;
+    if (x >= M[n] && s >= a[n]) return n;
+    st = 1; dr = n; p = 0;
+    while (st <= dr)
+    {
+        mid = (st + dr) / 2;
+        if (x < M[mid] || s < a[mid]) dr = mid - 1;
+        else
+        {
+            p = mid;
+            st = mid + 1;
+        }
+    }
+    return p;
+}
+
+int main()
+{
+    int i, Q, x, s;
+    cin >> n;
+    for (i = 1; i <= n; i++)
+        cin >> a[i];
+
+    /// maxime partiale
+    M[1] = a[1];
+    for (i = 2; i <= n; i++)
+        M[i] = max(M[i - 1], a[i]);
+    /// sume partiale
+    for (i = 2; i <= n; i++)
+        a[i] += a[i - 1];
+
+    /// interogarile
+    cin >> Q;
+    while (Q--)
+    {
+        cin >> x >> s;
+        cout << CautBin(x, s) << "\n";
+    }
+    return 0;
+}

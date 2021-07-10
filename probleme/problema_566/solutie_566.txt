@@ -1,0 +1,42 @@
+//problema mese
+/*
+ *  Pentru a afla numarul de mese, parcurgem matricea si numaram elementele 
+ *  care nu au vecini in sus si in stanga (coltul stanga sus al unei mese)
+ * 
+ *  Pentru a afla ariile determinam dimensiunile, si facem produsul
+ * 
+ * */
+
+#include <iostream>
+using namespace std;
+
+int a[255][255], n, m;
+
+int main(){
+    cin  >> n >> m;
+    for (int i = 1 ;i <= n ; ++i)
+        for(int j = 1 ; j <= m ; ++j)
+            cin >> a[i][j];
+    //bordam matricea cu 0 - nu este necesar, deoarece folosim variabile globale, dar ca ideee ....
+    for(int i = 0 ; i <= n + 1 ; i ++)
+        a[i][0] = a[i][m + 1] = 0;
+    for(int j = 0 ; j <= m + 1; j ++)
+        a[0][j] = a[n+1][j] = 0;
+    int cnt = 0, smax = 0;
+    for(int i =1 ; i <= n ;  i ++)
+        for(int j = 1 ;j <= m ; ++j)
+            if(a[i][j] == 1)
+                if(a[i-1][j] == 0 && a[i][j-1] == 0)
+                {
+                    cnt ++;
+                    int ii = i, jj = j;
+                    while(a[i][jj] == 1)
+                        jj ++;
+                    while(a[ii][j] == 1)
+                        ii ++;
+                    if( smax < (ii - i) * (jj - j) )
+                        smax = (ii - i) * (jj - j);
+                }
+    cout << cnt << " " << smax << endl;
+    return 0;
+}

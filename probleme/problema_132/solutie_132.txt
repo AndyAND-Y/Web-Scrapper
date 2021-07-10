@@ -1,0 +1,23 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+ifstream fin("elempp.in");
+ofstream fout("elempp.out");
+
+int n;
+
+int main(){
+    fin >> n;
+    for(int i=1;i<=n;++i){
+        int x;
+        fin >> x;
+        int y=x;
+        while(x>=100)
+            x/=10;
+        if(sqrt((int) x) == (int)sqrt((int)x))
+            fout << y << " ";
+    }
+    return 0;
+}

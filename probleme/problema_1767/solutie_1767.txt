@@ -1,0 +1,23 @@
+/* * Razvan Zoltan @ multiple
+   * solutie oficiala
+   * query constant - O(1) pe query
+*/
+
+#include <fstream>
+
+using namespace std;
+
+ifstream fin("multiple.in");
+ofstream fout("multiple.out");
+
+int main()
+{
+    int t, n, k;
+    fin >> t;
+    while (t) {
+        --t;
+        fin >> n >> k;
+        fout << n + k - n % k << '\n';
+    }
+    return 0;
+}

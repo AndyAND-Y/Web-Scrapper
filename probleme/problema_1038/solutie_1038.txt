@@ -1,0 +1,106 @@
+#include<fstream>
+using namespace std;
+ifstream f("zona2.in");
+ofstream g("zona2.out");
+int v[200][200];
+int d[2510], n,l,x,y,sol;
+int p,a1,a2,ax,by;
+void citire(){
+    f>>x>>y>>n>>l;
+    //n=100;
+    for(int i=1;i<=l;++i) f>>d[i];
+    x+=55;y+=55;
+    ax=x;by=y;
+    for(int i=0;i<=n+58;++i) v[0][i]=v[n+58][i]=v[i][0]=v[i][n+58]=-1;
+}
+void fill(int a,int b){
+    if(v[a][b]==0){
+        v[a][b]=-1;
+        fill(a+1,b);
+        fill(a,b+1);
+        fill(a-1,b);
+        fill(a,b-1);
+    }
+}
+void fill1(int a,int b){
+    if(v[a][b]==0){
+        v[a][b]=1;
+        fill1(a+1,b);
+        fill1(a,b+1);
+        fill1(a-1,b);
+        fill1(a,b-1);
+    }
+}
+void afis(int v[200][200]){
+    for(int i=1;i<200;++i){
+        for(int j=1;j<200;++j)
+            if(v[i][j]>0) g<<"* ";//else g<<". ";
+            else g<<v[i][j]<<' ';
+        g<<'\n';
+    }
+    g<<'\n';
+}
+int merg(int x, int y){
+    sol=0;
+    while(sol<l && v[x][y]==0){
+        sol++;
+        if(sol<=l){
+            v[x][y]=sol;
+            switch(d[sol]){
+                case 1: x--;
+                        break;
+                case 2:
+                        y++;
+                        break;
+                case 3:
+                        x++;
+                        break;
+                case 4:
+                        y--;
+            }
+        }
+        //if(v[x][y]>0) break;
+    }
+    p=v[x][y];
+    if(sol>l) return 0;
+    return sol-v[x][y]+1;
+}
+
+void sterg(int a0, int b0){
+    sol=0;
+    while(v[a0][b0]!=p){
+        sol++;
+        if(sol<=l){
+            v[a0][b0]=0;
+            switch(d[sol]){
+                case 1: a0--;
+                        break;
+                case 2:
+                        b0++;
+                        break;
+                case 3:
+                        a0++;
+                        break;
+                case 4:
+                        b0--;
+            }
+        }
+    }
+}
+int main(){
+    citire();
+    a1=merg(ax,by);
+    //afis(v);
+    sterg(ax,by);
+    fill(1,1);
+    for(int i=1;i<=n+55;++i)
+        for(int j=1;j<=n+55;++j)
+            if(v[i][j]==0) fill1(i,j);
+    for(int i=2;i<=n+55;++i)
+        for(int j=1;j<=n+55;++j)
+         if(v[i][j]>0 && v[i][j+1]>0 && v[i-1][j]>0 && v[i-1][j+1]>0)
+            a2++;
+    g<<a1<<'\n'<<a2<<'\n';
+    g.close();
+    return 0;
+}

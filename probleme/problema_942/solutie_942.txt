@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    long long int n;
+    int nr2, nr3;
+    cin >> n;
+    nr2 = nr3 = 0;
+    while(n != 0)
+    {
+        if(n % 10 == 2)
+            nr2 ++;
+        else
+            nr3 ++;
+        n /= 10;
+    }
+    if(nr2 == nr3)
+        cout << "2 3";
+    else
+        if(nr2 > nr3)
+            cout << 2;
+        else
+            cout << 3;
+    return 0;
+}

@@ -1,0 +1,25 @@
+#include <fstream>
+
+using namespace std;
+ifstream fin("planta.in");
+ofstream fout("planta.out");
+
+unsigned long long int h,d,a,b,n,i;
+
+int main()
+{
+    fin>>d>>a>>b>>n;
+  /*
+   h=d;
+     for(i=1; i<=n; i++)
+         if(i%2==1)
+             h=h+a;
+         else
+             h=h-b;
+ */
+   h=d+(a-b)*(n/2);
+    if(n%2==1)
+        h=h+a;
+  fout << h << endl;
+    return 0;
+}

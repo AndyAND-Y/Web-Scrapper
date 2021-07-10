@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int a, b, P = 0, ogl, x;
+    cin >> a >> b;
+    if(a > b)
+    {
+        int aux = a;
+        a = b;
+        b = aux;
+    }
+    for(int i=a ; i<=b ; ++i){
+        x = i, ogl = 0;
+        while(x)
+            ogl = 10 * ogl + x%10, x /= 10;
+        if(ogl == i)
+            P ++;
+    }
+    cout << P;
+    return 0;
+}

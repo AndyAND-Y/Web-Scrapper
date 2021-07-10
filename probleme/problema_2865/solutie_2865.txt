@@ -1,0 +1,60 @@
+#include <fstream>
+#define NMAX 100002
+#define LMAX 18
+using namespace std;
+ifstream f("minisecvente.in");
+ofstream g("minisecvente.out");
+int andru, pad, andrada[NMAX], tomp[NMAX],vio[LMAX][NMAX], ru, dont, copii;
+long long asp;
+
+int minim(int st, int dr)
+{
+    int diff, sh, l;
+    diff=dr-st+1;
+    l=tomp[diff];
+    sh=diff - (1<<l);
+    return min(vio[l][st],vio[l][st+sh]);
+}
+
+int caut(int st, int dr)
+{
+    if(st > dr) return 0;
+    else
+    {
+        int mij = (st + dr) / 2;
+        if((minim(mij,pad) < pad-mij+1)and(minim(mij+1,pad) >= pad-mij))return mij;
+        if(minim(mij,pad) >= pad-mij+1) return caut(st,mij);
+        else return caut(mij+1,dr);
+    }
+}
+
+int main()
+{
+    f >> andru;
+    for(pad = 1; pad <= andru; pad++)
+        f >> andrada[pad];
+    tomp[1]=0;
+    for (pad = 2; pad <= andru; pad++)
+        tomp[pad] = tomp[pad/2] + 1;
+
+    for (pad = 1; pad <= andru; pad++)
+        vio[0][pad] = andrada[pad];
+
+    for (pad=1; (1 << pad) <=andru; pad++)
+        for (copii=1; copii <= andru - (1 << pad)+1; copii++)
+        {
+        dont=1<<(pad-1);
+        vio[pad][copii]= min( vio[pad-1][copii] , vio[pad-1][copii+dont] );
+        }
+    asp = 0;
+    for(pad = 1; pad <= andru; pad++)
+    {
+        if(minim(1,pad) < pad)
+        {
+            ru = caut(1,pad);
+            asp += ru;
+        }
+    }
+    g << asp;
+    return 0;
+}

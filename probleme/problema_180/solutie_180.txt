@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+int n, a[10005];
+
+int main(){
+    cin >> n;
+    for(int i=0;i<n;++i)
+        cin >> a[i];
+    int pmin=0,pmax=0;
+    for(int i=1;i<n;++i)
+    {
+        if(a[i]>a[pmax])
+            pmax = i;
+        if(a[i]<a[pmin])
+            pmin = i;
+    }
+    if(pmin>pmax){
+        int aux = pmin;
+        pmin = pmax;
+        pmax = aux;
+    }
+    for(int i=pmin;i<pmax;i++)
+        for(int j=i+1;j<=pmax; ++j)
+            if(a[i]>a[j]){
+                int aux = a[i];
+                a[i] = a[j];
+                a[j]=aux;
+            }
+    for(int i=0;i<n;++i)
+        cout << a[i]<<" ";
+    return 0;
+}

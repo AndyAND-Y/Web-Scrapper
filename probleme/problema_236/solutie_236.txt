@@ -1,0 +1,30 @@
+#include <iomanip>
+#include <fstream>
+#include <iostream>
+using namespace std;
+
+ifstream fin("sort2.in");
+ofstream fout("sort2.out");
+
+int a[105],n;
+
+int main(){
+    int x;
+    while(fin >> x)
+        if(x<100)
+            a[n++] = x;
+    if(!n)
+        fout << "NU EXISTA";
+    else{
+        for(int i=0 ; i<n-1; ++i)
+            for(int j=i+1; j<n; ++j)
+                if(a[i]>a[j]){
+                    int aux = a[i];
+                    a[i] = a[j];
+                    a[j] = aux;
+                }
+        for(int i=0 ; i<n ; ++i)
+            fout << a[i] << " ";
+    }
+    return 0;
+}

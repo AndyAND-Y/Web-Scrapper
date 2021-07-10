@@ -1,0 +1,61 @@
+#include <fstream>
+
+using namespace std;
+ifstream fin("cifra2.in");
+ofstream fout("cifra2.out");
+int main()
+{
+    int N,copN,cmin,p;
+    fin>>N;
+    cmin=9;
+    copN=N;
+    while(copN)
+    {
+        if(copN%10<cmin)
+            cmin=copN%10;
+        copN=copN/10;
+    }
+    fout<<cmin<<'\n';
+    copN=N;
+    p=1;
+    N=0;
+    while(copN)
+    {
+        if(copN%10!=cmin)
+        {
+            N=N+(copN%10-cmin)*p;
+            p=p*10;
+        }
+        copN=copN/10;
+    }
+    fout<<N<<'\n';
+    while(N>9)
+    {
+        cmin=9;
+        copN=N;
+        while(copN)
+        {
+            if(copN%10<cmin)
+                cmin=copN%10;
+            copN=copN/10;
+        }
+
+        copN=N;
+        p=1;
+        N=0;
+        while(copN)
+        {
+            if(copN%10!=cmin)
+            {
+                N=N+(copN%10-cmin)*p;
+                p=p*10;
+            }
+            copN=copN/10;
+        }
+     
+    }
+    fout<<N<<'\n';
+    fin.close();
+    fout.close();
+    return 0;
+}

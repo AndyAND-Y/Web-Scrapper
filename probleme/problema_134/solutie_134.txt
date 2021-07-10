@@ -1,0 +1,23 @@
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+int n, k, a[100005], s[100005];
+
+
+int main(){
+    ifstream fin("secvk.in");
+    ofstream fout("secvk.out");
+    fin >> n >> k;
+    for(int i=1;i<=n;++i)
+        fin >> a[i], s[i] = s[i-1]+a[i];
+    int st=0,dr=0,smax = 0;
+    for(int i=k;i<=n;++i)
+        if(s[i]-s[i-k] > smax)
+            smax = s[i]-s[i-k], st = i-k+1, dr = i;
+    for(int i=st ; i<=dr ; ++i)
+        fout << a[i] << " ";
+    return 0;
+}

@@ -1,0 +1,18 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n;
+    cin >> n;
+    int nz = 0, nu = 0;
+    while(n)
+    {
+        if(n % 2 == 0)
+            nz ++;
+        else
+            nu ++;
+        n /= 2;
+    }
+    cout << nz << " " << nu;
+    return 0;
+}

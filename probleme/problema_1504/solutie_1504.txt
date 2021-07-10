@@ -1,0 +1,25 @@
+#include <fstream>
+
+using namespace std;
+ifstream fin("comori1.in");
+ofstream fout("comori1.out");
+int n,ok,i,a,b;
+int main()
+{
+    fin>>n;
+    ok=1;
+    fin>>a;
+    for(i=2; i<=n; i++)
+    {
+        fin>>b;
+        if(a>b)
+        {
+            ok=0;
+            fout<<i<<' ';
+        }
+        a=b;
+    }
+    if(ok==1)
+        fout << 0 << endl;
+    return 0;
+}

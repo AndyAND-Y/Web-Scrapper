@@ -1,0 +1,19 @@
+void sum_cif (int n, int &s)
+{
+    //initializarea sumei cu zero este importanta
+    s=0;
+    
+    //aplicam algoritmul standard pentru determinarea cifrelor unui numar
+    
+    // cat timp numarul este diferit de zero
+    while( n )
+    {
+        //adunam ultima cifra la suma
+        s += n % 10;
+        
+        //trunchiem numarul, prin impartire la 10
+        n/=10;
+    }
+    
+    //valoarea calculata se intoarce in intermediul parametrului, nu se returneaza
+}

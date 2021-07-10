@@ -1,0 +1,14 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n, k, x, y;
+    cin >> n >> k;
+    x = n / k * k;
+    y = n / k * k + k;
+    if(n - x <= y - n)
+        cout << x;
+    else
+        cout << y;
+    return 0;
+}

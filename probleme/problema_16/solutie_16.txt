@@ -1,0 +1,7 @@
+int sum_div(int x){
+    int s = 0;
+    for(int d=1 ; d <= x; d++)
+        if(x%d==0)
+            s += d;
+    return s;
+}

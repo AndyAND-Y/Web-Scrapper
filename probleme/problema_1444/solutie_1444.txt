@@ -1,0 +1,22 @@
+#include <fstream>
+
+using namespace std;
+ifstream f("memory001.in");
+ofstream g("memory001.out");
+long long m,n,i,j,v[1001],minim,col,x;
+
+int main()
+{
+    f >> m >> n ;
+    for ( i=1 ; i<=m ; i++ )
+      for( j=1 ; j<=n ; j++ )
+      {
+          f >> x ;
+          v[j] = v[j] + x ;
+      }
+    minim = 2000000000000;
+    for ( i=1 ; i<=n ; i++ )
+      if ( v[i]<minim ) { minim = v[i] ; col = i ;}
+    g << col ;
+    return 0;
+}

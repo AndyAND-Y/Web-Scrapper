@@ -1,0 +1,87 @@
+#include<bits/stdc++.h>
+
+#define maxN 100002
+#define maxQ 102
+
+using namespace std;
+
+FILE *fin = freopen("tollroads.in", "r", stdin);
+FILE *fout = freopen("tollroads.out", "w", stdout);
+
+struct Edge
+{
+    int u, c;
+};
+
+vector < Edge > Adj[maxN];
+int d[maxN],n,q;
+vector < int > h, H[maxN];
+bitset < maxN > inQ;
+
+int Dijkstra(int u, int Time)
+{
+    int cnt = 0;
+    for (int i = 1; i <= n; ++ i)
+        if (i == u)
+        {
+            inQ[i] = 1;
+            d[i] = 0;
+            H[0].push_back(i);
+        }
+        else
+        {
+            inQ[i] = 0;
+            d[i] = maxN;
+        }
+    for (int t = 0; t <= Time; ++ t)
+    {
+        for (int nod : H[t])
+        {
+            if (d[nod] != t) continue;
+            ++ cnt;
+            for (Edge e : Adj[nod])
+            {
+                int v = e.u;
+                if (t + e.c <= Time && d[v] > t + e.c)
+                {
+                    d[v] = t + e.c;
+                    if (!inQ[v])
+                    {
+                        h.push_back(v);
+                        inQ[v] = 1;
+                    }
+                }
+            }
+        }
+        H[t].clear();
+        while (!h.empty())
+        {
+            int v = h.back();
+            inQ[v] = 0;
+            h.pop_back();
+            if (d[v] <= Time)
+                H[d[v]].push_back(v);
+        }
+    }
+    return cnt;
+}
+
+int main()
+{
+    int m;
+    scanf("%d%d%d", &n, &m, &q);
+    for (int i = 0; i < m; ++ i)
+    {
+        int u, v, c;
+        scanf("%d%d%d", &u, &v, &c);
+        Adj[u].push_back(Edge{v, c});
+        Adj[v].push_back(Edge{u, c});
+    }
+    for (int i = 0; i < q; ++ i)
+    {
+        int u, t;
+        scanf("%d%d", &u, &t);
+        printf("%d\n", Dijkstra(u, t) - 1);
+    }
+    return 0;
+}

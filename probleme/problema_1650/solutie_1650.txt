@@ -1,0 +1,18 @@
+#include <iostream>
+using namespace std;
+int n, k, m, ncopie, i;
+int main()
+{
+    cin >> n; // introducem numarul initial
+    ncopie = n; // ii oferim o copie
+    cin >> k; // citim numarul de operatii ce se vor efectua
+    for (i = 1; i <= k; i++)
+    {
+        cin >> m;
+        n = n + m; // se citeste fiecare numar care se aduna,de "k" ori
+    }
+    if (n == ncopie) cout << "DA";
+    else cout << "NU";
+    // se compara numarul final cu cel inital si se ofera textul in functie de egalitatea celor 2 elemente
+    return 0;
+}

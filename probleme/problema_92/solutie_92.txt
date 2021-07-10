@@ -1,0 +1,49 @@
+#include <fstream>
+using namespace std;
+
+ifstream fin("proiecte.in");
+ofstream fout("proiecte.out");
+
+int n, T;
+struct Proiect {
+    int t, ord;
+} p[1000];
+
+
+void Citeste();
+void Greedy();  // Greedy
+void Sort();
+
+int main()
+{
+    Citeste();
+    Greedy();
+    return 0;
+}
+
+void Citeste()
+{
+    fin >> n;
+    for ( int i = 0; i < n; ++i )
+        fin >> p[i].t, p[i].ord = i + 1;
+}
+
+void Greedy()
+{
+    Sort();
+    for ( int i = 0; i < n; ++i )
+        fout << p[i].ord << ' ';
+}
+
+void Sort()
+{
+    Proiect aux;
+    for ( int i = 0; i < n - 1; ++i )
+        for ( int j = i + 1; j < n; ++j )
+            if ( p[i].t > p[j].t )
+            {
+                aux = p[i];
+                p[i] = p[j];
+                p[j] = aux;
+            }
+}

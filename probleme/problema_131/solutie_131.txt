@@ -1,0 +1,29 @@
+#include <fstream>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+ifstream fin("sortcif2.in");
+ofstream fout("sortcif2.out");
+
+int n, a[105];
+
+int primcif(int n){
+    while(n>9)
+        n/=10;
+    return n;
+}
+
+bool maimic(int a,int b){
+    return primcif(a)<primcif(b);
+}
+
+int main(){
+    fin >> n;
+    for(int i=0;i<n;++i)
+        fin >> a[i];
+    sort(a,a+n,maimic);
+    for(int i=0 ; i<n ; ++i)
+        fout << a[i] << " ";
+    return 0;
+}

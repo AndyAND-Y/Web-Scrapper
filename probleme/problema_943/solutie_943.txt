@@ -1,0 +1,26 @@
+#include <iostream>
+
+using namespace std;
+int n,c,r,s;
+int main()
+{
+    cin>>n;
+    r=n%10;
+    c=n/10;
+    s=(3*c)%10;
+    switch(r)
+    {
+        case 1:s=(s+1)%10;break;
+        case 2:s=(s+7)%10;break;
+        case 3:s=(s+8)%10;break;
+        case 4:s=(s+4)%10;break;
+        case 5:s=(s+9)%10;break;
+        case 6:s=(s+5)%10;break;
+        case 7:s=(s+6)%10;break;
+        case 8:s=(s+2)%10;break;
+        case 9:s=(s+3)%10;break;
+
+    }
+    cout << s;
+    return 0;
+}

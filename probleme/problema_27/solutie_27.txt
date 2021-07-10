@@ -1,0 +1,6 @@
+int nr_cif_zero(int n){
+    if(n<10)
+        return n==0;
+    else
+        return nr_cif_zero(n/10)+(n%10==0);
+}

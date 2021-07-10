@@ -1,0 +1,30 @@
+#include <iostream>
+
+using namespace std;
+
+int n,a[100][100], k,p;
+
+int main(){
+    cin >> n >> k >> p;
+    for(int i=1;i<=n;++i)
+        for(int j=1;j<=n;++j)
+            if(i==k || j==p)
+                a[i][j] = 0;
+            else
+                if(i<k)
+                    if(j<p)
+                        a[i][j] = 1;
+                    else
+                        a[i][j] = 2;
+                else
+                    if(j<p)
+                        a[i][j] = 3;
+                    else
+                        a[i][j] = 4;
+    for(int i=1;i<=n;++i){
+        for(int j=1;j<=n;++j)
+            cout << a[i][j] << " ";
+        cout << endl;
+    }
+    return 0;
+}

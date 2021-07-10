@@ -1,0 +1,16 @@
+#include <fstream>
+
+using namespace std;
+
+ifstream fin("zmeu.in");
+ofstream fout("zmeu.out");
+
+int main()
+{
+    long long n,m,c,r;
+    fin>>n>>m;
+    c=n/(2*m);
+    r=n%(2*m);
+    fout<<c<<endl<<(2*m)-r;
+    return 0;
+}

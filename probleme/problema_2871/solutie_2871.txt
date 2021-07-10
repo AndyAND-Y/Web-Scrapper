@@ -1,0 +1,34 @@
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+ifstream fin("fulger.in");
+ofstream fout("fulger.out");
+
+int main()
+{
+    int n, i, b=0, nr, tr, p;
+    fin>>n;
+    for(i=1; i<=n; i++)
+    {
+        fin>>nr;
+        tr=0;
+        p=1;
+        if(nr==0)
+            tr=9;
+        while(nr)
+        {
+            tr=(9-nr%10)*p+tr;
+            p=p*10;
+            nr=nr/10;
+        }
+        fout<<tr<<" ";
+        if(tr%100==10)
+            b++;
+    }
+    fout<<endl<<b;
+    fin.close();
+    fout.close();
+    return 0;
+}

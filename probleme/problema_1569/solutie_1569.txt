@@ -1,0 +1,16 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int i,n,l,c;
+    cin>>n;
+    for(i=1;i<=n;i++)
+        for(l=1;l<=i;l++)
+        {
+            for(c=1;c<=i;c++)
+                cout<<i;
+            cout<<endl;
+        }
+    return 0;
+}

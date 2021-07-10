@@ -1,0 +1,12 @@
+#include <iostream>
+using namespace std;
+
+
+int main(){
+    int x,s=0;
+    cin >> x;
+    while(x)
+        s += x, cin >> x;
+    cout << s << endl;
+    return 0;
+}

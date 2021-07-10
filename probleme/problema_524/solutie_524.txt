@@ -1,0 +1,24 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n, x[1005];
+    cin  >> n;  
+    for(int i = 1 ; i <= n ; ++ i)
+        cin >> x[i];
+    int st = 1, dr = 0;
+    for(int i = 1 ; i <= n ; ++i)
+    {
+        int p = 0, q = 0;
+        for(int j = 1 ; j <= n && p == 0 ; j++)
+            if(x[i] == x[j])
+                p = j;
+        for(int j = n ; j > 0 && q == 0 ; j --)
+            if(x[i] == x[j])
+                q = j;
+        if(q - p > dr - st)
+            st = p, dr = q;
+    }
+    cout << st << " " << dr;
+    return 0;
+}

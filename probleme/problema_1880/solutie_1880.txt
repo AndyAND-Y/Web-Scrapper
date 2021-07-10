@@ -1,0 +1,22 @@
+#include <fstream>
+using namespace std;
+int main()
+{
+    ifstream f("platou3.in");
+    ofstream g("platou3.out");
+    int kmax=0,k=0,x,n,i;
+    f>>n;
+    for(i=1; i<=n; i++)
+    {
+        f>>x;
+        if(x>0)k++;
+        else
+        {
+            kmax=max(kmax,k);
+            k=0;
+        }
+    }
+    kmax=max(k,kmax);
+    g<<kmax;
+    return 0;
+}

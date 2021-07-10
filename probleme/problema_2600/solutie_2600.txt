@@ -1,0 +1,13 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+long long a, aux;
+
+int main () {
+    cin>>a;
+    aux = a*a + a*a*a*a;
+    cout<<(int)( 3*aux / (aux + sqrt(aux)) + sqrt(aux) );
+    return 0;
+}

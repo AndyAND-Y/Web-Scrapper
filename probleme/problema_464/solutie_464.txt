@@ -1,0 +1,20 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n, k, cnt = 0;
+    cin >> k >> n;
+    while(n)
+    {
+        if(n % 2 == 0)
+            while(n)
+            {
+                if(n % 10 == k)
+                    cnt ++;
+                n /= 10;
+            }
+        cin >> n;
+    }
+    cout << cnt;
+    return 0;
+}

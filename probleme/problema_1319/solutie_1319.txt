@@ -1,0 +1,18 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int n,d;
+    cin>>n;
+    d=2;
+    while (n>1)
+    {
+        if (d*d>n) d=n;
+        if (n%d==0)
+            n/=d,cout<<d<<" ";
+        else
+            d++;
+    }
+    return 0;
+}

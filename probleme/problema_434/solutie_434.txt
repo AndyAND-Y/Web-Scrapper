@@ -1,0 +1,21 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n;
+    cin >> n;
+    int x = 3;
+    while(n>0)
+    {
+        int y = x+2;
+        int prim = 1;
+        // vom verifica cele doua numere x si y simultan, posibilul divizor d creste pana la sqrt(y)
+        for(int d = 3 ; d*d <= y && prim ; d += 2)
+            if(x % d == 0 || y % d == 0)
+                prim = 0;
+        if(prim)
+            cout << x << " " << y << "\n", n --;
+        x += 2;
+    }
+    return 0;
+}

@@ -1,0 +1,29 @@
+#include <fstream>
+using namespace std;
+ 
+ifstream fin("minmax.in");
+ofstream fout("minmax.out");
+ 
+int main(){
+    int n , min , max , a;
+    //citim n - numarul de numere
+    fin >> n;
+    //citim primul numar
+    fin >> a;
+    //initializam min si max cu primul numar
+    min = max = a;
+    //mai citim inca 
+    for(int i = 2 ; i <= n ; i++){
+        // citim un numar
+        fin >> a;
+        // daca a este mai mic decat minimul, actualizam minimul
+        if(a < min)
+            min = a;
+        // daca a este mai mare decat maximul, actualizam maximul
+        if(a > max)
+            max = a;
+    }
+    // afisam rezultatele
+    fout << min << " " << max << endl;
+    return 0;
+}

@@ -1,0 +1,24 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n;
+    cin >> n;
+    int cif=10, nrap;
+    do
+    {
+        cif --;
+        nrap=0;
+        int c = n;
+        do
+        {
+            if(c%10 == cif)
+                nrap ++;
+            c /= 10;
+        }
+        while(c);
+    }
+    while(nrap==0);
+    cout << cif << " " << nrap;
+    return 0;
+}

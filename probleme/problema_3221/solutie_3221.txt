@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+int n,i,j,k,h,x,Max,a[204],d[204][204];
+int main()
+{
+    scanf ("%d", &n);
+    assert ((1<=n) && (n<=200));
+    for (i=1;i<=n;i++)
+    {
+        scanf ("%d", &a[i]);
+        assert ((1<=a[i]) && (a[i]<=1000000000));
+    }
+    for (i=1;i<=n;i++)
+        d[i][i]=a[i];
+    for (i=1;i<=(n-1);i++)
+        for (j=1;j<=(n-i);j++)
+        {
+            k=i+j;
+            Max=-2000000000;
+            for (h=j;h<=(k-1);h++)
+            {
+                x=d[j][h]+d[h+1][k];
+                x/=2;
+                if (x>Max)
+                    Max=x;
+            }
+            d[j][k]=Max;
+        }
+    printf ("%d\n", Max);
+    return 0;
+}

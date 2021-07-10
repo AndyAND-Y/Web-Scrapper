@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n;
+    cin >> n;
+    int p = 1,      // initializam produsul cu 1
+        gasit = 0;  // gasit ne spunde daca in numar sunt cifre impare. Initial, nu sunt.
+    
+    // determina pe rand cifrele
+    while( n ){
+        if(n % 2 == 1)  // daca ultima cifra este impara
+        {
+            p *= n%10;  // actualizam produsul;
+            gasit = 1;  // modificam gasit, deoarece exista cifre impare
+        }
+        n /= 10;
+    }
+    
+    if(!gasit)  // daca nu am gasit cire impare, p devine -1
+        p = -1;
+    
+    // afisam rezultatul obtinut
+    cout << p << endl;
+    
+    return 0;
+}

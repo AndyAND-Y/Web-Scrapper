@@ -1,0 +1,54 @@
+#include <fstream>
+#include <stdlib.h>
+#include <time.h>
+
+#define MAX_N 4000000
+
+unsigned v[MAX_N];
+
+unsigned quickSelect(int l, int r, int k) {
+  if (l == r) {
+    return v[l];
+  }
+  int i = l, j = r;
+  unsigned piv = v[rand() % (r - l + 1) + l];
+
+  while (i <= j) {
+    while (v[i] < piv) {
+      i++;
+    }
+    while (v[j] > piv) {
+      j--;
+    }
+    if (i <= j) {
+      int tmp = v[i];
+      v[i] = v[j];
+      v[j] = tmp;
+      i++;
+      j--;
+    }
+  }
+  if (k <= (j - l + 1)) {
+    return quickSelect(l, j, k);
+  } else {
+    return quickSelect(j + 1, r, k - (j - l + 1));
+  }
+}
+
+int main(void) {
+  int n, k;
+  std::fstream f("statisticiordine.in", std::ios::in);
+
+  f >> n >> k;
+  for (int i = 0; i < n; i++) {
+    f >> v[i];
+  }
+  f.close();
+
+  srand(time(0));
+
+  f.open("statisticiordine.out", std::ios::out);
+  f << quickSelect(0, n - 1, k) << '\n';
+  f.close();
+  return 0;
+}

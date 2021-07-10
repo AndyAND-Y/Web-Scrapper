@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+#define nmax 100003
+using namespace std;
+
+int a[nmax], n;
+
+int main()
+{
+    int k, i, M;
+    cin >> n;
+    k = 0; /// numarul de valori 1
+    for (i = 1; i <= n; i++)
+    {
+        cin >> a[i];
+        k += a[i];
+    }
+
+    /// sume partiale
+    for (i = 1; i <= n; i++)
+        a[i] += a[i - 1];
+
+    /// determina M = numarul maxim de valori de 1 dintr-o
+    /// secventa de lungime k; solutia va fi k-M
+    M = a[k];
+    for (i = k + 1; i <= n; i++)
+        M = max(M, a[i] - a[i - k]);
+
+    cout << (k - M);
+    return 0;
+}

@@ -1,0 +1,97 @@
+#include <iostream>
+#include <fstream>
+#include <cassert>
+using namespace std;
+
+ifstream fin("soarece2.in");
+ofstream fout("soarece2.out");
+
+int n , m;
+short a[1001][1001];
+int  x[1000001], y[1000001];
+int ibranza , jbranza;
+char P[1001][1001];
+
+const int dx[] = {0 , 0 , 1 , -1}, // E V S N
+          dy[] = {1 , -1 , 0 , 0};
+
+void reconstituire(int i , int j)
+{
+    if(a[i][j] > 1)
+    {
+        for(int k = 0; k < 4 ; k ++)
+        {
+            int ii = i + dx[k], jj = j + dy[k];
+            if(a[ii][jj] == a[i][j] - 1)
+            {
+                reconstituire(ii,jj);
+                switch(k)
+                {
+                    case 0:
+                        fout << "V";
+                        break;
+                    case 1:
+                        fout << "E";
+                        break;
+                    case 2:
+                        fout << "N";
+                        break;
+                    case 3:
+                        fout << "S";
+                        break;
+                }
+                break;
+            }
+        }
+    }
+}
+
+int main(){
+    fin >> n >> m;
+    int st = 1 , dr = 0;
+    for(int i = 1 ; i <= n ; i ++)
+        for(int j = 1 ; j <= m ; j ++)
+        {
+            fin >> P[i][j];
+            if(P[i][j] == 'S')
+            {
+                dr ++;
+                x[dr] = i, y[dr] = j;
+                a[i][j] = 1;
+            }
+            if(P[i][j] == 'B')
+                ibranza = i , jbranza = j;
+        }
+    fin.close();
+    
+    while(st <= dr)
+    {
+        int i = x[st], j = y[st];
+        for(int k = 0 ; k < 4 ; k ++)
+        {
+            int ii = i + dx[k], jj = j + dy[k];
+            if( ii > 0 && ii <= n && jj > 0 && jj <= m && P[ii][jj] !='#' && a[ii][jj] == 0)
+            {
+                a[ii][jj] = a[i][j] + 1;
+                dr ++;
+                x[dr] = ii, y[dr] = jj;
+                if(ibranza == ii && jbranza == jj)
+                {
+                    st = dr + 1;
+                    break;
+                }
+            }
+        }
+        st ++;
+    }
+    
+    if(a[ibranza][jbranza] == 0)
+        fout << 0;
+    else
+    {
+        fout << a[ibranza][jbranza] - 1 << "\n";
+        reconstituire(ibranza , jbranza);
+    }
+    fout.close();
+    return 0;
+}

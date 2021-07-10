@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int d, a, b, nrdivmax=-1, max ,min, cc;
+    int C = 0;
+    cin >> a >> b;
+    if(a%2==1)
+        a++;
+    for(int n=a;n<=b;n+=2){
+        C = 0;
+        int d2 = 0;
+        int m = n;
+        while(m%2 == 0)
+            m /= 2, d2++;
+        for(d=1 ; d*d<m ; d+=2)
+            if(n % d == 0)
+                C +=2;
+        if(d * d == n)
+            C ++;
+        C *= d2;
+        //cout << n << " ... " << C << endl;
+        if(C>nrdivmax)
+            nrdivmax = C, min = max = n, cc = 1;
+        else
+            if(C == nrdivmax)
+                max = n, cc++;
+    }
+    cout << nrdivmax << " " << min << " " << max;
+    //cout << endl << cc;
+    return 0;
+}

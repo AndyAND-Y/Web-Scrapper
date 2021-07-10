@@ -1,0 +1,22 @@
+int sumdiv(int n)
+{
+    int s = 0;
+    for(int d = 1 ; d * d <= n ; d ++)
+        if(n % d == 0)
+        {
+            s += d;
+            if(d * d < n)
+                s += n / d;
+        }
+    return s;
+}
+
+void perfect (int x, int y)
+{
+    int gasit = false;
+    for(int i = y ; i >= x ; i --)
+        if(sumdiv(i) == 2 * i)
+            cout << i << " ", gasit = 1;
+    if(! gasit)
+        cout << "nu exista";
+}

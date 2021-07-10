@@ -1,0 +1,21 @@
+#include <fstream>
+
+using namespace std;
+ifstream f("sumagauss2.in");
+ofstream g("sumagauss2.out");
+long long s,k,d,n,m ;
+
+int main()
+{
+    f >> s ;
+    k = 2*s ;
+    for ( d=1 ; d*d<=k ; d++ )
+       if ( k%d==0 )
+         if ( (d+k/d)%2==1 )
+         {
+             n = ( d+k/d-1 ) / 2 ;
+             m = n-d ;
+             g << n << " " << m << "\n" ;
+         }
+    return 0;
+}

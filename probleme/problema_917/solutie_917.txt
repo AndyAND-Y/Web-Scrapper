@@ -1,0 +1,7 @@
+void cmmdc(int a ,int b , int & rez)
+{
+    if(a % b == 0)
+        rez = b;
+    else
+        cmmdc(b , a % b , rez);
+}

@@ -1,0 +1,10 @@
+int IncDecRec(int n)
+{
+    if (n < 10)
+    {
+        if (n % 2 == 1) return n - 1;
+        return n + 1;
+    }
+    if (n % 2 == 1) return IncDecRec(n / 10) * 10 + (n % 10 - 1);
+    return IncDecRec(n / 10) * 10 + (n % 10 + 1);
+}

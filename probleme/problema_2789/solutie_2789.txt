@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+ifstream f("cb3.in");
+ofstream g("cb3.out");
+
+const int NM = 10003;
+int a[NM], n, Q, S, k;
+long long sum[NM];
+
+int main()
+{
+    f >> n >> Q;
+    for(int i=0; i < n; ++i)
+        f >> a[i];
+
+    sort(a, a+n);
+
+    sum[0] = a[0];
+    for(int i=1; i < n; ++i)
+        sum[i] = sum[i-1] + a[i];
+
+    for(int i=1; i <= Q; ++i){
+        f >> S;
+        k = upper_bound (sum, sum+n, S) - sum;
+        g << k << '\n';
+    }
+
+    return 0;
+}

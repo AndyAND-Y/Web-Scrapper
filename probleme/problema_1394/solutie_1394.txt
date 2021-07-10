@@ -1,0 +1,27 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+ifstream fin("devt.in");
+ofstream fout("devt.out");
+typedef int vect[100001];
+vect sol,a;
+int long long n,k,i,j,z;
+int main()
+{
+    fin>>n>>k;
+    a[1]=1;
+    for(i=2;i<=n;i++)
+        if(a[i]!=1)for(j=i*i;j<=n;j+=i)a[j]=1;
+    for(i=1;i<=n;i++)
+    {
+        sol[i]=sol[i-1];
+        if(a[i]==1)sol[i]++;
+    }
+    for(z=1;z<=k;z++)
+    {
+        fin>>i>>j;
+        if(a[i]==1)fout<<sol[j]-sol[i]+1<<"\n";
+        else fout<<sol[j]-sol[i]<<"\n";
+    }
+    return 0;
+}

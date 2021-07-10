@@ -1,0 +1,59 @@
+//prof Minca Carmen -CNITV
+
+#include <fstream>
+#include <iostream>
+using namespace std;
+char v[10005];
+int fr[10005];
+int w[10005];
+
+int cmmdc(int a, int b)
+{
+    while(a&&b)
+    if(a>b)a=a%b;
+       else b=b%a;
+    return a+b;
+}
+int main ()
+{
+    int n, N, i, j,x,d, p=1;
+    ifstream f("miny.in");
+    ofstream g("miny.out");
+    n=10000;
+    //determinare numere prime <=10000 - Ciurul lui Eratostene
+    v[2]=1;
+    for(i=3;i<=n; i+=2)v[i]=1;
+    for (i=3; i<=n; i+=2)
+    {if (v[i]!=0)
+        for (j=2*i; j<=n; j+=i)v[j]=0;
+    }
+    f>>N;//<=50000
+
+    for(i=1;i<=N;i++)
+      {f>>x; fr[x]++;//frecventa de aparitie a fiecarui numar din fisier
+       p=(p*x)%100;//cifra zecilor produsului
+       }
+    for(i=2;i<=n;i++)
+     {
+         if(fr[i])
+          if(v[i])w[i]+=fr[i];//i este numar prim si apare de w[i] ori
+          else
+          {   x=i;//descompun in factori primi pe i
+              for(j=2;j<=n && x>1;j++)
+                while(v[j] && (x%j==0)&& x>1)
+                   {w[j]+=fr[i];x/=j;} //contorizez in w[j] aparitiile factorului prim j
+
+          }
+     }
+    int M=0;d=0;
+    //calculez cmmdc-ul exponentilor factorilor primi din descompunerea lui Y
+    for(i=2;i<=n;i++)
+     if(w[i])
+     {M++; //numarul factorilor primi din descompunerea lui Y
+      d=cmmdc(d, w[i]);}
+    g<<p/10<<endl<<M<<endl;
+    for(i=2;i<=n;i++)
+     if(w[i])
+      g<<i<<" "<<w[i]/d<<endl; //factorii primi si exponentii lor
+    return 0;
+}

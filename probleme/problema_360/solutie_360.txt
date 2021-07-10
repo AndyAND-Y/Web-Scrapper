@@ -1,0 +1,18 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n, c, r, p;
+    cin >> n >> c;
+    r = 0, p =1;
+    while(n){
+        if(n%10 != c)
+            r += n%10*p , p *= 10;
+        n /= 10;
+    }
+    if(p==1)
+        cout << -1;
+    else
+        cout << r;
+    return 0;
+}

@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    //doua numere naturale sunt peime intre ele daca cmmdc al lor este 1
+    int a  ,b;
+    cin >> a >> b;
+    
+    //vom calcula cmmdc pentru a, b, folosind algoritmul lui Euclid.
+    
+    //stim ca numerele sunt nenule
+    
+    while(a%b)
+    {
+        int r = a % b;
+        a = b;
+        b =r;
+    }
+    //rezultatul este ultimul impartitor, adica b.
+    
+    // afisam mesajul corespunzator
+    if(b == 1)
+        cout << "PIE";
+    else
+        cout << "NOPIE";
+    
+    return 0;
+}

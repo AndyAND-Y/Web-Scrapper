@@ -1,0 +1,15 @@
+int resturi(int n, int x, int y, int r)
+{
+    int cx = x, cy = y;
+    while(cy != 0)
+    {
+        int cr = cx % cy;
+        cx = cy;
+        cy = cr;
+    }
+    long long m = x / cx * y;
+    int cnt = n / m;
+    if(r > 0  && cnt * m + r <= n)
+        cnt ++;
+    return cnt;
+}

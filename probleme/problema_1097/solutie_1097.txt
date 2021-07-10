@@ -1,0 +1,35 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+ 
+ifstream fin("placare.in");
+ofstream fout("placare.out");
+ 
+short int n,m,a[301][301];
+ 
+int main(){
+    fin>>n>>m;
+    for(int i=1;i<=n;++i)
+        for(int j=1;j<=m;)
+            if(a[i][j]==0){
+                int x;
+                fin>>x;
+                if(x==0)
+                    continue;
+                if(x>0)
+                    for(int k=1;k<=x;++k,++j)
+                        a[i][j]=x;
+                else{
+                    for(int k=1;k<=-x;++k)
+                        a[i+k-1][j]=-x;
+                    ++j;
+                }
+            }
+            else
+                j++;
+    for(int i=1;i<=n;++i){
+        for(int j=1;j<=m;++j)
+            fout<<a[i][j]<<" ";
+        fout<<endl;
+    }
+}

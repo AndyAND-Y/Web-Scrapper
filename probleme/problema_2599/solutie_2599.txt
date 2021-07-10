@@ -1,0 +1,15 @@
+#include <iostream>
+
+using namespace std;
+
+long long a;
+
+int main () {
+    cin>>a;
+    a = a*a; /// se obtine valoarea originala la puterea a doua
+    a = a*a; /// se obtine valoarea originala la puterea a patra
+    a = a*a; /// se obtine valoarea originala la puterea a opta
+    a = a*a; /// se obtine valoarea originala la puterea a saisprezecea
+    cout<<a;
+    return 0;
+}

@@ -1,0 +1,28 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+int main(){
+    char s[22];
+    //citim sirul. NU contine spatii, poate fi citit cu cin >>
+    cin >> s;
+    
+    for(int i=0;s[i] ;++i)          //parcurgem sirul
+        if(strchr("aeiou",s[i]))    //daca pe pozitia curenta este vocala
+            s[i] -= 'a'-'A';            // o transformam in litera mare
+    /*
+     * Pentru a transforma o litera mica in litera mare, folosim faptul 
+     * ca diferenta intre litera mica si litera mare este aceeasi pentru
+     * toate literele, si anume diferenta dintre 'a' si 'A', adica 'a'-'A'
+     * 
+     * Astfel, vom scadea din caracterul litera mica valoarea 'a'-'A'
+     * 
+     * Pentru a transforma o litera mare in litera mica, vom aduna la 
+     * litera mare valoarea 'a' - 'A'
+     * 
+     * */
+    
+    //afisam sirul modificat
+    cout << s ;
+    return 0;
+}

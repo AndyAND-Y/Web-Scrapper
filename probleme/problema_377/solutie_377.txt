@@ -1,0 +1,12 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n , a , b;
+    cin >> n;
+    for(int d = 1; d*d <= n; d++)
+        if(n % d == 0)
+            a = d, b = n/d;
+    cout << a << " " << b;
+    return 0;
+}

@@ -1,0 +1,10 @@
+int UCP(int n){
+    if(n==0)
+        return 0;
+    while(n)
+        if(n%2==0)
+            return n%10;
+        else
+            n/=10;
+    return -1;
+}

@@ -1,0 +1,29 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+ifstream fin("spirala.in");
+ofstream fout("spirala.out");
+
+int a[105][105],n;
+
+int main(){
+    fin >> n;
+    for(int i=1;i<=n;++i)
+        for(int j=1;j<=n;++j)
+            fin >> a[i][j];
+    for(int k=1;k<=n/2;k++)
+    {
+        for(int j=k;j<=n-k+1;++j)
+            fout << a[k][j] << " ";
+        for(int i=k+1;i<=n-k+1;++i)
+            fout << a[i][n-k+1] << " ";
+        for(int j=n-k;j>=k;--j)
+            fout << a[n-k+1][j] << " ";
+        for(int i=n-k;i>k;--i)
+            fout << a[i][k] << " ";
+    }
+    if(n%2==1)
+        fout << a[n/2+1][n/2+1];
+    return 0;
+}

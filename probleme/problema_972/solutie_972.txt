@@ -1,0 +1,29 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+bool vocala(char L)
+{
+    if(strchr("aeiou" , L))
+        return true;
+    return false;
+}
+
+bool consoana(char L)
+{
+    if(L >= 'a' && L <= 'z' && !vocala(L))
+        return true;
+    return false;
+}
+
+int main()
+{
+    char s[256];
+    cin.getline(s, 256);
+    int cnt = 0;
+    for(int i = 1 ; i < strlen(s) - 1 ; i ++)
+        if(consoana(s[i-1]) && vocala(s[i]) && consoana(s[i+1]))
+            cnt ++;
+    cout << cnt;
+    return 0;
+}

@@ -1,0 +1,14 @@
+#include <fstream>
+using namespace std;
+
+ifstream fin("n_suma.in");
+ofstream fout("n_suma.out");
+
+int main(){
+int n,a,s=0;
+fin >> n;
+for ( ; n ; --n)
+    fin >>a, s+=a;
+fout << s << endl;
+return 0;
+}

@@ -1,0 +1,46 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int x , y;
+    //citim numerele
+    cin >> x >> y;
+    
+    //ordonam cele doua numere
+    if(x>y)
+    {
+        //interschimbare
+        int aux = x;
+        x = y;
+        y = aux;
+    }
+    
+    //initializam contorul cu zero
+    int nrp = 0;
+    
+    //parcurgem intevalul [x,y]
+    for(int i = x ; i <= y; i++){
+        //verificam daca i este prim
+        
+        //peresupunem ca este prim
+        int prim = 1;
+        //0 si 1 nu sunt prime
+        if(i<2)
+            prim = 0;
+        //numerele pare mai mari decat 2 nu sunt prime
+        if(i % 2 == 0 && i > 2)
+            prim = 0;
+        //cautam un divizor impar 
+        for(int d = 3; d * d <= i && prim == 1 ; d ++)
+            if(i % d == 0)  // daca il gasim
+                prim = 0;   //i nu este prim
+        
+        //daca numarul este prim, marim contorul
+        if(prim == 1)
+            nrp ++;
+    }
+    
+    //afisam contorul
+    cout << nrp;
+    return 0;
+}

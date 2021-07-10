@@ -1,0 +1,22 @@
+#include <iostream>
+#include <cassert>
+using namespace std;
+
+int main()
+{
+    int n , p , x , q , ep = 0, eq = 0;
+    cin >> p >> q >> n;
+    for( ; n ; n --)
+    {
+        cin >> x;
+        while(x % p == 0)
+            x /= p, ep ++;
+        while(x % q == 0)
+            x /= q, eq ++;
+    }
+    if(ep < eq)
+        cout << ep <<"\n";
+    else
+        cout << eq <<"\n";
+    return 0;
+}

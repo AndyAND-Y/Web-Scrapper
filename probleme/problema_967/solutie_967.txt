@@ -1,0 +1,43 @@
+# include <iostream>
+using namespace std;
+
+int main()
+{
+    int n, s, c, sum = 0, nc = 0, c1 = 0, c3 = 0, c5 = 0, c7 = 0, c9 = 0;
+    cin >> n >> c;
+    for(int i = 1; i <= n ; i ++)
+    {
+        cin >> s;
+        if(s % 10 == 1)
+            c1 ++;
+        if(s % 10 == 3)
+            c3 ++;
+        if(s % 10 == 5)
+            c5 ++;
+        if(s % 10 == 7)
+            c7 ++;
+        if(s % 10 == 9)
+            c9 ++;
+        bool prim = true;
+        if(s < 2)
+            prim = false;
+        for(int d = 2 ; d * d <= s && prim ; d ++)
+            if(s % d == 0)
+                prim = false;
+        if(prim)
+            sum += s;
+        while(s)
+        {
+            if(s % 10 == c)
+                nc ++;
+            s /= 10;
+        }
+    }
+    cout << sum << endl << nc << endl;
+    int d = 1;
+    for(int i = 1 ; i <= n ; i ++)
+        if(c1 % i == 0 && c3 % i == 0 && c5 % i == 0 && c7 % i == 0 && c9 % i == 0)
+            d = i;
+    cout << (c1 + c3 + c5 + c7 + c9)/d << endl;
+    return 0;
+}

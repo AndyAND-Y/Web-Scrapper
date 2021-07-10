@@ -1,0 +1,20 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n;
+    cin >> n;
+    //  pentru a evita cazul special al numarului zero, care are o cifra dar 
+    //  daca n = 0, nu se intra in while, folosim urmatoarea idee
+    //  orice numar are cel putin o cifra; initializam contorul cu 1, si 
+    //  trunchiem numarul, numarand cifrele, pana cand numarul devine de o cifra
+    int c = 1;
+    while(n > 9)
+    {
+        c ++;
+        n /= 10;
+    }
+    cout << c << endl;
+    
+    return 0;
+}

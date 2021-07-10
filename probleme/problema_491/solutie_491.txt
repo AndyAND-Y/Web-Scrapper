@@ -1,0 +1,29 @@
+#include <iostream>
+#include <cassert>
+using namespace std;
+
+int main(){
+    int n, v[1005];
+    cin  >> n;
+    
+    for(int i = 0 ; i < n ; ++ i)
+        cin >> v[i];
+    int p = -1, u = -1;
+    for(int i = 0 ; i < n ; ++ i)
+        if(v[i] % 2 == 0)
+        {
+            if(p == -1)
+                p = i;
+            u = i;
+        }
+    if(p!=-1)
+    {
+        int S = 0;
+        for(int i = p ; i <= u ; ++ i)
+            S += v[i];
+        cout << S;
+    }
+    else
+        cout << "NU EXISTA";
+    return 0;
+}

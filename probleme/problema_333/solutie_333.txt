@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    double a,b,c;
+    cin >> a >> b >> c;
+    if(a>b){
+        double aux = a;
+        a = b;
+        b = aux;
+    }
+    if(b>c){
+        double aux = c;
+        c = b;
+        b = aux;
+    }
+    if(a+b<=c || a+c<=b || b+c <=c)
+        cout << "nu este triunghi";
+    else
+        if(c*c<a*a+b*b)
+            cout << "triunghi ascutitunghic";
+        else
+            if(c*c == a*a+b*b)
+                cout << "triunghi dreptunghic";
+            else
+                cout << "triunghi obtuzunghic";
+    return 0;
+}

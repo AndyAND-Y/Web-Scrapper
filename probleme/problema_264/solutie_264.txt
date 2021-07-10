@@ -1,0 +1,23 @@
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+ifstream fin("maxcif.in");
+ofstream fout("maxcif.out");
+
+int v[10];
+
+int main(){
+    int x;
+    while(fin>>x)
+        v[x]++;
+        x = 0;
+    for(int i=0;i<10;++i)
+        if(v[i]>x)
+            x = v[i];
+    for(int i=0;i<10;++i)
+        if(v[i] == x)
+            fout << i << " ";
+    return 0;
+}

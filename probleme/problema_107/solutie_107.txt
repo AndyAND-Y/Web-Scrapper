@@ -1,0 +1,16 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+int main(){
+    int n, nra=0 ,uc;
+    cin >> n;
+    uc = n%10;
+    do{
+        if(uc == n%10)
+            nra ++;
+        n /= 10;
+    }while(n);
+    cout << nra << endl;
+    return 0;
+}

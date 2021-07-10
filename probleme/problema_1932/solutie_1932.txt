@@ -1,0 +1,23 @@
+#include <fstream>
+using namespace std;
+ifstream fin("pc.in");
+ofstream fout("pc.out");
+int n,x,i;
+int main()
+{
+    // se observa ca toate numerele impare sunt norocoase si nu exista numere pare norocoase.Prin urmare solutia este simpla:verificam fiecare numar in parte si verificam
+    // paritatea acestuia, in caz ca avem 0 numere(n=0) vom afisa -1
+    fin>>n;
+    if(n)
+        for(i=1;i<=n;i++)
+        {
+            fin>>x;
+            if(x%2==1)
+                fout<<1<<' ';
+            else
+                fout<<0<<' ';
+        }
+    else
+        fout<<"-1";
+    return 0;
+}

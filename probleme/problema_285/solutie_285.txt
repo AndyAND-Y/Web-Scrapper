@@ -1,0 +1,20 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main(){
+    int k , x , y;
+    cin >> k;
+    
+    // vom cauta solutia
+    // dam lui x valori cu sanse si il xexprimam pe y din ecuatie. 
+    // Daca este numar natural, afisam perechea x y
+    
+    for( x = 1 ; x * x <= k / 2 ; ++x){
+        int z = k - x * x;
+        y = sqrt(z);
+        if(z == y * y)
+            cout << x << " " << y << "\n";
+    }
+    return 0;
+}

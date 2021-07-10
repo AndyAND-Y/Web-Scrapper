@@ -1,0 +1,18 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+int main(){
+    int n, nra=0 ,pc;
+    cin >> n;
+    pc = n;
+    while(pc>9)
+        pc /= 10;
+    do{
+        if(pc == n%10)
+            nra ++;
+        n /= 10;
+    }while(n);
+    cout << nra << endl;
+    return 0;
+}

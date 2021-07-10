@@ -1,0 +1,25 @@
+#include <iostream>
+
+using namespace std;
+
+int PrimaCifra(int n){
+    if(n<10)
+        return n;
+    return PrimaCifra(n/10);
+}
+
+int main(){
+    int n , a=10 , b=-1;
+    cin >> n ;
+    cin >> a;
+    for( n--; n ; --n ){
+        cin >> b;
+        if(PrimaCifra(b)<PrimaCifra(a))
+            a = b;
+        else
+            if(PrimaCifra(b) == PrimaCifra(a) && b>a)
+                a = b;
+    }
+    cout << a;
+    return 0;
+}

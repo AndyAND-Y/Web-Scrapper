@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int a , b , contor=0;
+    cin >> a;
+    cin >> b;
+    
+    while( b ){
+        int p = a, q = b;
+        while(p % q !=0){
+            int r = p % q;
+            p = q;
+            q = r;
+        }
+        if(q == 1)
+            contor ++;
+        a = b;
+        cin >> b;
+    }
+    cout << contor << endl;
+    return 0;
+}

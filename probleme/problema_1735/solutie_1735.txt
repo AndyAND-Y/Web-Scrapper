@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+ifstream fin("divquery.in");
+ofstream fout("divquery.out");
+int cmmdc(int a, int b)
+{
+    int r;
+    while(b)
+    {
+        r=a%b;
+        a=b;
+        b=r;
+    }
+    return a;
+}
+int q,n,i,j,x,y,dif,l;
+int qr[18][100001];
+int lg[100001];
+int main()
+{
+    fin>>n>>q;
+    for(i=2;i<=n;i++)lg[i]=1+lg[i/2];
+    for(i=1;i<=n;i++)fin>>qr[0][i];
+    for(i=1;(1<<i)<=n;i++)
+        for(j=1;j<=n-(1<<i)+1;j++)
+        qr[i][j]=cmmdc(qr[i-1][j],qr[i-1][j+(1<<(i-1))]);
+    while(q--)
+    {
+        fin>>x>>y;
+        dif=y-x+1;
+        l=lg[dif];
+        dif=dif-(1<<l);
+        fout<<cmmdc(qr[l][x],qr[l][x+dif])<<"\n";
+    }
+    return 0;
+}

@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int n , m;
+    cin >> n >> m;
+    int a , b , x , y;
+    a = n / 10;
+    b = n % 10;
+    x = m / 10;
+    y = m % 10;
+    bool ok = false;
+    if(a == x)
+        ok = true;
+    if(a == y)
+        ok = true;
+    if(b == x)
+        ok = true;
+    if(b == y)
+        ok = true;
+    if(ok)
+        cout << "da";
+    else
+        cout << "nu";
+    return 0;
+}

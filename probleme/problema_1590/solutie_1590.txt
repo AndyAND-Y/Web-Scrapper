@@ -1,0 +1,121 @@
+//Sandor Lukacs 100 puncte
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+ifstream f("arma1.in");
+ofstream g("arma1.out");
+
+int n,v[10002],pr[50000],nr,c[50000],opt,niv;//pr - sirul numerelor prime
+int fp[50000];//fp[i] - retine nivelul maxim la care trebuie programata arma pt a distuge inamicul i
+long long s;//cantitatea minima necesara
+
+void ciur(){
+    long long i,j;
+    nr = 0;
+    pr[++nr] = 2;
+    for(i = 3; i <=48000; i = i + 2){
+        if(c[i] == 0){
+            pr[++nr] = i;
+            for(j = i; j*i <= 48000; j = j + 2)
+                c[i*j] = 1;
+        }
+    }
+}
+
+int cmmdc(int a, int b){
+    int r;
+    while(b != 0){
+        r = a % b;
+        a = b;
+        b = r;
+    }
+    return a;
+}
+
+int nivel(int d){//determin cmmdc al puterilor factorilor primi din descompunerea lui d
+    int i,rez, p;
+    rez = 0;//rezultatul
+
+    for(i = 1; i <= nr && pr[i]*pr[i] <= d;++i){
+        p = 0;
+
+        while(d % pr[i] == 0){//cat timp pr[i] este factor prim
+            p = p + 1;//cresc puterea
+            d = d / pr[i]; //noua valoare
+        }
+        if(p != 0){//daca pr[i] apare in descompunere
+            if(p == 1) return 1; //daca apare la puterea 1 nu mai continui
+            else {
+                rez = cmmdc(rez,p); //retin cmmdc al puterilor
+            }
+        }
+    }
+    if(rez == 0 || d != 1) return 1;//daca e numar prim sau mai avem un factor primnivelul e 1
+    else return rez;
+}
+
+long long x_la_p(long long x, int p, int d){
+    long long y = x, rasp = 1;
+    while(p > 1){
+
+        if(p % 2 == 1) rasp = rasp*y;
+        y = y * y;
+        if(y > d) return d + 1;//daca depasesc d nu mai calculez
+        p = p/2;
+    }
+    return rasp*y;
+
+}
+int cant_minim(int d, int p){
+    //pentru a determina cantitatea minima trebuie sa determin o valoare x, a.i. x^p = d
+    long long x,ls,ld,y;
+    if(p == 1) return d;//daca e numar prim
+
+    x = d;
+    y = 1;
+    //calculez [sqrt(d)]
+    while(x > y){
+        x = (x + y) / 2;
+        y = d / x;
+    }
+
+    if(p == 2) return x;//daca e patrat perfect
+    ls = 1; ld = x;
+    y = x_la_p(x,p,d);
+    while(y != d) {
+
+        if(y > d) ld = x;
+
+        if(d > y) ls = x;
+
+        x = ls + (ld - ls)/2;
+
+        y = x_la_p(x,p,d);//calculez x ^ p
+
+    }
+   return x;
+}
+
+int main()
+{
+    int i;
+    ciur();
+    f>>opt>>n;
+    for(i = 1; i <= n; ++i) {
+            f>>v[i];
+            niv = nivel(v[i]);
+            fp[i] = niv;
+    }
+    if(opt == 1){
+        s = 0; //initial
+        for(i = 1; i <= n; ++i)
+            s = s + cant_minim(v[i],fp[i]);
+        g<<s;
+    }
+    if(opt == 2){
+        for(i = 1; i <= n; ++i) g<<fp[i]<<"\n";
+    }
+    return 0;
+}

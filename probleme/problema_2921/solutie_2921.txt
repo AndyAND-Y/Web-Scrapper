@@ -1,0 +1,35 @@
+#include <iostream>
+#include <cassert>
+
+using namespace std;
+
+int n,m, A[100001];
+long long S[100001];
+
+int main()
+{
+    cin >> n;
+    for(int i = 1 ; i <= n ; i ++)
+        cin >> A[i];
+    S[0] = 0;
+    for(int i = 1 ; i <= n ; i ++)
+        S[i] = S[i-1] + A[i];
+    cin >> m;
+    long long smax = -1;
+    for(int i = 1 ; i <= n ; i ++)
+        if(A[i] < 0)
+            smax += A[i];
+    while(m)
+    {
+        int i , j;
+        cin >> i >> j;
+        assert(i >= 1 && i <= n);
+        assert(j >= 1 && j <= n);
+        if(i > j)
+            swap(i,j);
+        if( smax < S[j] - S[i-1])
+            smax = S[j] - S[i-1];
+        m --;
+    }
+    cout << smax;
+}

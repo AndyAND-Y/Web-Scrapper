@@ -1,0 +1,13 @@
+#include <fstream>
+using namespace std;
+
+ifstream fin("maxim.in");
+ofstream fout("maxim.out");
+
+int main(){
+    int a,b,m;
+    fin >> a >> b;
+    m = (a>b?a:b);
+    fout << m << endl;
+    return 0;
+}

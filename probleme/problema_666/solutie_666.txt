@@ -1,0 +1,30 @@
+#include <iostream>
+using namespace std;
+
+int a[101][101], n, m;
+
+int main(){
+    cin  >> n >> m;
+    for (int i = 1 ;i <= n ; ++i)
+        for(int j = 1 ; j <= m ; ++j)
+            cin >> a[i][j];
+    
+    int cnt = 0;
+    for (int i = 2 ;i <= n ; i += 2) // parcurgem doar liniile cu indici pari
+        for(int j = 1 ; j <= m ; ++j)
+        {
+            bool prim = true;
+            int x = a[i][j];
+            if(x < 2)
+                prim = false;
+            if(x > 2 && x % 2 == 0)
+                prim = false;
+            for(int d = 3 ; prim && d * d <= x ; d += 2)
+                if(x % d == 0)
+                    prim = false;
+            if(prim)
+                cnt ++;
+        }
+    cout << cnt;
+    return 0;
+}

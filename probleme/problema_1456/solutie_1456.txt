@@ -1,0 +1,22 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+char s[101];
+
+int main()
+{
+    cin >> s;
+    bool cons = false, voc = false;
+    for(unsigned i = 0 ; i < strlen(s) ; i ++)
+        if(!strchr("aeiou", s[i]))
+            cons = true;
+        else
+            if(s[i] != 'i')
+                voc = true;
+    if(cons && !voc)
+        cout << "DA";
+    else
+        cout << "NU";
+    return 0;
+}

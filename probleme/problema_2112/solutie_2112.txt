@@ -1,0 +1,20 @@
+#include <fstream>
+
+using namespace std;
+ifstream fin("tablita.in");
+ofstream fout("tablita.out");
+int main()
+{
+   int n,k,s;
+   fin>>n;
+   s=0;
+   k=1;
+   while(s+k<n)
+    {
+        s=s+k;
+        k++;
+    }
+    fout<<k<<endl;
+
+    return 0;
+}

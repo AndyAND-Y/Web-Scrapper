@@ -1,0 +1,39 @@
+//problema covoare
+/*
+ *  Completam o matrice corespunzator, in ordinea data
+ * 
+ * */
+
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+ifstream fin("covoare.in");
+ofstream fout("covoare.out");
+
+int A[101][101], n, m , p , a , b , c;
+
+int main(){
+    fin  >> n >> m >> p;
+    
+    for(int i =1 ; i <= n ; ++i)
+        for(int j = 1 ; j <= m ; ++j)
+            if(A[i][j] == 0)
+            {
+                fin >> a >> b >> c;
+                for(int k = 0 ; k < b ; k ++)
+                    for(int l = 0 ; l < a ; ++l)
+                    {
+                        if(i+k>n || j+l>m)
+                            cout << "ies din matrice\n";
+                        A[i + k][j + l] = c;
+                    }
+            }
+    for (int i = 1 ;i <= n ; ++i)
+    {
+        for(int j = 1 ; j <= m ; ++j)
+            fout << A[i][j] << " ";
+        fout << endl;
+    }
+    return 0;
+}

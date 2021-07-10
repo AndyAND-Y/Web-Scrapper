@@ -1,0 +1,16 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int n, u, z ,s;
+    cin >> n;
+    u = n % 10, n /=10;
+    z = n % 10, n /=10;
+    s = n % 10, n /=10;
+    if(s == z && z == u)
+        cout << "da";
+    else
+        cout << "nu";
+    return 0;
+}

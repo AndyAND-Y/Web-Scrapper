@@ -1,0 +1,28 @@
+#include <iostream>
+
+using namespace std;
+int n,b,c,u,sum,p,i,a[100];
+int main()
+{
+    cin>>n>>b>>c;
+    sum=0;
+    p=1;
+    while(n!=0)
+    {
+        u=n%10;
+        sum=sum+u*p;
+        p=p*b;
+        n=n/10;
+    }
+    p=0;
+    while(sum!=0)
+    {
+        u=sum%c;
+        p++;
+        a[p]=u;
+        sum=sum/c;
+    }
+    for(i=p;i>=1;i--)cout<<a[i];
+
+    return 0;
+}

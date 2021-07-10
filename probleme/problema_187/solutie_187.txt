@@ -1,0 +1,30 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int v[10];
+ifstream fin("ciffrecv.in");
+ofstream fout("ciffrecv.out");
+
+int main(){
+    int n;
+    while( fin >> n  ){
+        v[n]++;
+    }
+    if(v[7]){
+        fout << 7 << " " << v[7];
+        return 0;
+    }
+    if(v[5]){
+        fout << 5 << " " << v[5];
+        return 0;
+    }
+    if(v[3]){
+        fout << 3 << " " << v[3];
+        return 0;
+    }
+    if(v[2]){
+        fout << 2 << " " << v[2];
+        return 0;
+    }
+}

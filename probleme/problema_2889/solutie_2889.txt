@@ -1,0 +1,11 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    double r,pi=atan(1)*4,a,p;
+    cin>>r;
+    a=pi*r*r;
+    p=2*pi*r;
+    cout<<fixed<<a<<" "<<p;
+}

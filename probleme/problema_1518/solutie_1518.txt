@@ -1,0 +1,85 @@
+#include <stdio.h>
+
+int GRILA[9][9], numar_pozitii_nule, solutie_valida;
+
+struct {
+    int lin, col;
+} pozitii[81];
+
+int linie_valida(int lin) {
+    int i, j;
+    for(i = 0; i < 8; i++)
+        for(j = i + 1; j < 9; j++)
+            if(GRILA[lin][i] == GRILA[lin][j] && GRILA[lin][i] != 0 && GRILA[lin][j] != 0)
+                return 0;
+    return 1;
+}
+
+int coloana_valida(int coloana) {
+    int i, j;
+    for(i = 0; i < 8; i++)
+        for(j = i + 1; j < 9; j++)
+            if(GRILA[i][coloana] == GRILA[j][coloana] && GRILA[i][coloana] != 0 && GRILA[j][coloana] != 0)
+                return 0;
+    return 1;
+}
+
+int submatrice_valida(int lin_start, int col_start) {
+    int valori[9], i, j, ord = 0;
+    for(i = lin_start; i < lin_start + 3; i++)
+        for(j = col_start; j < col_start + 3; j++)
+            if(GRILA[i][j])
+                valori[ord++] = GRILA[i][j];
+
+    for(i = 0; i < ord - 1; i++)
+        for(j = i + 1; j < ord; j++)
+            if(valori[i] == valori[j] && valori[i] != 0 && valori[j] != 0)
+                return 0;
+    return 1;
+}
+
+void backtrack(int i_poz) {
+    int val;
+
+    for(val = 1; val <= 9 && !solutie_valida; val++) {
+        GRILA[pozitii[i_poz].lin][pozitii[i_poz].col] = val;
+
+        if(linie_valida(pozitii[i_poz].lin) && coloana_valida(pozitii[i_poz].col) && submatrice_valida(pozitii[i_poz].lin / 3 * 3, pozitii[i_poz].col / 3 * 3))
+            if(i_poz + 1 == numar_pozitii_nule)
+                solutie_valida = 1;
+            else
+                backtrack(i_poz + 1);
+
+        if(!solutie_valida)
+            GRILA[pozitii[i_poz].lin][pozitii[i_poz].col] = 0;
+    }
+}
+
+
+int main(void) {
+    freopen("sudoku.in", "r", stdin);
+    freopen("sudoku.out", "w", stdout);
+
+    int lin, col;
+    for(lin = 0; lin < 9; lin++)
+        for(col = 0; col < 9; col++) {
+            scanf("%d", &GRILA[lin][col]);
+            if(GRILA[lin][col] == 0) {
+                pozitii[numar_pozitii_nule].lin = lin;
+                pozitii[numar_pozitii_nule++].col = col;
+            }
+        }
+
+    backtrack(0);
+
+    if(!solutie_valida)
+        printf("IMPOSIBIL"); // Preventiv; toate testele au solutii.
+    else
+        for(lin = 0; lin < 9; lin++) {
+            for(col = 0; col < 9; col++)
+                printf("%d ", GRILA[lin][col]);
+            printf("\n");
+        }
+
+    return 0;
+}

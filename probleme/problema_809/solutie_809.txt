@@ -1,0 +1,26 @@
+#include <fstream>
+using namespace std;
+
+ifstream fin("nrlipsa1.in");
+ofstream fout("nrlipsa1.out");
+
+int v[100];
+
+int main(){
+    int n;
+    while(fin >> n)
+        if(n > 9 && n < 100)
+            v[n] = 1;
+    int a = -1, b = -1;
+    for(int i = 10 ; i < 100 && a == -1; i += 2)
+        if(v[i] == 0)
+            a = i;
+    for(int i = 98 ; i > 9 && b == -1; i -= 2)
+        if(v[i] == 0)
+            b = i;
+    if(a == b)
+        fout << "nu exista";
+    else
+        fout <<a << " " << b;
+    return 0;
+}

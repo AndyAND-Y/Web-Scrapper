@@ -1,0 +1,21 @@
+#include <iostream>
+using namespace std;
+ 
+int main()
+{
+    int n;
+    cin >> n;
+    int cmax= n%10;
+    // aplicam algoritmul standard de determinare a cifrelor, prin trunchierea numarului
+    while(n)
+    {
+        // fiecare cifra se compara cu maximul; acesta se actualizeaza, daca este cazul
+        if(n%10>cmax)
+            cmax = n%10;
+        n /= 10;
+    }
+    
+    cout << cmax << endl;
+
+    return 0;
+}

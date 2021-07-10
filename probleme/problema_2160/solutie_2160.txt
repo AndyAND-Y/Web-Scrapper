@@ -1,0 +1,21 @@
+//Emanuela Cerchez
+#include <fstream>
+
+using namespace std;
+ifstream fin("prize.in");
+ofstream fout("prize.out");
+int n;
+long long int sum;
+
+int main()
+{int i, x;
+    fin>>n;
+    for (i=0; i<n; i++)
+        {
+            fin>>x;
+            sum+=(x-1);
+        }
+    fout<<sum+1<<'\n';
+    fout.close();
+    return 0;
+}

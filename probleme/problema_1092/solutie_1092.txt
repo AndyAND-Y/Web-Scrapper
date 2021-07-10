@@ -1,0 +1,28 @@
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+ifstream fin("spatrat.in");
+ofstream fout ("spatrat.out");
+
+const int N = 1e5 + 5, oo = 1e9;
+
+int d[N], t[N], n;
+
+int main() {
+    fin >> n;
+    for (int i = 1; i <= n; ++i)
+        d[i] = t[i] = oo;
+    for (int j = sqrt(n); j; --j) {
+        for (int i = 0; i <= n - j * j; ++i)
+            if (d[i] != oo && d[i + j * j] > d[i] + 1) {
+                d[i + j * j] = d[i] + 1;
+                t[i + j * j] = j;
+            }
+    }
+    fout << d[n] << "\n";
+    while (t[n]) {
+        fout << t[n] << " ";
+        n -= t[n] * t[n];
+    }
+}

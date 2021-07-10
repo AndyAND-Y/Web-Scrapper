@@ -1,0 +1,168 @@
+/* se parcurge cu fiecare piesa din cele initiale tabla in functie de tip
+se marcheaza pozitiile si apoi se raspunde intrebarilor direct */
+#include <iostream>
+#include <fstream>
+
+using namespace std ;
+
+ifstream f ("piesesah.in") ;
+ofstream g ("piesesah.out") ;
+
+//directiile pentru fiecare tip
+
+const int dical[]={-2,-2,-1,-1,1,1,2,2},
+          djcal[]={-1,1,-2,2,-2,2,-1,1};
+
+const int dipion[]={-1,-1,1,1},
+          djpion[]={-1,1,-1,1};
+
+//ca si pionul doar ca mult
+const int dinebun[]={-1,-1,1,1},
+          djnebun[]={-1,1,-1,1};
+
+const int direge[]={-1,-1,-1,0,0,1,1,1},
+          djrege[]={-1,0,1,-1,1,-1,0,1};
+
+//ca si regele doar ca mult...
+const int diregina[]={-1,-1,-1,0,0,1,1,1},
+          djregina[]={-1,0,1,-1,1,-1,0,1};
+
+const int ditura[]={-1,0,0,1},
+          djtura[]={0,-1,1,0};
+
+//matricea in care memoram
+int a[1050][1050] ;
+//matricea in care memoram tipul
+char b[1050][1050] ;
+
+int main ()
+{
+  int n , m , t ;
+  f >> n >> m >> t ;
+
+ for ( int contor = 1 ; contor <= m ; ++contor )
+    {
+     char c ;
+     int x , y ;
+     f >> c >> x >> y ;
+     b[x][y] = c ;
+     a[x][y] = 2 ;
+    }
+ for ( int x = 1 ; x <= n ; ++x )
+    for ( int y = 1 ; y <= n ; ++y )
+        if ( a[x][y] == 2 ) // e piesa , incepem parcurgerea
+            {
+             if ( b[x][y] == 'p' )
+                {
+                 for ( int k = 0 ; k < 4 ; ++k )
+                    {
+                     int i = x + dipion[k] ;
+                     int j = y + djpion[k] ;
+                     if ( a[i][j] == 0 && i > 0 && i <= n && j > 0 && j <= n )
+                        a[i][j] = 1 ;
+                    }
+                }
+             else if ( b[x][y] == 'r' )
+                {
+                 for ( int k = 0 ; k < 8 ; ++k )
+                    {
+                     int i = x + direge[k] ;
+                     int j = y + djrege[k] ;
+                     if ( a[i][j] == 0 && i > 0 && i <= n && j > 0 && j <= n )
+                        a[i][j] = 1 ;
+                    }
+                }
+             else if ( b[x][y] == 'c' )
+                {
+                 for ( int k = 0 ; k < 8 ; ++k )
+                    {
+                     int i = x + dical[k] ;
+                     int j = y + djcal[k] ;
+                     if ( a[i][j] == 0 && i > 0 && i <= n && j > 0 && j <= n )
+                        a[i][j] = 1 ;
+                    }
+                }
+             else if ( b[x][y] == 't' )
+                {
+                 for ( int k = 0 ; k < 4 ; ++k )
+                        {
+                         int i = x + ditura[k] ;
+                         int j = y + djtura[k] ;
+                         if ( ( a[i][j] == 0 || a[i][j] == 1 ) && i > 0 && i <= n && j > 0 && j <= n )
+                                {
+                                 a[i][j] = 1 ;
+                                 while ( i > 0  && i <= n && j > 0 && j <= n )
+                                   {
+                                    if ( a[i][j] == 0 || a[i][j] == 1 )
+                                        a[i][j] = 1 ;
+                                    else if ( a[i][j] == 2 )
+                                        break ;
+                                    i = i + ditura[k] ;
+                                    j = j + djtura[k] ;
+                                   }
+                                }
+                        }
+                }
+
+             else if ( b[x][y] == 'n' )
+                {
+                 for ( int k = 0 ; k < 4 ; ++k )
+                        {
+                         int i = x + dinebun[k] ;
+                         int j = y + djnebun[k] ;
+                         if ( ( a[i][j] == 0 || a[i][j] == 1 ) && i > 0 && i <= n && j > 0 && j <= n )
+                                {
+                                 a[i][j] = 1 ;
+                                 while ( i > 0  && i <= n && j > 0 && j <= n )
+                                   {
+                                    i = i + dinebun[k] ;
+                                    j = j + djnebun[k] ;
+                                    if ( a[i][j] == 0 || a[i][j] == 1 )
+                                        a[i][j] = 1 ;
+                                    else if ( a[i][j] == 2 )
+                                        break ;
+                                   }
+                                }
+                        }
+            }
+         else if ( b[x][y] == 'q' )
+            {
+             //e regina
+             for ( int k = 0 ; k < 8 ; ++k )
+                  {
+                     int i = x + diregina[k] ;
+                     int j = y + djregina[k] ;
+                     if ( ( a[i][j] == 0 || a[i][j] == 1 ) && i > 0 && i <= n && j > 0 && j <= n )
+                            {
+                             a[i][j] = 1 ;
+                             while ( i > 0  && i <= n && j > 0 && j <= n )
+                               {
+                                i = i + diregina[k] ;
+                                j = j + djregina[k] ;
+                                if ( a[i][j] == 0 || a[i][j] == 1 )
+                                    a[i][j] = 1 ;
+                                else if ( a[i][j] == 2 )
+                                    break ;
+                               }
+                            }
+                    }
+            }
+    }
+
+
+
+ for ( int contor = 1 ; contor <= t ; ++contor )
+    {
+     int x , y ;
+     f >> x >> y ;
+     g << a[x][y] << "\n" ;
+    }
+ /*
+ for ( int i = 1 ; i <= n ; ++i )
+    {
+     for ( int j = 1 ; j <= n ; ++j )
+        g << a[i][j] << " " ;
+     g << "\n" ;
+    }
+ */
+}

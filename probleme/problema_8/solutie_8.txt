@@ -1,0 +1,17 @@
+#include <fstream>
+using namespace std;
+
+ifstream fin("maxim3.in");
+ofstream fout("maxim3.out");
+
+int main(){
+    int max, a, b, c;
+    fin >> a >> b >> c;
+    max = a;
+    if(b > max)
+        max = b;
+    if(c > max)
+        max = c;
+    fout << max;
+    return 0;
+}

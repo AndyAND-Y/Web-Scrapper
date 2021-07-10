@@ -1,0 +1,21 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n,m,cn,cm;
+    cin >> n >> m;
+    int rn = 0,rm = 0;
+    cn = n, cm = m;
+    while(cn)
+        rn+=cn%2, cn/=2;
+    while(cm)
+        rm+=cm%2, cm/=2;
+    if(rn>rm)
+        cout << n;
+    else
+        if(rm>rn)
+            cout << m;
+        else
+            cout << (n<m?n:m);
+    return 0;
+}

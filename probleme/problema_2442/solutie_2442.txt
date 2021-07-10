@@ -1,0 +1,29 @@
+#include <fstream>
+
+using namespace std;
+ifstream fin("cifre006.in");
+ofstream fout("cifre006.out");
+int N, k, cif, ap, p = 1, N1, N2;
+
+int main()
+{
+    fin >> N >> k;
+    while(N)
+    {
+        cif = N % 10;
+        if(cif == k)
+        {
+            ap++;
+            N1 = N1 * 10 + cif;
+        }
+
+        else
+        {
+            N2 = N2 + cif * p;
+            p = p * 10;
+        }
+        N = N / 10;
+    }
+    fout << ap << '\n' <<N1*p+N2;
+    return 0;
+}

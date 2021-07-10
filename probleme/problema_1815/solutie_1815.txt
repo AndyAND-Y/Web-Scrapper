@@ -1,0 +1,34 @@
+#include<fstream>
+#include<math.h>
+using namespace std;
+ifstream f("unghi.in");
+ofstream g("unghi.out");
+int main()
+{
+    int n,h,m,i;
+    float uh,um,u;
+    f>>n;
+    for(i=1;i<=n;i++)
+    {
+        f>>h>>m;
+        h=h%12;
+        if(m==60)
+        {
+            m=0;
+            h++;
+        }
+        uh=(h*60+m)*0.5;
+        um=6*m;
+        if(uh>um)
+            u=uh-um;
+        else
+            u=um-uh;
+        if(u<360-u)
+            g<<u<<endl;
+        else
+            g<<360-u<<endl;
+        //u=fabs(uh-um);
+        //g<<min(360-u,u)<<'\n';
+    }
+    return 0;
+}

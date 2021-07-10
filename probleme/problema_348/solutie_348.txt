@@ -1,0 +1,12 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n,p,q=1;
+    cin >> n >> p;
+    while(q<=p){
+        cout << q << " ";
+        q *= n;
+    }
+    return 0;
+}

@@ -1,0 +1,40 @@
+#include<fstream>
+#define MAX 1000000
+using namespace std;
+ifstream fin("minimdoua.in");
+ofstream fout("minimdoua.out");
+
+int main()
+{
+    int n,i,x,minim1=MAX+10,minim2=MAX+10;
+    fin>>n;
+    for(i=1; i<=n; i++)
+    {
+        fin>>x;
+        if(x >= 10 && x%10 == x/10%10)
+        {
+            if(x < minim1)
+            {
+                minim2 = minim1;
+                minim1 = x;
+            }
+            else if(x < minim2)
+            {
+                minim2 = x;
+            }
+        }
+    }
+    if(minim2 <= MAX)
+    {
+        fout<<minim1<<" "<<minim2;
+    }
+    else
+    {
+        fout<<"numere insuficiente";
+    }
+
+    fin.close();
+    fout.close();
+
+    return 0;
+}

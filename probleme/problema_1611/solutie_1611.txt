@@ -1,0 +1,83 @@
+/*
+  Cristian Francu 2016-02-01
+  Solutie optima la punctul (3)
+  - Testul de palindrom/aproape palindrom se face prin compararea cifrelor
+    simetrice, ceea ce nu produce depasiri in cazuri gen 1 999 999 999
+  - Palindromul asociat se genereaza in O(log x) (numarul de cifre ale lui x)
+*/
+#include <stdio.h>
+
+int main() {
+  FILE *fin, *fout;
+  int c, n, i, x, cx, y, z, ndif, npali, napr, p10s, p10d;
+
+  fin = fopen( "palindrom2.in", "r" );
+  fout = fopen( "palindrom2.out", "w" );
+  fscanf( fin, "%d%d", &c, &n );
+  if ( c < 3 ) { // primele doua subpuncte se rezolva similar
+    npali = napr = 0;
+    for ( i = 0; i < n; i++ ) { // citim cele n numere
+      fscanf( fin, "%d", &x );
+      // punctele 1 si 2, este palindrom sau aproape palindrom?
+      // calculam cea mai mare putere a lui 10 care incape in x
+      p10s = 1000000000; // ea nu poate fi mai mare ca 1 miliard
+      while ( p10s > x )
+        p10s /= 10;
+      // calculam numarul de diferente intre cifrele lui x si y
+      ndif = 0;
+      cx = x;
+      while ( cx > 0 ) {
+        if ( cx / p10s != cx % 10 ) // comparam prima si ultima cifra
+          ndif++;
+        cx = cx % p10s / 10; // eliminam prima si ultima cifra din cx
+        p10s /= 100; // ajustam puterea lui 10
+      }
+      // in functie de ndif verificam daca e palindrom sau aproape palindrom
+      if ( ndif == 0 )
+        npali++;
+      else if ( ndif == 1 )
+        napr++;
+    }
+    fprintf( fout, "%d\n", c == 1 ? npali : napr );
+  } else { // punctul 3, palindromurile asociate (cel mai mic p > x) 
+    for ( i = 0; i < n; i++ ) { // citim cele n numere
+      fscanf( fin, "%d", &x );
+
+      x++;
+      p10d = 1;
+      p10s = 1000000000; // cea mai mare putere plauzibila a lui 10
+      while ( p10s > x )
+        p10s /= 10;
+      // calculam rasturnatul primei jumatati a lui x in y
+      y = 0;
+      while ( p10s > p10d ) {
+        y = y + x / p10s % 10 * p10d; // prima cifra a lui cx la inceputul lui y
+        p10s /= 10;
+        p10d *= 10;
+      }
+      if ( y >= x % p10d ) // rasturnind prima jumate peste ultima obtinem
+        // un palindrom mai mare ca cel original?
+        x = x - x % p10d + y; // atunci acesta este palindromul cautat
+      else { // trebuie sa adunam 1 la prima jumate si sa o rasturnam
+        // adaugind-o la coada (y este acum inutil)
+        x = y = 1 + x / p10d; // prima jumate, inclusiv centrul la nr cif impar
+        if ( p10s == p10d ) // daca nr cf e impar taiem ultima cifra a lui y
+          y /= 10;
+        // rasturnam y in z
+        z = 0;
+        while ( y > 0 ) {
+          z = z * 10 + y % 10;
+          y /= 10;
+        }
+        x = x * p10d + z; // compunem prima jumatate cu prima jumatate intoarsa
+      }
+
+      fprintf( fout, "%d ", x );
+    }
+    fprintf( fout, "\n" );
+  }
+  fclose( fin );
+  fclose( fout );
+
+  return 0;
+}

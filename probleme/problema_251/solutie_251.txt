@@ -1,0 +1,36 @@
+#include <iomanip>
+#include <fstream>
+#include <iostream>
+using namespace std;
+
+ifstream fin("interclasare2.in");
+ofstream fout("interclasare2.out");
+
+int a[100005],n, b[100005], m, c[200005], k;
+
+int main(){
+    fin >> n;
+    for(int i=1;i<=n;++i)
+        fin >> a[i];
+    fin >> m;
+    for(int i=1;i<=m;++i)
+        fin >> b[i];
+    int i=1,j=1;
+    k = 0;
+    while(i<=n && j<=m)
+        if(a[i]<b[j])
+            i++;
+        else
+            if(a[i]>b[j])
+                j++;
+            else
+                c[++k] = a[i] , i++, j++;
+
+    for(int i=1;i<=k;++i)
+    {
+        fout << c[i] << " ";
+        if(i%10==0)
+            fout << "\n";
+    }
+    return 0;
+}

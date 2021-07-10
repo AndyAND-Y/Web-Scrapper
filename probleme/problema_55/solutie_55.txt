@@ -1,0 +1,26 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int n,MIN = -1;
+    cin>>n;
+    while(n!=0)
+    {
+        if(n>0)
+        {
+            if(MIN == -1)
+                MIN = n;
+            else
+                if(n < MIN)
+                    MIN = n;
+        }
+        cin>>n;
+    }
+    if(MIN == -1)
+        cout << "NU EXISTA";
+    else
+        cout << MIN;
+    return 0;
+}

@@ -1,0 +1,43 @@
+#include <fstream>
+
+using namespace std;
+
+ifstream fin("ograda.in");
+ofstream fout("ograda.out");
+
+int main()
+{
+    long long int P, C, x;
+    fin >> x >> C >> P;
+    if(x == 1)
+    {
+        long long int G, V;
+        V = (P - 2 * C) / 2;
+        G = C - V;
+        fout << G << " " << V << endl;
+    }
+    else
+    {
+        long long  nric = 0, nrpp = 0;
+        for(int d = 1 ; d * d <= P ; d ++)
+            if(P % d == 0)
+            {
+                if(d % 2 == 0)
+                    nrpp ++;
+                if(d * d < P)
+                    if(P / d % 2 == 0)
+                        nrpp ++;
+            }
+        for(int d = 1 ; d * d <= C ; d ++)
+            if(C % d == 0)
+            {
+                if(d % 2 == 1)
+                    nric ++;
+                if(d * d < C)
+                    if(C / d % 2 == 1)
+                        nric ++;
+            }
+        fout << nric << " " << nrpp;
+    }
+    return 0;
+}

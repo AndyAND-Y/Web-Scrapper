@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+    int n, x[1005], m , y[1005];
+    cin  >> n;  
+    for(int i = 1 ; i <= n ; ++ i)
+        cin >> x[i];
+    m = 0;
+    for(int  i = 1 ; i <=n ; ++i)
+    {
+        int a= x[i], b = x[n], r;
+        if(b == 0)
+            b = a;
+        else
+            while(a % b != 0)
+            {
+                r = a % b;
+                a = b;
+                b = r;
+            }
+        if(b == 1)
+            y[++m] = x[i];
+    }
+    for(int i = 1 ; i < m ; i ++)
+        for(int j = i + 1; j <= m ; j ++)
+            if(y[i] < y[j])
+            {
+                int aux = y[i];
+                y[i] = y[j];
+                y[j] = aux;
+            }
+    for(int i = 1 ; i <= m ; ++ i)
+        cout << y[i] << " ";
+    return 0;
+}

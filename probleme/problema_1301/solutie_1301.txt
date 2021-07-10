@@ -1,0 +1,17 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    float a,b,c;
+    cin>>a>>b>>c;
+    if (a+b>c and a+c>b and b+c>a)
+        if ((a==b and a!=c) or (a==c and a!=b) or (b==c and b!=a))
+            cout<<"Formeaza triunghi isoscel"<<endl;
+        else
+            cout<<"Nu formeaza triunghi isoscel"<<endl;
+    else
+        cout << "Nu formeaza triunghi" << endl;
+    return 0;
+}

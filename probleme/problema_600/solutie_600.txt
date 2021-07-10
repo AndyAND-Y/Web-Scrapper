@@ -1,0 +1,50 @@
+//problema romburi
+
+#include <iostream>
+#include <fstream>
+//#define DEBUG
+using namespace std;
+
+ifstream fin("romburi.in");
+ofstream fout("romburi.out");
+
+int A[1005][1005], n, m , p , a , b , L;
+
+int main(){
+    fin  >> n >> m >> p;
+    for( ; p ; --p)
+    {
+        fin >> a >> b >> L;
+        int i = a;
+        for(int k = 0 ; k < L ; k ++)
+        {
+            for(int j = b - k; j <= b + k; j ++)
+                if(i > 0 && i <= n && j > 0 && j <= m)
+                    A[i][j] ++;
+            i ++;
+        }
+        i = a + 2 * (L-1);
+        for(int k = 0 ; k < L - 1 ; k ++)
+        {
+            for(int j = b - k; j <= b + k; j ++)
+                if(i > 0 && i <= n && j > 0 && j <= m)
+                    A[i][j] ++;
+            i --;
+        }
+    }
+    #ifdef DEBUG
+    for (int i = 1 ;i <= n ; ++i)
+    {
+        for(int j = 1 ; j <= m ; ++j)
+            cout << A[i][j] << " ";
+        cout << endl;
+    }
+    #endif
+    int C = 0;
+    for (int i = 1 ;i <= n ; ++i)
+        for(int j = 1 ; j <= m ; ++j)
+            if(A[i][j] == 0)
+                C ++;
+    fout << C ;
+    return 0;
+}

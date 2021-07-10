@@ -1,0 +1,17 @@
+void nr_cif_zero(int n , int & nr)
+{
+    if(n < 10)
+        if(n  == 0)
+            nr = 1;
+        else
+            nr = 0;
+    else
+    {
+        int x;
+        nr_cif_zero(n / 10 , x);
+        if(n % 10 == 0)
+            nr = x + 1;
+        else
+            nr = x;
+    }
+}

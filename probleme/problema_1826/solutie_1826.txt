@@ -1,0 +1,10 @@
+int zerof(int n){
+    int r = 0;
+    for(int i = 5 ; i <= n ; i += 5)
+    {
+        int d = i;
+        while(d % 5 ==0)
+            r ++, d /= 5;
+    }
+    return r;
+}

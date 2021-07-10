@@ -1,0 +1,19 @@
+#include <iomanip>
+#include <fstream>
+#include <iostream>
+using namespace std;
+
+ifstream fin("sume.in");
+ofstream fout("sume.out");
+
+int a[105],n;
+
+int main(){
+    fin >> n;
+    int s = 0;
+    for(int i=1;i<=n;++i)
+        fin >> a[i], s += a[i];
+    for(int i=n ; i ; --i)
+        fout << s << endl, s -= a[i];
+    return 0;
+}

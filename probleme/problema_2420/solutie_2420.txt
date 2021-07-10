@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int n, p=0;
+    cin >> n;
+
+    for(int i=1;i<=n;i++)
+    {
+        int no_div=0, j=1;
+
+        for(j=1;j*j<i;j++)
+            if(i%j==0)
+                no_div+=2;
+
+        if(j*j==i)
+            ++no_div;
+
+        p+=no_div;
+    }
+
+    cout << p;
+    return 0;
+}
